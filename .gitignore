@@ -1,0 +1,11 @@
+/vendor
+/composer.lock
+.idea
+coverage-report/
+*local.php
+.DS_Store
+build/*
+/nbproject
+logs/*
+*.log
+revision-test.txt
