@@ -1,5 +1,5 @@
 {
-    "name": "cpms/common",
+    "name": "dvsa/mot-cpms-common",
     "description": "Contains common code shared by CPMS projects",
     "type": "library",
     "license": "MIT",
@@ -36,12 +36,12 @@
     },
     "scripts": {
         "test": [
-            "phpunit test"
+            "phpunit"
         ]
     },
     "config": {
         "allow-plugins": {
-            "laminas/laminas-component-installer": true,
+            "laminas/laminas-component-installer": false,
             "laminas/laminas-dependency-plugin": true
         }
     }
