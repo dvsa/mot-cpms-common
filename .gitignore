@@ -1,5 +1,4 @@
 /vendor
-/composer.lock
 .idea
 coverage-report/
 *local.php
@@ -9,3 +8,4 @@ build/*
 logs/*
 *.log
 revision-test.txt
+.phpunit.result.cache

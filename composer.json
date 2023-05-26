@@ -19,7 +19,10 @@
         "phpunit/phpunit": "^9.5",
         "laminas/laminas-test": "^4.0.0",
         "laminas/laminas-component-installer": "^2.5",
-        "captainhook/captainhook": "^5.16"
+        "captainhook/captainhook": "^5.16",
+        "dvsa/coding-standards": "^2.0",
+        "vimeo/psalm": "^5.12",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-0": {
