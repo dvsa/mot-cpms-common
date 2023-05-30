@@ -9,3 +9,6 @@ logs/*
 *.log
 revision-test.txt
 .phpunit.result.cache
+vendor-bin/php-codesniffer/vendor
+vendor-bin/phpstan/vendor
+vendor-bin/psalm/vendor
