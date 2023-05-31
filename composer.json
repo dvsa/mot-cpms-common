@@ -1,5 +1,5 @@
 {
-    "name": "cpms/common",
+    "name": "dvsa/mot-cpms-common",
     "description": "Contains common code shared by CPMS projects",
     "type": "library",
     "license": "MIT",

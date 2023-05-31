@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^7.3 || ^8.0",
-    "squizlabs/php_codesniffer": "^3.6",
+    "squizlabs/php_codesniffer": "^3.7.2",
     "dvsa/coding-standards": "^1.0"
   },
   "config": {
