@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^7.3 || ^8.0",
-    "vimeo/psalm": "^4.30.0"
+    "vimeo/psalm": "^5.12"
   },
   "config": {
     "preferred-install": "dist"
