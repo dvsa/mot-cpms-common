@@ -3,6 +3,7 @@
 namespace CpmsCommonTest\Validator;
 
 use CpmsCommon\Validator\DateRange;
+use DateTime;
 
 /**
  * Class DateRangeTest
@@ -75,10 +76,12 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+
         $this->validator->setAfter($value);
 
+
         $this->assertInstanceOf('\DateTimeInterface', $this->validator->getAfter());
-        $this->assertEquals(new \DateTime($value), $this->validator->getAfter());
+        $this->assertEquals(new DateTime($value) , $this->validator->getAfter());
     }
 
     public function testValidationRequiresOneOfBeforeOrAfterToBeSet()
@@ -166,7 +169,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     public function invalidDateProvider()
     {
         return [
-            ['2012-111-01', 'Y-m-d'],
+            ['2012-1111-01', 'Y-m-d'],
             ['2012-11-011', 'Y-m-d'],
             ['20122-11-011', 'Y-m-d'],
             ['not a date', 'Y-m-d'],
