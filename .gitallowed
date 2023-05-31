@@ -1,5 +1,0 @@
-MyPASS=${2-"password"}
-Using a password on the command line interface can be insecure
-'password' => 'password'
-
-.gitallowed
