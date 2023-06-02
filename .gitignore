@@ -1,0 +1,17 @@
+/vendor
+.idea
+coverage-report/
+*local.php
+.DS_Store
+build/*
+/nbproject
+logs/*
+*.log
+revision-test.txt
+.phpunit.result.cache
+vendor-bin/php-codesniffer/vendor
+vendor-bin/phpstan/vendor
+vendor-bin/psalm/vendor
+vendor-bin/php-codesniffer/composer.lock
+vendor-bin/phpstan/composer.lock
+vendor-bin/psalm/composer.lock

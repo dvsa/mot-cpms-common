@@ -1,0 +1,41 @@
+<?php
+if (isset($gatewayUrl)): ?>
+    <form action="<?php echo $gatewayUrl; ?>" id="payForm" method="POST">
+        <?php foreach ($data as $key => $value):
+            if ($key == 'redirection_data') {
+                $key = 'redirectionData';
+            }
+
+            if ($key == 'redirection_version') {
+                $key = 'redirectionVersion';
+            }
+
+            if (is_array($value)) {
+                foreach ($value as $index => $indexValue) {
+                    foreach ((array)$indexValue as $k => $v) {
+                        ?>
+                        <input type="hidden" name="<?php echo sprintf('%s[%s][%s]', $key, $index, $k); ?>"
+                               value="<?php echo $v; ?>"/>
+                    <?php
+                    }
+                }
+            } else {
+                ?>
+                <input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>"/>
+            <?php
+            }
+            ?>
+        <?php endforeach; ?>
+        <noscript>
+            <p>Click the button below, in order to continue.</p>
+            <input type="submit" value="Continue" id="payButton"/>
+        </noscript>
+    </form>
+    <script type="application/javascript">
+        function clickButton() {
+            document.getElementById('payForm').submit();
+            console.log('button clicked');
+        }
+        clickButton();
+    </script>
+<?php endif; ?>

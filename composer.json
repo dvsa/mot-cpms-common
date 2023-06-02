@@ -1,0 +1,47 @@
+{
+    "name": "dvsa/mot-cpms-common",
+    "description": "Contains common code shared by CPMS projects",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "laminas/laminas-mvc": "^3.3.0",
+        "laminas/laminas-inputfilter": "^2.12",
+        "laminas/laminas-servicemanager": "^3.7",
+        "laminas/laminas-log": "^2.13",
+        "laminas/laminas-authentication": "^2.8",
+        "laminas/laminas-router": "^3.4",
+        "laminas/laminas-json": "^3.3",
+        "laminas/laminas-dependency-plugin": "^2.1",
+        "laminas-api-tools/api-tools-versioning": "^1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "laminas/laminas-test": "^4.0.0",
+        "laminas/laminas-component-installer": "^3.2",
+        "captainhook/captainhook": "^5.16",
+        "captainhook/plugin-composer": "^5.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "CpmsCommon\\": "src/",
+            "CpmsCommonTest\\": "test/"
+        },
+        "classmap": [
+            "./Module.php",
+            "./test/CpmsCommonTest/Module.php"
+        ]
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "laminas/laminas-dependency-plugin": true,
+            "laminas/laminas-component-installer": true,
+            "captainhook/plugin-composer": true
+        }
+    }
+}
