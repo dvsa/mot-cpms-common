@@ -34,7 +34,9 @@ class DvsaLogFormatter extends Simple implements LogDataAwareInterface
         $logData = $this->getReplacementValues();
 
         foreach ($logData as $name => $value) {
-            $output = str_replace("%$name%", $value, $output);
+            if ($value != null) {
+                $output = str_replace("%$name%", $value, $output);
+            }
         }
         //Reset log data to prevent reuse
         $this->getLogData()->resetData();
