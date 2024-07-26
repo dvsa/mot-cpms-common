@@ -24,7 +24,17 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 
         $this->validator->setMaxDelta('6 months');
 
-        $this->assertEquals(new \DateInterval('P6M'), $this->validator->getMaxDelta());
+        $expected = new \DateInterval('P6M');
+        $actual = $this->validator->getMaxDelta();
+
+        $this->assertEquals($expected->y, $actual->y);
+        $this->assertEquals($expected->m, $actual->m);
+        $this->assertEquals($expected->d, $actual->d);
+        $this->assertEquals($expected->h, $actual->h);
+        $this->assertEquals($expected->i, $actual->i);
+        $this->assertEquals($expected->s, $actual->s);
+        $this->assertEquals($expected->f, $actual->f);
+        $this->assertEquals($expected->invert, $actual->invert);
     }
 
     /**
