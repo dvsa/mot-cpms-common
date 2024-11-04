@@ -11,7 +11,7 @@ use Laminas\Stdlib\AbstractOptions;
  */
 class ServiceOptions extends AbstractOptions
 {
-    const MAX_LIMIT = 25;
+    public const MAX_LIMIT = 25;
     /** @var int */
     protected $limit = 25;
     /** @var int */

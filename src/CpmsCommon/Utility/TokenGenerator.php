@@ -16,27 +16,27 @@ class TokenGenerator
     /**
      * Token prefixes for different types
      */
-    const PREFIX = 1;
+    public const PREFIX = 1;
 
     /**
      * The character that separates the version from the rest of the token
      */
-    const VERSION_SEPARATOR = 'k';
+    public const VERSION_SEPARATOR = 'k';
 
     /**
      * The length of each part that makes up the bulk of the token
      */
-    const PART_LENGTH = 3;
+    public const PART_LENGTH = 3;
 
     /**
      * The amount of part that makes up the bulk of the token
      */
-    const PART_COUNT = 10;
+    public const PART_COUNT = 10;
 
     /**
      * A regex to match the structure of the token
      */
-    const TOKEN_REGEX = '\d{1}[a-z0-9]{32}';
+    public const TOKEN_REGEX = '\d{1}[a-z0-9]{32}';
 
     public function generate($prefix = self::PREFIX)
     {

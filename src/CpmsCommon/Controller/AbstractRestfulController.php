@@ -38,7 +38,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     use ErrorCodeAwareTrait;
     use ContentTypeTrait;
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     private $serviceLocator;
 
     public function setServiceLocator($serviceLocator)

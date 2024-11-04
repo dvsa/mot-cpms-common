@@ -12,11 +12,11 @@ use Laminas\Validator\Exception;
  */
 class DateRange extends AbstractValidator
 {
-    const INVALID_DATE         = 'invalidDate';
-    const NOT_AFTER            = 'notAfter';
-    const NOT_AFTER_INCLUSIVE  = 'notAfterInclusive';
-    const NOT_BEFORE           = 'notBefore';
-    const NOT_BEFORE_INCLUSIVE = 'notBeforeInclusive';
+    public const INVALID_DATE         = 'invalidDate';
+    public const NOT_AFTER            = 'notAfter';
+    public const NOT_AFTER_INCLUSIVE  = 'notAfterInclusive';
+    public const NOT_BEFORE           = 'notBefore';
+    public const NOT_BEFORE_INCLUSIVE = 'notBeforeInclusive';
 
     protected $messageTemplates
         = array(

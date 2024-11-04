@@ -13,11 +13,11 @@ use Laminas\View\Helper\AbstractHelper;
  */
 class Revision extends AbstractHelper
 {
-    const REVISION_DATE_KEY    = 'data';
-    const REVISION_ENV_KEY     = 'environment';
-    const REVISION_RELEASE_KEY = 'release';
+    public const REVISION_DATE_KEY    = 'data';
+    public const REVISION_ENV_KEY     = 'environment';
+    public const REVISION_RELEASE_KEY = 'release';
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     /**
      * @var ContainerInterface $serviceLocator
      */

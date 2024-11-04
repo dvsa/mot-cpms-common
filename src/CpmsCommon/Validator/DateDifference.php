@@ -12,10 +12,10 @@ use Laminas\Validator\Exception;
  */
 class DateDifference extends AbstractValidator
 {
-    const COMPARISON_KEY_NOT_FOUND = 'comparisonKeyNotFound';
-    const INVALID_DATE             = 'invalidDate';
-    const INVALID_COMP_DATE        = 'invalidCompDate';
-    const DIFFERENCE_TOO_LARGE     = 'differenceTooLarge';
+    public const COMPARISON_KEY_NOT_FOUND = 'comparisonKeyNotFound';
+    public const INVALID_DATE             = 'invalidDate';
+    public const INVALID_COMP_DATE        = 'invalidCompDate';
+    public const DIFFERENCE_TOO_LARGE     = 'differenceTooLarge';
 
     protected $messageTemplates = [
         self::INVALID_DATE             => "Date supplied is not valid. Expected format %format%, got %value%",

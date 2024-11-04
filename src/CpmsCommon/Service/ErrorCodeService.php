@@ -13,127 +13,127 @@ use Laminas\Http\Response;
  */
 class ErrorCodeService
 {
-    const ERROR_CODE_KEY    = 'code';
-    const ERROR_MESSAGE_KEY = 'message';
-    const HTTP_STATUS_KEY   = 'http_status_code';
-    const SUCCESS_MESSAGE   = '000';
-    const REPLACEMENT_KEY   = 'replacement';
+    public const ERROR_CODE_KEY    = 'code';
+    public const ERROR_MESSAGE_KEY = 'message';
+    public const HTTP_STATUS_KEY   = 'http_status_code';
+    public const SUCCESS_MESSAGE   = '000';
+    public const REPLACEMENT_KEY   = 'replacement';
 
     //API errors
-    const METHOD_NOT_ALLOWED                        = 101;
-    const NOT_PERMITTED                             = 102;
-    const MISSING_PARAMETER                         = 103;
-    const INVALID_PARAMETER                         = 104;
-    const UNKNOWN_ERROR                             = 105;
-    const RESOURCE_NOT_FOUND                        = 106;
-    const NOT_IMPLEMENTED                           = 107;
-    const AN_ERROR_OCCURRED                         = 108;
-    const SCHEME_NOT_AUTHORISED                     = 110;
-    const TOKEN_GENERATION_ERROR                    = 112;
-    const ACCESS_TOKEN_EXPIRED                      = 113;
-    const INVALID_ACCESS_TOKEN                      = 114;
-    const UNAUTHORISED_SCOPE                        = 115;
-    const MISSING_AUTHORISATION_HEADER              = 116;
-    const ACCESS_TOKEN_NOT_MATCHING_SALES_REFERENCE = 117;
-    const MALFORMED_JSON_DATA                       = 118;
-    const MISSING_POST_ACCESS_TOKEN                 = 119;
-    const INVALID_ENDPOINT                          = 120;
-    const NEGATIVE_AMOUNT                           = 121;
-    const INVALID_REDIRECT_DOMAIN                   = 122;
-    const GENERIC_ERROR_CODE                        = 123;
-    const MAINTENANCE_MODE                          = 124;
-    const INVALID_BATCH_REQUEST                     = 125;
-    const INVALID_ALLOCATED_AMOUNT                  = 126;
-    const INVALID_ALLOCATED_AMOUNT_SUM              = 127;
-    const INVOICE_ALREADY_REFUNDED                  = 128;
-    const OVERPAYMENT_ALREADY_REFUNDED              = 129;
-    const INVOICE_ALREADY_IN_BATCH                  = 130;
+    public const METHOD_NOT_ALLOWED                        = 101;
+    public const NOT_PERMITTED                             = 102;
+    public const MISSING_PARAMETER                         = 103;
+    public const INVALID_PARAMETER                         = 104;
+    public const UNKNOWN_ERROR                             = 105;
+    public const RESOURCE_NOT_FOUND                        = 106;
+    public const NOT_IMPLEMENTED                           = 107;
+    public const AN_ERROR_OCCURRED                         = 108;
+    public const SCHEME_NOT_AUTHORISED                     = 110;
+    public const TOKEN_GENERATION_ERROR                    = 112;
+    public const ACCESS_TOKEN_EXPIRED                      = 113;
+    public const INVALID_ACCESS_TOKEN                      = 114;
+    public const UNAUTHORISED_SCOPE                        = 115;
+    public const MISSING_AUTHORISATION_HEADER              = 116;
+    public const ACCESS_TOKEN_NOT_MATCHING_SALES_REFERENCE = 117;
+    public const MALFORMED_JSON_DATA                       = 118;
+    public const MISSING_POST_ACCESS_TOKEN                 = 119;
+    public const INVALID_ENDPOINT                          = 120;
+    public const NEGATIVE_AMOUNT                           = 121;
+    public const INVALID_REDIRECT_DOMAIN                   = 122;
+    public const GENERIC_ERROR_CODE                        = 123;
+    public const MAINTENANCE_MODE                          = 124;
+    public const INVALID_BATCH_REQUEST                     = 125;
+    public const INVALID_ALLOCATED_AMOUNT                  = 126;
+    public const INVALID_ALLOCATED_AMOUNT_SUM              = 127;
+    public const INVOICE_ALREADY_REFUNDED                  = 128;
+    public const OVERPAYMENT_ALREADY_REFUNDED              = 129;
+    public const INVOICE_ALREADY_IN_BATCH                  = 130;
 
-    const CRITICAL_ERROR = 999;
+    public const CRITICAL_ERROR = 999;
 
     //Amendment errors
 
-    const CHARGE_BACK_NOT_ALLOWED          = 201;
-    const CHARGE_BACK_ALREADY_EXISTS       = 202;
-    const PAYMENT_ALREADY_AMENDED          = 203;
-    const PAYMENT_ALREADY_ADJUSTED         = 204;
-    const PAYMENT_TYPE_CANNOT_BE_AMENDED   = 205;
-    const PAYMENT_NOT_AMENDABLE            = 206;
-    const PAYMENT_NOT_FOUND_NOT_REFUNDABLE = 207;
-    const REFUND_API_NOT_AVAILABLE         = 208;
-    const CARD_REFUND_FAILED               = 209;
-    const CUSTOMER_REFERENCE_MISMATCH      = 210;
-    const UNCHANGED_CUSTOMER_REFERENCE     = 211;
-    const REALLOCATION_NOT_ALLOWED         = 212;
-    const PAYMENT_ALREADY_REALLOCATED      = 213;
-    const INVALID_OVERPAYMENT_AMOUNT       = 214;
-    const DUPLICATE_SALES_REFERENCE_FOUND  = 215;
-    const ERROR_ALLOCATING_PAYMENT         = 216;
-    const NO_MATCHING_INVOICE_FOUND        = 217;
+    public const CHARGE_BACK_NOT_ALLOWED          = 201;
+    public const CHARGE_BACK_ALREADY_EXISTS       = 202;
+    public const PAYMENT_ALREADY_AMENDED          = 203;
+    public const PAYMENT_ALREADY_ADJUSTED         = 204;
+    public const PAYMENT_TYPE_CANNOT_BE_AMENDED   = 205;
+    public const PAYMENT_NOT_AMENDABLE            = 206;
+    public const PAYMENT_NOT_FOUND_NOT_REFUNDABLE = 207;
+    public const REFUND_API_NOT_AVAILABLE         = 208;
+    public const CARD_REFUND_FAILED               = 209;
+    public const CUSTOMER_REFERENCE_MISMATCH      = 210;
+    public const UNCHANGED_CUSTOMER_REFERENCE     = 211;
+    public const REALLOCATION_NOT_ALLOWED         = 212;
+    public const PAYMENT_ALREADY_REALLOCATED      = 213;
+    public const INVALID_OVERPAYMENT_AMOUNT       = 214;
+    public const DUPLICATE_SALES_REFERENCE_FOUND  = 215;
+    public const ERROR_ALLOCATING_PAYMENT         = 216;
+    public const NO_MATCHING_INVOICE_FOUND        = 217;
 
     //Gateway Errors
-    const GATEWAY_ERROR = 501;
+    public const GATEWAY_ERROR = 501;
 
     /**
      * OAuth 2.0 Error Codes
      *
      * @see http://tools.ietf.org/html/rfc6749#section-5.2
      */
-    const INVALID_CLIENT         = 601;
-    const INVALID_REQUEST        = 602;
-    const INVALID_GRANT          = 603;
-    const UNAUTHORISED_CLIENT    = 604;
-    const UNSUPPORTED_GRANT_TYPE = 605;
+    public const INVALID_CLIENT         = 601;
+    public const INVALID_REQUEST        = 602;
+    public const INVALID_GRANT          = 603;
+    public const UNAUTHORISED_CLIENT    = 604;
+    public const UNSUPPORTED_GRANT_TYPE = 605;
 
     /* Database error codes */
-    const TRANSACTION_NOT_FOUND                     = 701;
-    const ERROR_CREATING_TRANSACTION                = 702;
-    const ERROR_COULD_NOT_AUTHENTICATE              = 703;
-    const ERROR_INVALID_REQUEST_METHOD              = 704;
-    const ERROR_CREATE_TRANSACTION_FAILED           = 705;
-    const ERROR_AUTHORISE_TRANSACTION_FAILED        = 706;
-    const ERROR_TRANSACTION_NOT_FOUND               = 707;
-    const ERROR_FAILED_TO_SET_STATUS                = 708;
-    const ERROR_REFUND_FAILED_NO_PARENT_TRANSACTION = 709;
-    const ERROR_REFUND_ALREADY_EXISTS               = 710;
-    const ERROR_REFUND_AMOUNT_EXCEEDED              = 711;
-    const ERROR_CREATING_MANDATE                    = 712;
-    const ERROR_UPDATING_MANDATE                    = 713;
-    const ERROR_CREATING_DIRECT_DEBIT_TRANSACTION   = 714;
-    const ERROR_IN_DIRECT_DEBIT_WEBHOOK_DATA        = 715;
-    const ERROR_UPDATING_DIRECT_DEBIT_TRANSACTION   = 716;
-    const ERROR_MANDATE_NOT_FOUND                   = 717;
-    const ERROR_INCORRECT_MANDATE_STATUS            = 718;
-    const ERROR_INVALID_MANDATE_STATUS              = 719;
-    const ERROR_GETTING_MANDATE_STATUS              = 720;
-    const INVALID_STATUS_CHANGE                     = 721;
-    const ERROR_INSUFFICIENT_TRANSACTION_BALANCE    = 722;
-    const ERROR_GETTING_STORED_CARDS                = 723;
-    const ERROR_INVALID_REFUND_TRANSACTION_SCOPE    = 724;
-    const ERROR_MANDATE_CANCELLED_OR_SUSPENDED      = 725;
-    const ERROR_GETTING_STORED_CARD                 = 726;
-    const ERROR_SCHEDULED_JOB_LOCKED                = 727;
-    const ERROR_REGISTERING_STORED_CARD             = 728;
-    const CUSTOMER_NOT_FOUND                        = 729;
-    const ADJUSTABLE_TXN_NOT_FOUND                  = 730;
-    const PAYMENT_CHARGE_BACK_NOT_POSSIBLE          = 731;
-    const ERROR_MANDATE_CANCELLED                   = 732;
-    const ERROR_MANDATE_CANCELLED_3RD_PARTY         = 733;
-    const INVALID_MANDATE_UPDATE                    = 734;
-    const ERROR_SUBSCRIBING_MANDATE_PAYMENTS        = 735;
-    const API_ERROR_CREATING_MANDATE                = 736;
-    const API_ERROR_QUERYING_CARD_PAYMENT           = 737;
-    const PAYMENT_GATEWAY_ID_NOT_SET                = 738;
-    const ENDPOINT_NOT_IMPLEMENTED                  = 739;
-    const REFUND_AMOUNT_MISMATCH                    = 740;
+    public const TRANSACTION_NOT_FOUND                     = 701;
+    public const ERROR_CREATING_TRANSACTION                = 702;
+    public const ERROR_COULD_NOT_AUTHENTICATE              = 703;
+    public const ERROR_INVALID_REQUEST_METHOD              = 704;
+    public const ERROR_CREATE_TRANSACTION_FAILED           = 705;
+    public const ERROR_AUTHORISE_TRANSACTION_FAILED        = 706;
+    public const ERROR_TRANSACTION_NOT_FOUND               = 707;
+    public const ERROR_FAILED_TO_SET_STATUS                = 708;
+    public const ERROR_REFUND_FAILED_NO_PARENT_TRANSACTION = 709;
+    public const ERROR_REFUND_ALREADY_EXISTS               = 710;
+    public const ERROR_REFUND_AMOUNT_EXCEEDED              = 711;
+    public const ERROR_CREATING_MANDATE                    = 712;
+    public const ERROR_UPDATING_MANDATE                    = 713;
+    public const ERROR_CREATING_DIRECT_DEBIT_TRANSACTION   = 714;
+    public const ERROR_IN_DIRECT_DEBIT_WEBHOOK_DATA        = 715;
+    public const ERROR_UPDATING_DIRECT_DEBIT_TRANSACTION   = 716;
+    public const ERROR_MANDATE_NOT_FOUND                   = 717;
+    public const ERROR_INCORRECT_MANDATE_STATUS            = 718;
+    public const ERROR_INVALID_MANDATE_STATUS              = 719;
+    public const ERROR_GETTING_MANDATE_STATUS              = 720;
+    public const INVALID_STATUS_CHANGE                     = 721;
+    public const ERROR_INSUFFICIENT_TRANSACTION_BALANCE    = 722;
+    public const ERROR_GETTING_STORED_CARDS                = 723;
+    public const ERROR_INVALID_REFUND_TRANSACTION_SCOPE    = 724;
+    public const ERROR_MANDATE_CANCELLED_OR_SUSPENDED      = 725;
+    public const ERROR_GETTING_STORED_CARD                 = 726;
+    public const ERROR_SCHEDULED_JOB_LOCKED                = 727;
+    public const ERROR_REGISTERING_STORED_CARD             = 728;
+    public const CUSTOMER_NOT_FOUND                        = 729;
+    public const ADJUSTABLE_TXN_NOT_FOUND                  = 730;
+    public const PAYMENT_CHARGE_BACK_NOT_POSSIBLE          = 731;
+    public const ERROR_MANDATE_CANCELLED                   = 732;
+    public const ERROR_MANDATE_CANCELLED_3RD_PARTY         = 733;
+    public const INVALID_MANDATE_UPDATE                    = 734;
+    public const ERROR_SUBSCRIBING_MANDATE_PAYMENTS        = 735;
+    public const API_ERROR_CREATING_MANDATE                = 736;
+    public const API_ERROR_QUERYING_CARD_PAYMENT           = 737;
+    public const PAYMENT_GATEWAY_ID_NOT_SET                = 738;
+    public const ENDPOINT_NOT_IMPLEMENTED                  = 739;
+    public const REFUND_AMOUNT_MISMATCH                    = 740;
 
     //success messages
-    const SUCCESS_MANDATE_SETUP = 821;
+    public const SUCCESS_MANDATE_SETUP = 821;
 
     //Direct Debit Mandate Setup Errors
-    const NO_MANDATE_ASSOCIATED_WITH_EVENT = 901;
+    public const NO_MANDATE_ASSOCIATED_WITH_EVENT = 901;
 
-    const UNKNOWN_ERROR_MESSAGE = 'Unknown error occurred occurred, unable to log the error. Please contact support';
+    public const UNKNOWN_ERROR_MESSAGE = 'Unknown error occurred occurred, unable to log the error. Please contact support';
 
     /**
      * @var array

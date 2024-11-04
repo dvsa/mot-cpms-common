@@ -5,6 +5,7 @@
     <file>./test</file>
 
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>test/CpmsCommonTest/Bootstrap.php</exclude-pattern>
 
     <rule ref="./vendor/dvsa/coding-standards/src/Profiles/DVSA/CS/ruleset.xml" />
 </ruleset>

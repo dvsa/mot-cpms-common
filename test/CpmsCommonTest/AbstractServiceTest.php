@@ -4,8 +4,8 @@ namespace CpmsCommonTest;
 
 class AbstractServiceTest extends \PHPUnit\Framework\TestCase
 {
-    const MODEL_SERVICE        = 'cpms\model\temp';
-    const ERROR_MESSAGE_RESULT = 'error';
+    private const MODEL_SERVICE        = 'cpms\model\temp';
+    private const ERROR_MESSAGE_RESULT = 'error';
 
     /**
      * @var \CpmsCommon\AbstractService

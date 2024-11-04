@@ -19,7 +19,7 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class AbstractInputFilterFactory implements AbstractFactoryInterface
 {
-    const VERSION_PREFIX = 'V';
+    public const VERSION_PREFIX = 'V';
 
     private $configPrefix;
 

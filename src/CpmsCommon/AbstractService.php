@@ -22,10 +22,10 @@ abstract class AbstractService implements EventManagerAwareInterface
     use LoggerAwareTrait;
     use ErrorCodeAwareTrait;
 
-    const RESULT_ITEMS = 'items';
-    const RESULT_PAGE  = 'page';
-    const RESULT_TOTAL = 'total';
-    const RESULT_LIMIT = 'limit';
+    public const RESULT_ITEMS = 'items';
+    public const RESULT_PAGE  = 'page';
+    public const RESULT_TOTAL = 'total';
+    public const RESULT_LIMIT = 'limit';
 
     /** @var array */
     public $requiredDataKeys = array();
@@ -34,7 +34,7 @@ abstract class AbstractService implements EventManagerAwareInterface
     /** @var  ServiceOptions */
     public $options;
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     /**
      * @var ContainerInterface $serviceLocator
      */

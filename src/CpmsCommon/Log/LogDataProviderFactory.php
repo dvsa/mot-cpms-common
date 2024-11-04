@@ -17,7 +17,7 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class LogDataProviderFactory implements FactoryInterface
 {
-    const AUTH_SERVICE_ALIAS = 'cpms\service\authenticationService';
+    public const AUTH_SERVICE_ALIAS = 'cpms\service\authenticationService';
 
     /**
      * Create an object

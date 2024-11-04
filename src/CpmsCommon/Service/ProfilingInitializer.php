@@ -22,9 +22,9 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class ProfilingInitializer implements InitializerInterface
 {
-    const CLASS_PATH = __CLASS__;
+    public const CLASS_PATH = __CLASS__;
 
-    const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
+    public const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
 
     /**
      * @param $instance

@@ -19,7 +19,7 @@ use Laminas\Router\Http\RouteMatch;
  */
 class SendPayload extends AbstractPlugin
 {
-    const API_VERSION_KEY = 'api_version';
+    public const API_VERSION_KEY = 'api_version';
 
     /**
      * Set HTTP status code if specified and return appropriate view model
