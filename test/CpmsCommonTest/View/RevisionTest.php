@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\View;
 
 use CpmsCommon\View\Helper\Revision;
@@ -12,7 +13,6 @@ use Laminas\Http\Response;
  */
 class RevisionTest extends \PHPUnit\Framework\TestCase
 {
-
     /** @var  \Laminas\ServiceManager\ServiceManager */
     protected $serviceManager;
 

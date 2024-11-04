@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Service;
 
 use CpmsCommon\Service\Config\AuthServiceOptions;

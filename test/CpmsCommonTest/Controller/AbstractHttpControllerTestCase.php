@@ -1,4 +1,5 @@
 <?php
+
 /**
  * An abstract controller that all ordinary CPMS controllers
  *
@@ -34,7 +35,6 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
 
         $serviceManager = $this->getApplicationServiceLocator();
         $serviceManager->setAllowOverride(true);
-
     }
 
     /**

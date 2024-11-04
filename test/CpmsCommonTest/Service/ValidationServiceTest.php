@@ -145,7 +145,7 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
         $generatedClassName = $serviceFactory->getClassName($serviceName, $this->serviceManager);
 
         $expectedClassName = sprintf('Payment\%s%s\InputFilter\MockFilterProvider', AbstractInputFilterFactory::VERSION_PREFIX, $expectedVersion);
-        $this->assertSame( $expectedClassName, $generatedClassName, 'class name mismatch');
+        $this->assertSame($expectedClassName, $generatedClassName, 'class name mismatch');
     }
 
     public function testVersionedFilterNameByRouteMatch()
@@ -164,6 +164,6 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
         $generatedClassName = $serviceFactory->getClassName($serviceName, $this->serviceManager);
 
         $expectedClassName = sprintf('Payment\%s%s\InputFilter\MockFilterProvider', AbstractInputFilterFactory::VERSION_PREFIX, $expectedVersion);
-        $this->assertSame( $expectedClassName, $generatedClassName, 'class name mismatch');
+        $this->assertSame($expectedClassName, $generatedClassName, 'class name mismatch');
     }
 }

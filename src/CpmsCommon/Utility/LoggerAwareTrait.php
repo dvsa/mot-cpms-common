@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A trait so that controllers can easily integrate logging.
  *

@@ -28,7 +28,7 @@ class TokenGeneratorTest extends TestCase
     public function testGeneratesToken()
     {
         $token = $this->tokenGenerator->create(TokenGenerator::PREFIX);
-        $this->assertTrue((boolean)preg_match('/^' . TokenGenerator::TOKEN_REGEX . '$/', $token));
+        $this->assertTrue((bool)preg_match('/^' . TokenGenerator::TOKEN_REGEX . '$/', $token));
 
         $token = TokenGenerator::create(TokenGenerator::PREFIX);
         $this->assertTrue($this->tokenGenerator->verify($token));

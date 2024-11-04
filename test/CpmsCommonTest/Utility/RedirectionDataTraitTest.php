@@ -6,7 +6,6 @@ use CpmsCommonTest\Mock\RedirectionDataTraitMock;
 
 class RedirectionDataTraitTest extends \PHPUnit\Framework\TestCase
 {
-
     public function testTrait()
     {
         $mock = new RedirectionDataTraitMock();

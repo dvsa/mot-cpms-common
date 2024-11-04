@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Controller\Plugin;
 
 use CpmsCommon\Controller\AbstractRestfulController;
@@ -43,7 +44,6 @@ class Download extends AbstractPlugin
                 ->addHeaderLine('Content-Length', filesize($file))
                 ->addHeaderLine('Content-Description', 'File Transfer');
         } else {
-
             $message  = $this->getController()->getMessage(ErrorCodeService::RESOURCE_NOT_FOUND, $file);
             $response = $this->getController()->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_404);

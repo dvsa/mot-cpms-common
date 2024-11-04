@@ -27,7 +27,6 @@ trait RedirectionDataTrait
     {
 
         if (!empty($redirectionData['gateway_url'])) {
-
             $gatewayUrl = $redirectionData['gateway_url'];
             unset($redirectionData['gateway_url']);
 

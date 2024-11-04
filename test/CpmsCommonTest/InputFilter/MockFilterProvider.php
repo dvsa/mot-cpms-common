@@ -5,7 +5,6 @@ namespace CpmsCommonTest\InputFilter;
 use Interop\Container\ContainerInterface;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
-
 /**
  * Class MockFilterProvider
  *

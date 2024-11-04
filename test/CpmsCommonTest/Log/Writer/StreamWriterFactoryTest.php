@@ -13,7 +13,6 @@ use CpmsCommonTest\Bootstrap;
  */
 class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @var StreamWriterFactory
      */
@@ -72,12 +71,10 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
         if (!empty($config)) {
-
             $config = array_merge($serviceManager->get('config'), $config);
 
             $serviceManager->setAllowOverride(true);
             $serviceManager->setService('config', $config);
-
         }
 
         return $serviceManager;

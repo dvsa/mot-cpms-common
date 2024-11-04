@@ -73,7 +73,8 @@ class ValidationService extends AbstractService
                 foreach ($fieldDetails as $validatorName => $errorMessage) {
                     // check if the validator name is a string (as an integer indicates a nested error message) and is
                     // missing. Otherwise, don't give too much away and return a "invalid parameter" message.
-                    if ((is_string($validatorName) && $validatorName == 'isEmpty')
+                    if (
+                        (is_string($validatorName) && $validatorName == 'isEmpty')
                         || $errorMessage == "Value is required"
                     ) {
                         return $this->getErrorMessage(

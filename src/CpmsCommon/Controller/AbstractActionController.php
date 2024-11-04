@@ -1,4 +1,5 @@
 <?php
+
 /**
  * An abstract controller that all ordinary CPMS controllers inherit from
  *

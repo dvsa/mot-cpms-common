@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Controller\Plugin;
 
 use CpmsCommon\Service\ErrorCodeService;

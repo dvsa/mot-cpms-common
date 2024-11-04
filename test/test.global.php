@@ -1,4 +1,5 @@
 <?php
+
 use CpmsCommon\Log\LogDataProviderFactory;
 use CpmsCommon\Service\Config\AuthServiceOptions;
 use CpmsCommon\Utility\TokenGenerator;

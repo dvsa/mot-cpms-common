@@ -76,12 +76,10 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-
         $this->validator->setAfter($value);
 
-
         $this->assertInstanceOf('\DateTimeInterface', $this->validator->getAfter());
-        $this->assertEquals(new DateTime($value) , $this->validator->getAfter());
+        $this->assertEquals(new DateTime($value), $this->validator->getAfter());
     }
 
     public function testValidationRequiresOneOfBeforeOrAfterToBeSet()
@@ -140,7 +138,12 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
      * @dataProvider dateRangeValueProvider
      */
     public function testValidationWorks(
-        $value, $format, $expectedResult, $before = null, $after = null, $inclusive = false
+        $value,
+        $format,
+        $expectedResult,
+        $before = null,
+        $after = null,
+        $inclusive = false
     ) {
         if (!empty($before)) {
             $this->validator->setBefore($before);
@@ -152,7 +155,9 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         $this->validator->setFormat($format);
 
         $this->assertEquals(
-            $expectedResult, $this->validator->isValid($value), implode(', ', $this->validator->getMessages())
+            $expectedResult,
+            $this->validator->isValid($value),
+            implode(', ', $this->validator->getMessages())
         );
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommonTest\Bootstrap;
@@ -13,7 +14,7 @@ class DvsaLogFormatterTest extends \PHPUnit\Framework\TestCase
     /** @var  \Laminas\ServiceManager\ServiceManager */
     protected $serviceManager;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
 

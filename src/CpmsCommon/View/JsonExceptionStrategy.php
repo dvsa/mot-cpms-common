@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Generates JSON responses on exceptions
  *

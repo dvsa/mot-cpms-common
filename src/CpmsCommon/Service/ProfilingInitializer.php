@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Profiling Initializer
  *
@@ -21,7 +22,6 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class ProfilingInitializer implements InitializerInterface
 {
-
     const CLASS_PATH = __CLASS__;
 
     const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
@@ -74,7 +74,6 @@ class ProfilingInitializer implements InitializerInterface
                 $queueLabel = 'invoked';
 
                 if (isset($exploded[1])) {
-
                     switch ($exploded[1]) {
                         case 'pre':
                             $queueLabel = 'started';

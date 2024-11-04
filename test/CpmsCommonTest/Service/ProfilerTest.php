@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommon\Service\ProfilingInitializer;

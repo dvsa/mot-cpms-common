@@ -13,7 +13,6 @@ use Laminas\Http\Response;
  */
 class ErrorCodeService
 {
-
     const ERROR_CODE_KEY    = 'code';
     const ERROR_MESSAGE_KEY = 'message';
     const HTTP_STATUS_KEY   = 'http_status_code';

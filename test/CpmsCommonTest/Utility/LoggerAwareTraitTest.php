@@ -6,7 +6,6 @@ use CpmsCommonTest\Bootstrap;
 
 class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
 {
-
     private $trait;
 
     public function testLog()
@@ -53,5 +52,4 @@ class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
     {
         return Bootstrap::getInstance()->getServiceManager();
     }
-
 }

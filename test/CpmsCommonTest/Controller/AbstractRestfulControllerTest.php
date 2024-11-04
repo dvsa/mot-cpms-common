@@ -13,7 +13,6 @@ use Laminas\View\Model\JsonModel;
 
 class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
 {
-
     const ERROR_MSG = 'error msg';
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Log;
 
 use Laminas\Stdlib\AbstractOptions;

@@ -13,7 +13,6 @@ use CpmsCommon\Utility\TokenGenerator;
  */
 class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @var AuthServiceOptions
      */

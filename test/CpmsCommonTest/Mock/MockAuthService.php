@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Mock;
 
 use CpmsCommon\Service\BaseAuthenticationService;
@@ -10,5 +11,4 @@ use CpmsCommon\Service\BaseAuthenticationService;
  */
 class MockAuthService extends BaseAuthenticationService
 {
-
 }

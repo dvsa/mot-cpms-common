@@ -64,7 +64,6 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
         }
 
         if (count($namespaceParts) > 0 and in_array($namespaceParts[0], $this->versionedNamespaces)) {
-
             $config         = $serviceLocator->get('config');
             $defaultVersion = $config['api-tools-versioning']['default_version'];
             /** @var RouteMatch $routeMatch */

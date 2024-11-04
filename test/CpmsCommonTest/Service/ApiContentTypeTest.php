@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommonTest\Bootstrap;
@@ -10,7 +11,6 @@ use CpmsCommonTest\Bootstrap;
  */
 class ApiContentTypeTest extends \PHPUnit\Framework\TestCase
 {
-
     public function testContentTypeNoVersion()
     {
         $data = Bootstrap::getInstance()->getServiceManager()->get('cpms\api\contentType');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A trait that allows getting error messages
  * The class using this trait must also implement ServiceLocatorAwareInterface

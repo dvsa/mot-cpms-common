@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Service\Config;
 
 use Laminas\Stdlib\AbstractOptions;

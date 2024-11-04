@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommon\AbstractService;
@@ -53,7 +54,6 @@ class ServiceOptionTest extends \PHPUnit\Framework\TestCase
         );
         $options = new ServiceOptions($data);
         $this->assertSame('DESC', $options->getSort()['id']);
-
     }
 
     public function testResultArray()

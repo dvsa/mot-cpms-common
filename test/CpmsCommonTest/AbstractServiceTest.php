@@ -12,7 +12,7 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
      */
     private $service;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         $this->service = $this->getMockForAbstractClass(
             'CpmsCommon\AbstractService',

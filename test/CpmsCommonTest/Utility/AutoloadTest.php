@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Utility;
 
 use CpmsCommonTest\Mock\AutoloadMock;

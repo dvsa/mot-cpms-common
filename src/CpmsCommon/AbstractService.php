@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon;
 
 use CpmsCommon\Service\Config\ServiceOptions;

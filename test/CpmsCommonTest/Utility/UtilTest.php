@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Utility;
 
 use CpmsCommon\Utility\PaymentScopeCodes;

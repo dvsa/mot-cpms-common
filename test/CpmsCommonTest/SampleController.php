@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest;
 
 use CpmsCommon\Controller\AbstractRestfulController;

@@ -48,7 +48,6 @@ class TokenGenerator
         $checkDigit = 0;
 
         for ($i = 0; $i < self::PART_COUNT; $i++) {
-
             $value = rand(pow(36, self::PART_LENGTH - 1), pow(36, self::PART_LENGTH) - 1);
             $token .= base_convert($value, 10, 36);
             $checkDigit += $this->summarizeValue($value);

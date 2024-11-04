@@ -13,7 +13,6 @@ use Laminas\Json\Exception\InvalidArgumentException;
  */
 class LogDataTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @var LogData
      */

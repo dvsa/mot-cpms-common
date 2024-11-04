@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Log\Writer;
 
 use CpmsCommon\Log\LogDataAwareInterface;

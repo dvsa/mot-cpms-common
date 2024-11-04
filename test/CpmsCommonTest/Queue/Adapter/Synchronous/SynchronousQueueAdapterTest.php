@@ -39,7 +39,6 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $job->expects($this->once())->method('handle');
         /** @var JobInterface $job */
         $this->adapter->enqueue($job);
-
     }
 
     public function testProcessesBulkJobsImmediately()

@@ -15,7 +15,6 @@ use Laminas\Mvc\MvcEvent;
  */
 class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @var JsonExceptionStrategy
      */

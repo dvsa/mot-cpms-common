@@ -8,7 +8,6 @@ use Laminas\EventManager\EventManagerAwareTrait;
 
 class SimpleServiceMock implements EventManagerAwareInterface
 {
-
     use EventManagerAwareTrait;
     use AmountFormatterTrait;
 
