@@ -5,6 +5,7 @@ namespace CpmsCommon\Service;
 use CpmsCommon\Log\LogData;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Log\Writer\WriterInterface;
 
 /**
  * Service factory for Common Logger
@@ -27,8 +28,8 @@ class LoggerServiceFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var LogData $logData */
         $log           = new LoggerService();
+        /** @var array */
         $serviceConfig = $container->get('config');
         $logData       = null;
         $writers       = (array)$serviceConfig['logger']['writers'];
@@ -44,7 +45,9 @@ class LoggerServiceFactory implements FactoryInterface
         }
 
         foreach ($writers as $logWriter) {
-            $log->addWriter($container->get($logWriter));
+            /** @var string|WriterInterface */
+            $writer = $container->get($logWriter);
+            $log->addWriter($writer);
         }
 
         return $log;

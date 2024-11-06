@@ -36,6 +36,9 @@ class SampleController extends AbstractRestfulController
         return $this->getSuccessMessage();
     }
 
+    /**
+     * @return JsonModel
+     */
     public function indexAction()
     {
         $view = new JsonModel();

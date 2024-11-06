@@ -3,6 +3,7 @@
 namespace CpmsCommonTest\Service;
 
 use CpmsCommon\Service\ErrorCodeService;
+use CpmsCommon\Service\LoggerService;
 use CpmsCommonTest\Bootstrap;
 use InvalidArgumentException;
 
@@ -26,7 +27,7 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * Assert that stream writer is an instance of \Laminas\Log\Writer\Stream
      */
-    public function testStreamWriterInstance()
+    public function testStreamWriterInstance(): void
     {
         $writer = $this->serviceManager->get('cpms\streamWriter');
 
@@ -36,8 +37,9 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * Assert that the logger is an instance of Laminas\Log
      */
-    public function testLoggerInstance()
+    public function testLoggerInstance(): void
     {
+        /** @var array */
         $config  = $this->serviceManager->get('config');
         $logger = $this->serviceManager->get('Logger');
 
@@ -49,9 +51,9 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
 
     /**
      */
-    public function testSetReplacement()
+    public function testSetReplacement(): void
     {
-        /** @var \CpmsCommon\Service\LoggerService $logger */
+        /** @var LoggerService $logger */
         $logger = $this->serviceManager->get('Logger');
 
         $logger->setLogData(null);
@@ -61,12 +63,12 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('CpmsCommon\Log\LogData', $replacements);
     }
 
-    public function testAddReplacement()
+    public function testAddReplacement(): void
     {
         $key   = 'data';
         $value = 'test value';
 
-        /** @var \CpmsCommon\Service\LoggerService $logger */
+        /** @var LoggerService $logger */
         $logger = $this->serviceManager->get('Logger');
 
         $logger->addReplacement($key, $value);
@@ -74,19 +76,20 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($logger->getLogData()->getData(), $value);
     }
 
-    public function testGetReplacementException()
+    public function testGetReplacementException(): void
     {
         $this->expectException(\Laminas\Stdlib\Exception\BadMethodCallException::class);
 
         $key = 'testKey';
 
-        /** @var \CpmsCommon\Service\LoggerService $logger */
+        /** @var LoggerService $logger */
         $logger = $this->serviceManager->get('Logger');
 
+        /** @phpstan-ignore property.notFound, expr.resultUnused */
         $logger->getLogData()->{$key};
     }
 
-    public function testErrorCodeService()
+    public function testErrorCodeService(): void
     {
         /** @var \CpmsCommon\Service\ErrorCodeService $errorCodeService */
         $errorCodeService = $this->serviceManager->get('cpms\errorCodeService');
@@ -101,7 +104,7 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(ErrorCodeService::GENERIC_ERROR_CODE, $message['code']);
     }
 
-    public function testLogException()
+    public function testLogException(): void
     {
         $prevException = new InvalidArgumentException('PhpUnit invalid exception');
         $exception     = new \Exception('PHPUnit test exception', 78, $prevException);
@@ -113,7 +116,7 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('CpmsCommon\Service\LoggerService', $done);
     }
 
-    public function testProcessException()
+    public function testProcessException(): void
     {
         $prevException = new InvalidArgumentException('PhpUnit invalid exception');
         $exception     = new \Exception('PHPUnit test exception', 78, $prevException);

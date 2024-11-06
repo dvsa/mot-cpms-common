@@ -28,7 +28,7 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
         $this->controller->setServiceLocator($this->serviceManager);
     }
 
-    public function testDispatch()
+    public function testDispatch(): void
     {
         $this->controller->setPluginManager(new PluginManager($this->serviceManager));
         $this->controller->getEvent()->setRouteMatch(
@@ -45,7 +45,7 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(JsonModel::class, $result);
     }
 
-    public function testDispatchWith405StatusCode()
+    public function testDispatchWith405StatusCode(): void
     {
         $this->controller->setPluginManager(new PluginManager($this->serviceManager));
         $this->controller->getEvent()->setRouteMatch(
@@ -66,22 +66,25 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($response->getStatusCode(), 405);
     }
 
-    public function testDispatchWithCaughtException()
+    public function testDispatchWithCaughtException(): void
     {
         $result = $this->controller->dispatch($this->getRequest(), $this->getResponse());
 
         $this->assertInstanceOf('Laminas\Http\PhpEnvironment\Response', $result);
         $this->assertEquals(500, $result->getStatusCode());
-        $content = json_decode($result->getContent(), true);
+        /** @var string */
+        $resultContent = $result->getContent();
+        /** @var array */
+        $content = json_decode($resultContent, true);
         $this->assertSame(108, $content['code']);
     }
 
-    private function getRequest()
+    private function getRequest(): Request
     {
         return new Request();
     }
 
-    private function getResponse()
+    private function getResponse(): Response
     {
         return new Response();
     }

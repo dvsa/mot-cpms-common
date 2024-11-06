@@ -15,7 +15,7 @@ use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
  */
 class DownloadTest extends AbstractControllerTestCase
 {
-    private static $rootPath = __DIR__ . '/../../../../';
+    private static string $rootPath = __DIR__ . '/../../../../';
 
     /** @var SampleController */
     protected $controller;
@@ -29,20 +29,25 @@ class DownloadTest extends AbstractControllerTestCase
         );
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
-        $this->setApplicationConfig($serviceManager->get('ApplicationConfig'));
+        /** @var array */
+        $applicationConfig = $serviceManager->get('ApplicationConfig');
+        $this->setApplicationConfig($applicationConfig);
+        /** @var ControllerManager */
         $loader = $this->getApplicationServiceLocator()->get('ControllerManager');
-        $this->controller = $loader->get('CpmsCommonTest\Sample');
+        /** @var SampleController */
+        $controller = $loader->get('CpmsCommonTest\Sample');
+        $this->controller = $controller;
         $this->controller->setServiceLocator($this->getApplicationServiceLocator());
         $serviceManager->setAllowOverride(true);
         parent::setUp();
     }
 
-    public function testInstance()
+    public function testInstance(): void
     {
         $this->assertInstanceOf('CpmsCommon\Controller\Plugin\Download', $this->controller->plugin(Download::class));
     }
 
-    public function testDownload()
+    public function testDownload(): void
     {
         $testFile     = self::$rootPath . 'test/test.global.php';
         $maskFileName = 'same.txt';
@@ -52,7 +57,7 @@ class DownloadTest extends AbstractControllerTestCase
         $this->assertSame(200, $response->getStatusCode());
     }
 
-    public function testDownloadNotExist()
+    public function testDownloadNotExist(): void
     {
         $testFile     = self::$rootPath . 'test/non-test.global.php';
         $maskFileName = 'same.txt';
@@ -62,7 +67,7 @@ class DownloadTest extends AbstractControllerTestCase
         $this->assertSame(404, $response->getStatusCode());
     }
 
-    public function testDownloadWithoutMask()
+    public function testDownloadWithoutMask(): void
     {
         $testFile     = self::$rootPath . 'test/test.global.php';
         $maskFileName = '';

@@ -24,7 +24,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
      * @dataProvider validDateProvider
      * @throws \Exception
      */
-    public function testSetBeforeAcceptsValidFormats($value)
+    public function testSetBeforeAcceptsValidFormats(string $value): void
     {
         $formattedDateString = $this->formatDateTimeWithoutMicroseconds($value);
 
@@ -37,12 +37,13 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidDateProvider
      *
-     * @param $value
+     * @param mixed $value
      */
-    public function testSetBeforeRejectsInvalidFormats($value)
+    public function testSetBeforeRejectsInvalidFormats($value): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        /** @phpstan-ignore argument.type */
         $this->validator->setBefore($value);
 
         $this->assertInstanceOf('\DateTimeInterface', $this->validator->getBefore());
@@ -55,7 +56,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
      *
      * @throws \Exception
      */
-    public function testSetAfterAcceptsValidFormats($value)
+    public function testSetAfterAcceptsValidFormats(string $value): void
     {
         $formattedDateString = $this->formatDateTimeWithoutMicroseconds($value);
 
@@ -66,13 +67,13 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      *
      * @dataProvider invalidDateProvider
      *
      * @throws \Exception
      */
-    public function testSetAfterRejectsInvalidFormats($value)
+    public function testSetAfterRejectsInvalidFormats($value): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -82,7 +83,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(new DateTime($value), $this->validator->getAfter());
     }
 
-    public function testValidationRequiresOneOfBeforeOrAfterToBeSet()
+    public function testValidationRequiresOneOfBeforeOrAfterToBeSet(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('At least one of before or after should be set.');
@@ -90,12 +91,12 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         $this->validator->isValid('2015-12-12 12:00:00');
     }
 
-    public function testSetInclusiveDefaultIsFalse()
+    public function testSetInclusiveDefaultIsFalse(): void
     {
         $this->assertFalse($this->validator->isInclusive());
     }
 
-    public function testSetInclusive()
+    public function testSetInclusive(): void
     {
         $this->validator->setInclusive(true);
 
@@ -107,17 +108,18 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param $date
-     * @param $format
+     * @param mixed $date
+     * @param ?string $format
      *
      * @dataProvider invalidDateProvider
      */
-    public function testRestrictsValueToProvidedFormat($date, $format = null)
+    public function testRestrictsValueToProvidedFormat($date, $format = null): void
     {
         if (!is_string($date)) {
             $this->expectException(\RuntimeException::class);
         }
 
+        /** @phpstan-ignore argument.type */
         $this->validator->setFormat($format);
 
         $this->assertFalse($this->validator->isValid($date));
@@ -128,11 +130,11 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param      $value
-     * @param      $format
-     * @param      $expectedResult
-     * @param null $before
-     * @param null $after
+     * @param string $value
+     * @param string $format
+     * @param boolean $expectedResult
+     * @param string|null $before
+     * @param string|null $after
      * @param bool $inclusive
      *
      * @dataProvider dateRangeValueProvider
@@ -144,7 +146,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         $before = null,
         $after = null,
         $inclusive = false
-    ) {
+    ): void {
         if (!empty($before)) {
             $this->validator->setBefore($before);
         }
@@ -161,7 +163,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function validDateProvider()
+    public function validDateProvider(): array
     {
         return [
             ['2012-11-01', 'Y-m-d'],
@@ -171,7 +173,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidDateProvider()
+    public function invalidDateProvider(): array
     {
         return [
             ['2012-1111-01', 'Y-m-d'],
@@ -183,7 +185,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function dateRangeValueProvider()
+    public function dateRangeValueProvider(): array
     {
         $today = date('d-M-Y');
 
@@ -215,7 +217,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    private function formatDateTimeWithoutMicroseconds($value)
+    private function formatDateTimeWithoutMicroseconds(string $value): string
     {
         $format = 'Y-m-d H:i:s';
         $expected = new \DateTime($value);

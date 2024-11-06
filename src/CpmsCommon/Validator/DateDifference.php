@@ -17,7 +17,7 @@ class DateDifference extends AbstractValidator
     public const INVALID_COMP_DATE        = 'invalidCompDate';
     public const DIFFERENCE_TOO_LARGE     = 'differenceTooLarge';
 
-    protected $messageTemplates = [
+    protected array $messageTemplates = [
         self::INVALID_DATE             => "Date supplied is not valid. Expected format %format%, got %value%",
         self::DIFFERENCE_TOO_LARGE     => "Gap between dates is too large",
         self::COMPARISON_KEY_NOT_FOUND => "A second date must be specified for comparison",
@@ -57,7 +57,7 @@ class DateDifference extends AbstractValidator
     /**
      * @param string $fieldToCompareWith
      */
-    public function setFieldToCompareWith($fieldToCompareWith)
+    public function setFieldToCompareWith($fieldToCompareWith): void
     {
         $this->fieldToCompareWith = $fieldToCompareWith;
     }
@@ -67,9 +67,9 @@ class DateDifference extends AbstractValidator
      *
      * @param string $spec A string using the relative formats, as used by the strtotime() function
      */
-    public function setMaxDelta($spec)
+    public function setMaxDelta($spec): void
     {
-        $date           = \DateInterval::createFromDateString($spec);
+        $date = \DateInterval::createFromDateString($spec);
         $this->maxDelta = $date;
     }
 
@@ -147,9 +147,9 @@ class DateDifference extends AbstractValidator
     }
 
     /**
-     * @param string $format
+     * @param ?string $format
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }

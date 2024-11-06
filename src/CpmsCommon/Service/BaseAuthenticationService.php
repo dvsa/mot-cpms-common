@@ -23,6 +23,8 @@ abstract class BaseAuthenticationService extends ZendAuthService
 
     /**
      * @param AuthServiceOptions $options
+     *
+     * @return void
      */
     public function setOptions($options)
     {

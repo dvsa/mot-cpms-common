@@ -62,7 +62,7 @@ abstract class AbstractService implements EventManagerAwareInterface
     /**
      * Return a database model
      *
-     * @param $modelName
+     * @param string $modelName
      *
      * @return array|object
      */
@@ -112,6 +112,8 @@ abstract class AbstractService implements EventManagerAwareInterface
 
     /**
      * @param ServiceOptions $options
+     *
+     * @return void
      */
     public function setOptions(ServiceOptions $options)
     {
@@ -129,10 +131,10 @@ abstract class AbstractService implements EventManagerAwareInterface
     /**
      * Get Page results
      *
-     * @param $items
-     * @param $page
-     * @param $total
-     * @param $limit
+     * @param mixed $items
+     * @param string|int|float $page
+     * @param string|int|float $total
+     * @param string|int|float $limit
      *
      * @return array
      */

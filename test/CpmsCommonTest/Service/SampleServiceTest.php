@@ -26,7 +26,7 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->setServiceLocator($this->serviceManager);
     }
 
-    public function testServiceInstance()
+    public function testServiceInstance(): void
     {
         $this->assertInstanceOf('CpmsCommon\AbstractService', $this->service);
         $this->assertInstanceOf('Laminas\Log\Logger', $this->service->getLogger());
@@ -40,12 +40,13 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->logException(new \Exception('phpunit'));
         $this->service->log('phpunit', Logger::DEBUG);
 
-        $config      = $this->serviceManager->get('config');
+        /** @var array */
+        $config = $this->serviceManager->get('config');
         $logLocation = $config['logger']['location'];
         Util::deleteDir($logLocation);
     }
 
-    public function testServiceMethod()
+    public function testServiceMethod(): void
     {
 
         $model = $this->service->getModel('test');
@@ -72,7 +73,7 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(400, $results['http_status_code']);
     }
 
-    public function testPositiveAmount()
+    public function testPositiveAmount(): void
     {
         $done = $this->service->validPositiveAmount(-90.89);
         $this->assertFalse($done);

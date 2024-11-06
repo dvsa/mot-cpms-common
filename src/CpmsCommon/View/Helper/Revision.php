@@ -48,11 +48,11 @@ class Revision extends AbstractHelper
      * obtained from GIT
      * Invoke helper to render release / deployment information
      */
-    public function __invoke($format = false)
+    public function __invoke(bool $format = false): string
     {
         /** @var ContainerInterface $serviceLocator */
         $serviceLocator = $this->getServiceLocator();
-
+        /** @var array */
         $config         = $serviceLocator->get('config');
         $revisionFile   = $config['revision_file'];
 

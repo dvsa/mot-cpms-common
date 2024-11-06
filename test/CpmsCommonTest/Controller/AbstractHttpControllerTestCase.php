@@ -22,10 +22,10 @@ use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendTestCa
  */
 abstract class AbstractHttpControllerTestCase extends ZendTestCase
 {
-    protected $clientMock = array();
-    protected $configDir = '/../../../../../config/test/application.config.php';
+    protected array $clientMock = array();
+    protected string $configDir = '/../../../../../config/test/application.config.php';
 
-    public function setUp($noConfig = false): void
+    public function setUp(bool $noConfig = false): void
     {
         if (!$noConfig) {
             $this->setApplicationConfig(include $this->configDir);
@@ -47,7 +47,7 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
      *
      * @throws \Exception
      */
-    public function dispatchBody($url, $method, $body, $contentType = 'application/json')
+    public function dispatchBody($url, $method, $body, $contentType = 'application/json'): void
     {
         if (!is_string($body) && $contentType == 'application/json') {
             $body = json_encode($body);

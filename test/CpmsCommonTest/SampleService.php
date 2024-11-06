@@ -11,7 +11,7 @@ use CpmsCommon\AbstractService;
  */
 class SampleService extends AbstractService
 {
-    public function getResult()
+    public function getResult(): array
     {
         return $this->getPagedResultArray(array(), 1, 3, 5);
     }

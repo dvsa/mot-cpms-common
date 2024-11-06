@@ -46,9 +46,11 @@ trait LoggerAwareTrait
     /**
      * Logs a message to the defined logger.
      *
-     * @param       $message
-     * @param int   $priority
+     * @param string $message
+     * @param int $priority
      * @param array $extra
+     *
+     * @return void
      */
     public function log($message, $priority = Logger::INFO, $extra = array())
     {
@@ -58,9 +60,9 @@ trait LoggerAwareTrait
     /**
      * Logs an exception
      *
-     * @param $exception
+     * @param \Exception $exception
      *
-     * @return $this
+     * @return LoggerService
      */
     public function logException($exception)
     {

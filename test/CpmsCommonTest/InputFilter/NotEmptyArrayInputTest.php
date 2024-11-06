@@ -19,7 +19,7 @@ class NotEmptyArrayInputTest extends \PHPUnit\Framework\TestCase
         $this->filter = new NotEmptyArrayInput();
     }
 
-    public function testRejectsAnEmptyArray()
+    public function testRejectsAnEmptyArray(): void
     {
         $this->filter->setValue([]);
         $this->assertFalse($this->filter->isValid());

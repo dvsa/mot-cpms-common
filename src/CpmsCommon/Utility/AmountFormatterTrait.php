@@ -7,7 +7,7 @@ namespace CpmsCommon\Utility;
  */
 trait AmountFormatterTrait
 {
-    public function formatPoundsToPence($amountInPounds)
+    public function formatPoundsToPence(float $amountInPounds): string
     {
         return number_format($amountInPounds * 100, 0, '.', '');
     }

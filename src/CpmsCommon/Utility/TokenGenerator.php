@@ -38,9 +38,9 @@ class TokenGenerator
      */
     public const TOKEN_REGEX = '\d{1}[a-z0-9]{32}';
 
-    public function generate($prefix = self::PREFIX)
+    public function generate(int $prefix = self::PREFIX): string
     {
-        if (empty($prefix) || strlen($prefix) > 1) {
+        if (empty($prefix) || strlen(strval($prefix)) > 1) {
             throw new InvalidArgumentException('Invalid token prefix (' . $prefix . ')');
         }
 
@@ -49,7 +49,7 @@ class TokenGenerator
 
         for ($i = 0; $i < self::PART_COUNT; $i++) {
             $value = rand(pow(36, self::PART_LENGTH - 1), pow(36, self::PART_LENGTH) - 1);
-            $token .= base_convert($value, 10, 36);
+            $token .= base_convert(strval($value), 10, 36);
             $checkDigit += $this->summarizeValue($value);
         }
 
@@ -62,7 +62,7 @@ class TokenGenerator
     /**
      * Verify a token
      *
-     * @param  string
+     * @param string $token
      *
      * @return bool   True if token is valid
      */
@@ -87,7 +87,7 @@ class TokenGenerator
         $sum = 0;
         for ($i = 0; $i < $length - 1; $i += self::PART_LENGTH) {
             $value = base_convert(substr($token, $i, self::PART_LENGTH), 36, 10);
-            $sum += $this->summarizeValue($value);
+            $sum += $this->summarizeValue((int)$value);
         }
 
         return ($checkDigit == $this->summarizeValue($sum));

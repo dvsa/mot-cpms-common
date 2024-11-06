@@ -26,7 +26,7 @@ class LogDataTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider logDataProvider
      */
-    public function testSetsPropertiesCorrectly($data)
+    public function testSetsPropertiesCorrectly(array $data): void
     {
         foreach ($data as $property => $value) {
             $method = 'set' . ucfirst($property);

@@ -7,7 +7,7 @@ use CpmsCommon\Utility\Util;
 
 class UtilTest extends \PHPUnit\Framework\TestCase
 {
-    public function testAppendQueryParam()
+    public function testAppendQueryParam(): void
     {
         $url  = 'http://google.com';
         $url2 = 'http://google.com?home=1';
@@ -25,7 +25,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($url2 . '&time=' . $time, $output);
     }
 
-    public function testDeleteDir()
+    public function testDeleteDir(): void
     {
         $dir = sys_get_temp_dir() . '/log';
 
@@ -40,7 +40,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(file_exists($dir));
     }
 
-    public function testGetReversalScopes()
+    public function testGetReversalScopes(): void
     {
         $return = PaymentScopeCodes::getReversalPaymentScopeCodes();
         $this->assertTrue(is_array($return));

@@ -24,11 +24,13 @@ class ServiceOptions extends AbstractOptions
     protected $filters = array();
     /** @var array */
     protected $params = array();
-    /** @var */
+    /** @var mixed */
     protected $sort;
 
     /**
      * @param int $depth
+     *
+     * @return void
      */
     public function setDepth($depth)
     {
@@ -45,6 +47,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $filters
+     *
+     * @return void
      */
     public function setFilters($filters)
     {
@@ -61,6 +65,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param int $limit
+     *
+     * @return void
      */
     public function setLimit($limit)
     {
@@ -80,6 +86,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param int $page
+     *
+     * @return void
      */
     public function setPage($page)
     {
@@ -96,6 +104,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $params
+     *
+     * @return void
      */
     public function setParams($params)
     {
@@ -120,6 +130,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $requiredFields
+     *
+     * @return void
      */
     public function setRequiredFields($requiredFields)
     {
@@ -138,6 +150,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param mixed $sortOrder
+     *
+     * @return void
      */
     public function setSort($sortOrder)
     {
@@ -162,6 +176,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $_strictMode__
+     *
+     * @return void
      */
     public function setStrictMode($_strictMode__)
     {

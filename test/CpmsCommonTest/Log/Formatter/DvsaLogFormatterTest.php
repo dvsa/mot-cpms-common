@@ -21,7 +21,7 @@ class DvsaLogFormatterTest extends \PHPUnit\Framework\TestCase
         parent::setUp();
     }
 
-    public function testFormatterInstance()
+    public function testFormatterInstance(): void
     {
         $formatter = $this->serviceManager->get('dvsa\formatter');
         $this->assertInstanceOf('CpmsCommon\Log\Formatter\DvsaLogFormatter', $formatter);

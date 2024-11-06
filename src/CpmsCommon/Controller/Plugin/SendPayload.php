@@ -4,6 +4,7 @@ namespace CpmsCommon\Controller\Plugin;
 
 use CpmsCommon\Service\ErrorCodeService;
 use Laminas\Http\Header\ContentType;
+use Laminas\Http\PhpEnvironment\Response;
 use Laminas\Mvc\Application;
 use Laminas\Mvc\Controller\AbstractRestfulController;
 use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
@@ -24,24 +25,24 @@ class SendPayload extends AbstractPlugin
     /**
      * Set HTTP status code if specified and return appropriate view model
      *
-     * @param $payLoad
+     * @param array|object $payLoad
      *
      * @return \Laminas\View\Model\ModelInterface
      */
     public function __invoke($payLoad)
     {
-        /** @var \Laminas\Http\PhpEnvironment\Response $response */
-        /** @var RouteMatch $routeMatch */
-        /** @var Application $application */
         $controller  = $this->getController();
         $serviceLocator = $controller->getServiceLocator();
 
-        $payLoad     = (array)$payLoad;
-        $config      = $serviceLocator->get('config');
+        $payLoad = (array)$payLoad;
+        $config = $serviceLocator->get('config');
         $contentType = $serviceLocator->get('cpms\api\contentType');
-        $response    = $controller->getResponse();
+        /** @var Response $response */
+        $response = $controller->getResponse();
+        /** @var Application $application */
         $application = $serviceLocator->get('application');
-        $routeMatch  = $application->getMvcEvent()->getRouteMatch();
+        /** @var RouteMatch $routeMatch */
+        $routeMatch = $application->getMvcEvent()->getRouteMatch();
 
         $response->getHeaders()->addHeader(ContentType::fromString($contentType));
 
@@ -52,7 +53,7 @@ class SendPayload extends AbstractPlugin
 
         $payLoad   = $this->setApiVersion($payLoad, $config, $routeMatch);
         $viewModel = $controller->acceptableViewModelSelector($config['accept_criteria']);
-        $viewModel->setVariables($payLoad);
+        $viewModel->setVariables((array) $payLoad);
 
         return $viewModel;
     }
@@ -60,9 +61,9 @@ class SendPayload extends AbstractPlugin
     /**
      * Set the api version in the response
      *
-     * @param $payLoad
-     * @param $config
-     * @param $routeMatch
+     * @param array $payLoad
+     * @param array $config
+     * @param ?RouteMatch $routeMatch
      *
      * @return mixed
      */

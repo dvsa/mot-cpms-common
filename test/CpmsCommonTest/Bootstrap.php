@@ -15,9 +15,9 @@ class Bootstrap
     /** @var  string This is the root directory where the test is run from which likely the test directory */
     protected static $dir;
 
-    protected static $application;
+    protected static Application $application;
 
-    private static $instance;
+    private static ?Bootstrap $instance = null;
 
     private function __construct()
     {
@@ -28,14 +28,14 @@ class Bootstrap
      */
     public static function getInstance()
     {
-        if (!static::$instance) {
-            static::$instance = new self();
+        if (!Bootstrap::$instance) {
+            Bootstrap::$instance = new self();
         }
 
-        return static::$instance;
+        return Bootstrap::$instance;
     }
 
-    public function init($dir, $testModule = '')
+    public function init(string $dir, string $testModule = ''): void
     {
         static::$dir = $dir;
 
@@ -66,7 +66,7 @@ class Bootstrap
         static::$application    = $application;
     }
 
-    protected function setPaths()
+    protected function setPaths(): void 
     {
         $basePath = realpath(static::$dir) . '/';
 
@@ -119,5 +119,7 @@ class Bootstrap
 
 $path = realpath(__DIR__ . '/../');
 
-chdir(dirname($path));
-Bootstrap::getInstance()->init($path, 'CpmsCommonTest');
+if ($path) {
+    chdir(dirname($path));
+    Bootstrap::getInstance()->init($path, 'CpmsCommonTest');
+}

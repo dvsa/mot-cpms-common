@@ -22,7 +22,8 @@
         "captainhook/captainhook": "^5.16",
         "captainhook/plugin-composer": "^5.3",
         "squizlabs/php_codesniffer": "^3.10",
-        "dvsa/coding-standards": "^2.0"
+        "dvsa/coding-standards": "^2.0",
+        "phpstan/phpstan": "^1.12"
     },
     "autoload": {
         "psr-0": {
@@ -43,6 +44,9 @@
         ],
         "phpcs:fix": [
             "vendor/bin/phpcbf"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan"
         ]
     },
     "config": {

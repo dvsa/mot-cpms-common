@@ -35,7 +35,6 @@ class LogData extends AbstractOptions
     protected $stackTrace;
     /** @var  string */
     protected $data;
-    /** @var bool */
 
     /**
      * @return string
@@ -47,6 +46,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $accessToken
+     *
+     * @return void
      */
     public function setAccessToken($accessToken)
     {
@@ -63,6 +64,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $classMethod
+     *
+     * @return void
      */
     public function setClassMethod($classMethod)
     {
@@ -79,6 +82,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $correlationId
+     *
+     * @return void
      */
     public function setCorrelationId($correlationId)
     {
@@ -95,6 +100,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $data
+     *
+     * @return void
      */
     public function setData($data)
     {
@@ -111,6 +118,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $entryType
+     *
+     * @return void
      */
     public function setEntryType($entryType)
     {
@@ -127,6 +136,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param int $exceptionCode
+     *
+     * @return void
      */
     public function setExceptionCode($exceptionCode)
     {
@@ -143,6 +154,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $exceptionMessage
+     *
+     * @return void
      */
     public function setExceptionMessage($exceptionMessage)
     {
@@ -159,6 +172,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $exceptionType
+     *
+     * @return void
      */
     public function setExceptionType($exceptionType)
     {
@@ -175,6 +190,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $openAmToken
+     *
+     * @return void
      */
     public function setOpenAmToken($openAmToken)
     {
@@ -191,6 +208,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $stackTrace
+     *
+     * @return void
      */
     public function setStackTrace($stackTrace)
     {
@@ -207,6 +226,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $userId
+     *
+     * @return void
      */
     public function setUserId($userId)
     {
@@ -234,6 +255,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param boolean $_strictMode__
+     *
+     * @return void
      */
     public function setStrictMode($_strictMode__)
     {
@@ -242,6 +265,8 @@ class LogData extends AbstractOptions
 
     /**
      *  Reset error specific data
+     *
+     * @return void
      */
     public function resetData()
     {

@@ -20,7 +20,7 @@ class ServiceOptionTest extends \PHPUnit\Framework\TestCase
         parent::setUp();
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $filter = new UnderscoreToCamelCase();
 
@@ -53,10 +53,12 @@ class ServiceOptionTest extends \PHPUnit\Framework\TestCase
             'sort' => 'id:desc',
         );
         $options = new ServiceOptions($data);
-        $this->assertSame('DESC', $options->getSort()['id']);
+        /** @var array */
+        $sort = $options->getSort();
+        $this->assertSame('DESC', $sort['id']);
     }
 
-    public function testResultArray()
+    public function testResultArray(): void
     {
         $service = new SampleService();
         $result  = $service->getResult();

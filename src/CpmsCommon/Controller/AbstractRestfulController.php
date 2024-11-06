@@ -68,8 +68,8 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     {
         $logger = $this->getLogger();
         try {
-            /** @var $response HttpResponse $data */
-            $data     = parent::dispatch($request, $response);
+            $data = parent::dispatch($request, $response);
+            /** @var  HttpResponse  */
             $response = $this->getResponse();
             $logger->debug($request->toString());
 
@@ -81,7 +81,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
                 $viewModel = new JsonModel(
                     $this->getErrorMessage(
                         ErrorCodeService::NOT_IMPLEMENTED,
-                        $request->getMethod()
+                        [$request->getMethod()]
                     )
                 );
                 $viewModel->setTerminal(true);
@@ -100,7 +100,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
             $viewModel = new JsonModel(
                 $this->getErrorMessage(
                     ErrorCodeService::AN_ERROR_OCCURRED,
-                    '',
+                    [''],
                     HttpResponse::STATUS_CODE_500
                 )
             );

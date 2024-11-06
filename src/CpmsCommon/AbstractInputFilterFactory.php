@@ -11,6 +11,7 @@ use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Application;
 
 /**
  * Class AbstractInputFilterFactory
@@ -21,13 +22,12 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
 {
     public const VERSION_PREFIX = 'V';
 
-    private $configPrefix;
+    private string $configPrefix;
 
-    protected $versionedNamespaces
-        = [
-            'Payment',
-            'DirectDebit',
-        ];
+    protected array $versionedNamespaces = [
+        'Payment',
+        'DirectDebit',
+    ];
 
     public function __construct()
     {
@@ -38,8 +38,8 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      * Create service with name
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @param                         $name
-     * @param                         $requestedName
+     * @param string $name
+     * @param string $requestedName
      *
      * @return mixed
      * @throws ContainerException
@@ -50,7 +50,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
     }
 
     /**
-     * @param                         $name
+     * @param string $name
      * @param ContainerInterface $serviceLocator
      *
      * @return string
@@ -64,10 +64,13 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
         }
 
         if (count($namespaceParts) > 0 and in_array($namespaceParts[0], $this->versionedNamespaces)) {
-            $config         = $serviceLocator->get('config');
+            /** @var array */
+            $config = $serviceLocator->get('config');
             $defaultVersion = $config['api-tools-versioning']['default_version'];
-            /** @var RouteMatch $routeMatch */
-            $routeMatch = $serviceLocator->get('Application')->getMvcEvent()->getRouteMatch();
+            /** @var Application */
+            $application = $serviceLocator->get('Application');
+            /** @var ?RouteMatch $routeMatch */
+            $routeMatch = $application->getMvcEvent()->getRouteMatch();
 
             if (empty($routeMatch)) {
                 $version = $defaultVersion;

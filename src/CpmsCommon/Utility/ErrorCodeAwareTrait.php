@@ -28,10 +28,10 @@ trait ErrorCodeAwareTrait
     /**
      * Return an array with error code and message
      *
-     * @param        $errorCode
-     * @param array  $replacement
-     * @param null   $httpStatusCode
-     * @param array  $data
+     * @param int $errorCode
+     * @param array $replacement
+     * @param ?int $httpStatusCode
+     * @param array $data
      *
      * @return array
      */
@@ -39,12 +39,12 @@ trait ErrorCodeAwareTrait
     {
         /** @var ErrorCodeService $errorService */
         /** @var Request $request */
-        $replacement    = (array)$replacement;
+        $replacement = (array)$replacement;
         $container = $this->getServiceLocator();
-        $errorService   = $container->get('cpms/errorCodeService');
+        $errorService = $container->get('cpms/errorCodeService');
 
         $httpStatusCode = empty($httpStatusCode) ? Response::STATUS_CODE_400 : $httpStatusCode;
-        $message        = $errorService->getErrorMessage($errorCode, $replacement, $httpStatusCode, $data);
+        $message = $errorService->getErrorMessage($errorCode, $replacement, $httpStatusCode, $data);
 
         if ($this->getServiceLocator()->has('logger')) {
             $this->getServiceLocator()->get('logger')->debug(print_r($message, true));
@@ -53,10 +53,10 @@ trait ErrorCodeAwareTrait
 
                 if ($request instanceof Request) {
                     $debugInfo               = [
-                        'server'  => $request->getServer()->getArrayCopy(),
+                        'server' => $request->getServer()->getArrayCopy(),
                         'request' => $request->toString(),
                     ];
-                    $debugInfo['getParams']  = $request->getQuery()->getArrayCopy();
+                    $debugInfo['getParams'] = $request->getQuery()->getArrayCopy();
                     $debugInfo['postParams'] = $request->getPost()->getArrayCopy();
                     $this->getServiceLocator()->get('logger')->debug(print_r($debugInfo, true));
                 }
@@ -84,7 +84,7 @@ trait ErrorCodeAwareTrait
     /**
      * Get error message
      *
-     * @param        $code
+     * @param int $code
      * @param string $replacement
      *
      * @return mixed
@@ -94,6 +94,6 @@ trait ErrorCodeAwareTrait
         /** @var ErrorCodeService $errorService */
         $errorService = $this->getServiceLocator()->get('cpms\errorCodeService');
 
-        return $errorService->getMessage($code, $replacement);
+        return $errorService->getMessage($code, [$replacement]);
     }
 }

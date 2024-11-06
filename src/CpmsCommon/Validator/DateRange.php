@@ -18,7 +18,7 @@ class DateRange extends AbstractValidator
     public const NOT_BEFORE           = 'notBefore';
     public const NOT_BEFORE_INCLUSIVE = 'notBeforeInclusive';
 
-    protected $messageTemplates
+    protected array $messageTemplates
         = array(
             self::INVALID_DATE         => "The input does not appear to be a valid date",
             self::NOT_AFTER            => "Date must be after '%afterDate%'",
@@ -27,16 +27,16 @@ class DateRange extends AbstractValidator
             self::NOT_BEFORE_INCLUSIVE => "Date must be on or before '%beforeDate%'"
         );
 
-    protected $messageVariables
+    protected array $messageVariables
         = array(
             'afterDate'  => 'after',
             'beforeDate' => 'before',
         );
 
-    protected $after;
-    protected $before;
-    protected $format = 'Y-m-d H:i:s';
-    protected $inclusive = false;
+    protected ?string $after = null;
+    protected ?string $before = null;
+    protected ?string $format = 'Y-m-d H:i:s';
+    protected bool $inclusive = false;
 
     /**
      * Returns true if and only if $value meets the validation requirements
@@ -77,7 +77,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @param $date
+     * @param \DateTime $date
      *
      * @return bool
      */
@@ -97,7 +97,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @param $date
+     * @param \DateTime $date
      *
      * @return bool
      */
@@ -117,7 +117,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @return \DateTime
+     * @return ?\DateTime
      */
     public function getAfter()
     {
@@ -131,7 +131,7 @@ class DateRange extends AbstractValidator
     /**
      * @param string $after
      */
-    public function setAfter($after)
+    public function setAfter($after): void
     {
         try {
             $date = new \DateTime($after);
@@ -142,7 +142,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @return \DateTime
+     * @return ?\DateTime
      */
     public function getBefore()
     {
@@ -156,7 +156,7 @@ class DateRange extends AbstractValidator
     /**
      * @param string $before
      */
-    public function setBefore($before)
+    public function setBefore($before): void
     {
         try {
             $date = new \DateTime($before);
@@ -177,13 +177,13 @@ class DateRange extends AbstractValidator
     /**
      * @param boolean $inclusive
      */
-    public function setInclusive($inclusive)
+    public function setInclusive($inclusive): void
     {
         $this->inclusive = (bool)$inclusive;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getFormat()
     {
@@ -191,9 +191,9 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @param string $format
+     * @param ?string $format
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }

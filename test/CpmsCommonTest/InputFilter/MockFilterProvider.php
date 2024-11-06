@@ -4,6 +4,7 @@ namespace CpmsCommonTest\InputFilter;
 
 use Interop\Container\ContainerInterface;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class MockFilterProvider
@@ -13,9 +14,9 @@ use Laminas\InputFilter\InputFilterProviderInterface;
  */
 class MockFilterProvider implements InputFilterProviderInterface
 {
-    private $serviceLocator;
+    private ServiceLocatorInterface $serviceLocator;
 
-    public function setServiceLocator($serviceLocator)
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator): MockFilterProvider
     {
         $this->serviceLocator = $serviceLocator;
 

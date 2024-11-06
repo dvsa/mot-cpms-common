@@ -61,8 +61,8 @@ class LoggerService extends Logger implements LogDataAwareInterface
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return $this
      */

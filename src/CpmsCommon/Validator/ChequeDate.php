@@ -9,7 +9,7 @@ namespace CpmsCommon\Validator;
  */
 class ChequeDate extends DateRange
 {
-    protected $after = '-6 months';
-    protected $before = 'now';
-    protected $inclusive = true;
+    protected ?string $after = '-6 months';
+    protected ?string $before = 'now';
+    protected bool $inclusive = true;
 }

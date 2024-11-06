@@ -56,7 +56,7 @@ class AuthServiceOptions extends AbstractOptions
     /**
      * Unique ID of user making the request
      *
-     * @var
+     * @var mixed
      */
     protected $user;
 
@@ -97,6 +97,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $isDownload
+     *
+     * @return void
      */
     public function setIsDownload($isDownload)
     {
@@ -113,6 +115,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $enforceToken
+     *
+     * @return void
      */
     public function setEnforceToken($enforceToken)
     {
@@ -121,6 +125,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param string $method
+     *
+     * @return void
      */
     public function setMethod($method)
     {
@@ -137,6 +143,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $disabled
+     *
+     * @return void
      */
     public function setDisableAuthentication($disabled)
     {
@@ -153,6 +161,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param string $clientId
+     *
+     * @return void
      */
     public function setClientCode($clientId)
     {
@@ -169,6 +179,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param string $clientSecret
+     *
+     * @return void
      */
     public function setClientSecret($clientSecret)
     {
@@ -185,6 +197,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $ignoreScope
+     *
+     * @return void
      */
     public function setRequiredScope($ignoreScope)
     {
@@ -201,6 +215,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param mixed $userId
+     *
+     * @return void
      */
     public function setUser($userId)
     {
@@ -216,7 +232,9 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @param mixed $ipAddress
+     * @param string $ipAddress
+     *
+     * @return void
      */
     public function setIpAddress($ipAddress)
     {
@@ -232,7 +250,9 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @param mixed $ipWhiteList
+     * @param array $ipWhiteList
+     *
+     * @return void
      */
     public function setIpWhiteList($ipWhiteList)
     {
@@ -248,7 +268,9 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @param mixed $scope
+     * @param string $scope
+     *
+     * @return void
      */
     public function setScope($scope)
     {
@@ -264,7 +286,9 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @param mixed $accessToken
+     * @param string $accessToken
+     *
+     * @return void
      */
     public function setAccessToken($accessToken)
     {
@@ -281,6 +305,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param string $grantType
+     *
+     * @return void
      */
     public function setGrantType($grantType)
     {
@@ -305,6 +331,8 @@ class AuthServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $disabled
+     *
+     * @return void
      */
     public function setDisabled($disabled)
     {

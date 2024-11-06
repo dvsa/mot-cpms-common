@@ -24,7 +24,7 @@ class ReferenceGeneratorTest extends TestCase
         $this->referenceGenerator = new ReferenceGenerator();
     }
 
-    public function testGenerateReference()
+    public function testGenerateReference(): string
     {
         $reference = $this->referenceGenerator->generate('mot2', 2);
 
@@ -38,12 +38,12 @@ class ReferenceGeneratorTest extends TestCase
     /**
      * @depends testGenerateReference
      */
-    public function testVerifyReference($reference)
+    public function testVerifyReference(string $reference): void
     {
         $this->assertTrue($this->referenceGenerator->verify($reference));
     }
 
-    public function testVerifyFalseReference()
+    public function testVerifyFalseReference(): void
     {
         $reference = 'MOT2-02-20141105-102030-0';
         $this->assertFalse($this->referenceGenerator->verify($reference));
@@ -70,7 +70,7 @@ class ReferenceGeneratorTest extends TestCase
         $this->assertFalse($this->referenceGenerator->verify($reference));
     }
 
-    public function testInvalidTimeSegment()
+    public function testInvalidTimeSegment(): void
     {
         $reference = 'MOT2-02-20141105-252030-90876475';
         $this->assertFalse($this->referenceGenerator->verify($reference));
@@ -82,7 +82,7 @@ class ReferenceGeneratorTest extends TestCase
         $this->assertFalse($this->referenceGenerator->verify($reference));
     }
 
-    public function testReferenceUniqueness()
+    public function testReferenceUniqueness(): void
     {
         $list = array();
         for ($i = 0; $i < 1000; $i++) {
@@ -92,7 +92,7 @@ class ReferenceGeneratorTest extends TestCase
         }
     }
 
-    public function testInvalidPaymentType()
+    public function testInvalidPaymentType(): void
     {
         $this->expectException(InvalidArgumentException::class);
 

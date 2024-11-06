@@ -21,8 +21,8 @@ class Download extends AbstractPlugin
     /**
      * Force file download
      *
-     * @param      $file
-     * @param null $maskedFile
+     * @param string $file
+     * @param ?string $maskedFile
      *
      * @return Response|Stream
      */
@@ -30,8 +30,8 @@ class Download extends AbstractPlugin
     {
         if (file_exists($file)) {
             /** @var Stream $response */
-            $response       = new Stream();
-            $headers        = new Headers();
+            $response = new Stream();
+            $headers = new Headers();
             $maskedFilename = $maskedFile ?: $this->getMaskFilename($file);
 
             $response->setStream(fopen($file, 'r'));
@@ -56,7 +56,7 @@ class Download extends AbstractPlugin
     /**
      * Get friendly filename
      *
-     * @param           $file
+     * @param string $file
      *
      * @return string
      */

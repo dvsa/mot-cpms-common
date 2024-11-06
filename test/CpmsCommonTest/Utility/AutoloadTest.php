@@ -14,7 +14,7 @@ class AutoloadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test api auto loader class
      */
-    public function testAppendQueryParam()
+    public function testAppendQueryParam(): void
     {
         $class  = __NAMESPACE__ . '\SampleClass';
         $loader = new AutoloadMock();

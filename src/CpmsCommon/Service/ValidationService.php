@@ -36,8 +36,8 @@ class ValidationService extends AbstractService
 
     /**
      * @param array $data
-     * @param       $inputFilterAlias
-     * @param null  $redirectUriOnFail
+     * @param string $inputFilterAlias
+     * @param boolean|null  $redirectUriOnFail
      *
      * @return array | boolean
      */
@@ -55,7 +55,7 @@ class ValidationService extends AbstractService
             return true;
         }
 
-        return $this->getErrorFromFilter($inputFilter, $redirectUriOnFail);
+        return $this->getErrorFromFilter($inputFilter);
     }
 
     /**
@@ -79,14 +79,14 @@ class ValidationService extends AbstractService
                     ) {
                         return $this->getErrorMessage(
                             ErrorCodeService::MISSING_PARAMETER,
-                            $fieldName,
+                            [$fieldName],
                             Response::STATUS_CODE_400,
                             $data
                         );
                     } else {
                         return $this->getErrorMessage(
                             ErrorCodeService::INVALID_PARAMETER,
-                            $fieldName,
+                            [$fieldName],
                             Response::STATUS_CODE_400,
                             [
                                 ErrorCodeService::ERROR_MESSAGE_KEY => $errorMessage
@@ -101,7 +101,7 @@ class ValidationService extends AbstractService
 
         return $this->getErrorMessage(
             ErrorCodeService::UNKNOWN_ERROR,
-            "[$filterClass validation]",
+            ["[$filterClass validation]"],
             Response::STATUS_CODE_400,
             $data
         );

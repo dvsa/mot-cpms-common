@@ -36,8 +36,8 @@ class ReferenceGenerator
     /**
      * Generate reference
      *
-     * @param $schemeId
-     * @param $paymentType
+     * @param string $schemeId
+     * @param string $paymentType
      *
      * @return string
      */
@@ -89,7 +89,7 @@ class ReferenceGenerator
     /**
      * Verify reference is in the correct format
      *
-     * @param $reference
+     * @param string $reference
      *
      * @return bool
      */
@@ -109,7 +109,7 @@ class ReferenceGenerator
     /**
      * Verify time segment
      *
-     * @param $time
+     * @param string $time
      *
      * @return bool
      */
@@ -147,7 +147,7 @@ class ReferenceGenerator
     /**
      * Verify date segment of the reference
      *
-     * @param $date
+     * @param string $date
      *
      * @return bool
      */

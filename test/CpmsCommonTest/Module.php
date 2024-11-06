@@ -19,11 +19,12 @@ class Module
      *
      * @param MvcEvent $event
      */
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(MvcEvent $event): void
     {
         $application         = $event->getApplication();
         $eventManager        = $application->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
+        /** @var array */
         $config              = $application->getServiceManager()->get('Config');
         $displayExceptions   = $config['display_exception'];
         $exceptionStrategy   = new JsonExceptionStrategy();
@@ -33,12 +34,12 @@ class Module
         $exceptionStrategy->attach($eventManager);
     }
 
-    public function getConfig()
+    public function getConfig(): array
     {
         return include __DIR__ . '/../test.global.php';
     }
 
-    public function getAutoloaderConfig()
+    public function getAutoloaderConfig(): array
     {
         return array(
             'Laminas\Loader\StandardAutoloader' => array(

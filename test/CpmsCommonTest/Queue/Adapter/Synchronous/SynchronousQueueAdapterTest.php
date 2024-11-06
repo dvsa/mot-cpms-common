@@ -24,7 +24,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->adapter->setLogger($logger);
     }
 
-    public function testCanCreateWithFactory()
+    public function testCanCreateWithFactory(): void
     {
         $sl = Bootstrap::getInstance()->getServiceManager();
         $sl->get('cpms\queue\synchronous');
@@ -33,7 +33,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(SynchronousQueueAdapter::class, $instance);
     }
 
-    public function testProcessesJobImmediately()
+    public function testProcessesJobImmediately(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle');
@@ -41,7 +41,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->adapter->enqueue($job);
     }
 
-    public function testProcessesBulkJobsImmediately()
+    public function testProcessesBulkJobsImmediately(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle');
@@ -51,7 +51,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->adapter->enqueueAll([$job, $job2]);
     }
 
-    public function testBulkProcessContinuesDespiteExceptions()
+    public function testBulkProcessContinuesDespiteExceptions(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle')->willThrowException(new \Exception());

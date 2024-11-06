@@ -5,6 +5,7 @@ namespace CpmsCommonTest\Log\Writer;
 use CpmsCommon\Log\Writer\StreamWriterFactory;
 use CpmsCommon\Utility\Util;
 use CpmsCommonTest\Bootstrap;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class StreamWriterFactoryTest
@@ -23,7 +24,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $this->writerFactory = new StreamWriterFactory();
     }
 
-    public function testCreateService()
+    public function testCreateService(): void
     {
         $serviceManager = $this->getServiceManager();
         $result         = $this->writerFactory->__invoke($serviceManager, null);
@@ -31,7 +32,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    public function testCreateServiceWithNoFileName()
+    public function testCreateServiceWithNoFileName(): void
     {
         $config['logger']['filename']  = null;
         $config['logger']['location']  = null;
@@ -46,7 +47,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    public function testCreateLogDir()
+    public function testCreateLogDir(): void
     {
         $config['logger']['filename']    = null;
         $config['logger']['location']    = sys_get_temp_dir() . '/log';
@@ -66,12 +67,14 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    private function getServiceManager($config = null)
+    private function getServiceManager(array $config = null): ServiceManager
     {
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
         if (!empty($config)) {
-            $config = array_merge($serviceManager->get('config'), $config);
+            /** @var array */
+            $managerConfig = $serviceManager->get('config');
+            $config = array_merge($managerConfig, $config);
 
             $serviceManager->setAllowOverride(true);
             $serviceManager->setService('config', $config);

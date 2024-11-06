@@ -19,7 +19,7 @@ trait RedirectionDataTrait
      * Handle redirect to third party gateway if we have a gateway url
      * Redirect to redirect_uri if request is not restful
      *
-     * @param $redirectionData
+     * @param array $redirectionData
      *
      * @return ViewModel
      */

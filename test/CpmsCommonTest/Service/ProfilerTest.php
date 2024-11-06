@@ -17,14 +17,15 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
         $this->serviceManager->setAllowOverride(true);
 
-        $config                          = $this->serviceManager->get('Config');
+        /** @var array */
+        $config = $this->serviceManager->get('Config');
         $config['cpms_profiler_enabled'] = true;
         $this->serviceManager->setService('Config', $config);
 
         parent::setUp();
     }
 
-    public function testPreEvent()
+    public function testPreEvent(): void
     {
 
         $initializer = new ProfilingInitializer();
@@ -39,7 +40,7 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($initializerResult);
     }
 
-    public function testPostEvent()
+    public function testPostEvent(): void
     {
 
         $initializer = new ProfilingInitializer();
@@ -54,7 +55,7 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($initializerResult);
     }
 
-    public function testAmountFormatterTrait()
+    public function testAmountFormatterTrait(): void
     {
         $pound   = 10;
         $service = new SimpleServiceMock();

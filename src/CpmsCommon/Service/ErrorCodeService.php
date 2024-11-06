@@ -152,6 +152,8 @@ class ErrorCodeService
 
     /**
      * Set default messages for error codes that do not have messages
+     *
+     * @return void
      */
     private function processErrorCodes()
     {
@@ -169,9 +171,9 @@ class ErrorCodeService
      * Get error message for the specified error code
      * If $httpStatusCode is specified,this will overwrite the default HTTP STATUS
      *
-     * @param        $code
+     * @param int $code
      * @param array  $replacement
-     * @param null   $httpStatusCode
+     * @param int|null   $httpStatusCode
      * @param array  $data
      *
      * @return array
@@ -200,7 +202,7 @@ class ErrorCodeService
         return $return;
     }
 
-    private function printMessage($format, array $replacements)
+    private function printMessage(string $format, array $replacements): string
     {
         $replacements = array_values($replacements);
         switch (count($replacements)) {
@@ -257,7 +259,7 @@ class ErrorCodeService
     }
 
     /**
-     * @param        $code
+     * @param int $code
      * @param array  $replacement
      *
      * @return mixed
@@ -272,6 +274,8 @@ class ErrorCodeService
 
     /**
      * @param array $messages
+     *
+     * @return void
      */
     private function setDefinedMessages(array $messages = null)
     {

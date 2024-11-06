@@ -15,18 +15,20 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
     /** @var  \Laminas\ServiceManager\ServiceManager */
     protected $serviceManager;
 
-    /** @var \CpmsCommon\Service\ErrorCodeService $errorService */
+    /** @var ErrorCodeService $errorService */
     private $errorService;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        $this->errorService   = $this->serviceManager->get('cpms\errorCodeService');
+        /** @var ErrorCodeService */
+        $errorService = $this->serviceManager->get('cpms\errorCodeService');
+        $this->errorService = $errorService;
 
         parent::setUp();
     }
 
-    public function testCustomMessage()
+    public function testCustomMessage(): void
     {
         $code    = 8765;
         $message = 'my message';
@@ -45,11 +47,11 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($message, $actual[ErrorCodeService::ERROR_MESSAGE_KEY]);
     }
 
-    public function testGetErrorMessage()
+    public function testGetErrorMessage(): void
     {
         $replacement = 'test field';
-        $code        = ErrorCodeService::CUSTOMER_NOT_FOUND;
-        $actual      = $this->errorService->getErrorMessage($code, $replacement);
+        $code = ErrorCodeService::CUSTOMER_NOT_FOUND;
+        $actual = $this->errorService->getErrorMessage($code, [$replacement]);
 
         $this->assertArrayHasKey(ErrorCodeService::ERROR_CODE_KEY, $actual);
         $this->assertArrayHasKey(ErrorCodeService::ERROR_MESSAGE_KEY, $actual);
@@ -57,17 +59,18 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($code, $actual[ErrorCodeService::ERROR_CODE_KEY]);
         $this->assertNotEmpty($actual[ErrorCodeService::ERROR_MESSAGE_KEY]);
 
-        $actualWithStatus = $this->errorService->getErrorMessage(ErrorCodeService::INVALID_CLIENT, $replacement, 500);
+        $actualWithStatus = $this->errorService->getErrorMessage(ErrorCodeService::INVALID_CLIENT, [$replacement], 500);
         $this->assertArrayHasKey(ErrorCodeService::HTTP_STATUS_KEY, $actualWithStatus);
     }
 
-    public function testInvalidErrorCode()
+    public function testInvalidErrorCode(): void
     {
+        /** @phpstan-ignore argument.type */
         $message = $this->errorService->getErrorMessage('xx90sedf');
         $this->assertSame(ErrorCodeService::GENERIC_ERROR_CODE, $message[ErrorCodeService::ERROR_CODE_KEY]);
     }
 
-    public function testGetSuccessMessage()
+    public function testGetSuccessMessage(): void
     {
         $data    = array(
             'token' => '223'
@@ -88,7 +91,7 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(ErrorCodeService::SUCCESS_MESSAGE, $nullData[ErrorCodeService::ERROR_CODE_KEY]);
     }
 
-    public function testGetSuccessMessageWithMessage()
+    public function testGetSuccessMessageWithMessage(): void
     {
         $message = [
             ErrorCodeService::ERROR_CODE_KEY => ErrorCodeService::ACCESS_TOKEN_EXPIRED
@@ -101,7 +104,7 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(ErrorCodeService::ACCESS_TOKEN_EXPIRED, $data[ErrorCodeService::ERROR_CODE_KEY]);
     }
 
-    public function testGetFirstException()
+    public function testGetFirstException(): void
     {
         $firstMessage  = 'First Message';
         $secondMessage = 'Second Message';
@@ -114,13 +117,13 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($firstMessage, $output->getMessage());
     }
 
-    public function testGetMessage()
+    public function testGetMessage(): void
     {
         $message = $this->errorService->getMessage(ErrorCodeService::AN_ERROR_OCCURRED);
         $this->assertNotEmpty($message);
     }
 
-    public function testStaticGetMessage()
+    public function testStaticGetMessage(): void
     {
         $message = ErrorCodeService::getMessage(ErrorCodeService::RESOURCE_NOT_FOUND);
         $this->assertNotEmpty($message);

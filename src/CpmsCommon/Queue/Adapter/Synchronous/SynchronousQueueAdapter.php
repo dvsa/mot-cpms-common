@@ -19,7 +19,7 @@ class SynchronousQueueAdapter implements QueueInterface
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     private $serviceLocator;
 
-    public function setServiceLocator($serviceLocator)
+    public function setServiceLocator($serviceLocator): SynchronousQueueAdapter
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -37,12 +37,12 @@ class SynchronousQueueAdapter implements QueueInterface
     /**
      * @param JobInterface $job
      */
-    public function enqueue(JobInterface $job)
+    public function enqueue(JobInterface $job): void
     {
         $this->process($job);
     }
 
-    public function enqueueAll(array $jobs)
+    public function enqueueAll(array $jobs): void
     {
         array_map([$this, 'enqueue'], $jobs);
     }

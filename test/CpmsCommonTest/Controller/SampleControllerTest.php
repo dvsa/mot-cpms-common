@@ -33,10 +33,10 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
     protected $event;
     /** @var  RouteMatch */
     protected $routeMatch;
-    /** @var  \Laminas\Console\Request */
+    /** @var  Request */
     protected $request;
 
-    public function setUp($noConfig = false): void
+    public function setUp(bool $noConfig = false): void
     {
 
         $this->setApplicationConfig(
@@ -44,7 +44,9 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         );
 
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        $this->setApplicationConfig($this->serviceManager->get('ApplicationConfig'));
+        /** @var array */
+        $applicationConfig = $this->serviceManager->get('ApplicationConfig');
+        $this->setApplicationConfig($applicationConfig);
         $controller = $this->serviceManager->get('ControllerManager')->get('CpmsCommonTest\Sample');
 
         $this->controller = $controller;
@@ -54,7 +56,9 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->routeMatch = new RouteMatch(array('controller' => 'export'));
         $this->event      = new MvcEvent();
 
+        /** @var array */
         $config       = $this->serviceManager->get('Config');
+
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         $router       = HttpRouter::factory($routerConfig);
 
@@ -68,7 +72,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         parent::setUp(true);
     }
 
-    public function testControllerInstance()
+    public function testControllerInstance(): void
     {
         $this->assertInstanceOf('CpmsCommon\Controller\AbstractRestfulController', $this->controller);
         $this->assertInstanceOf('Laminas\Log\Logger', $this->controller->getLogger());
@@ -82,7 +86,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->controller->log('phpunit', Logger::DEBUG);
     }
 
-    public function testDispatch()
+    public function testDispatch(): void
     {
         /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
@@ -103,7 +107,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->assertResponseStatusCode(200);
     }
 
-    public function testDispatchWithRedirect()
+    public function testDispatchWithRedirect(): void
     {
         /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
@@ -123,7 +127,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->assertSame(302, $response->getStatusCode());
     }
 
-    public function test405Dispatch()
+    public function test405Dispatch(): void
     {
         /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
@@ -144,7 +148,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->assertSame(405, $res->getStatusCode());
     }
 
-    public function testDispatchException()
+    public function testDispatchException(): void
     {
         /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
@@ -160,8 +164,9 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
         $this->controller->dispatch($request);
         $res = $this->controller->getResponse();
-
-        $content = \json_decode($res->getContent(), true);
+        /** @var string */
+        $responseContent = $res->getContent();
+        $content = \json_decode($responseContent, true);
 
         $this->assertTrue(is_array($content));
         $this->assertArrayHasKey('code', $content);
@@ -170,7 +175,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $this->assertSame(405, $res->getStatusCode());
     }
 
-    public function testExceptionStrategy()
+    public function testExceptionStrategy(): void
     {
         /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
@@ -210,12 +215,12 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $strategy->prepareExceptionViewModel($event);
     }
 
-    public function testGetMessage()
+    public function testGetMessage(): void
     {
         $request    = new Request();
         $controller = clone $this->controller;
         $controller->getServiceLocator()->setService('request', $request);
-        $message = $this->controller->getErrorMessage(ErrorCodeService::GENERIC_ERROR_CODE, 0);
+        $message = $this->controller->getErrorMessage(ErrorCodeService::GENERIC_ERROR_CODE, [0]);
         $this->assertNotEmpty($message);
     }
 }
