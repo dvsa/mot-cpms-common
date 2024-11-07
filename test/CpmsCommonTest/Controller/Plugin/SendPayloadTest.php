@@ -8,6 +8,7 @@ use CpmsCommonTest\SampleController;
 use Laminas\Http\Request;
 use Laminas\Router\Http\RouteMatch;
 use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use Laminas\Mvc\Controller\ControllerManager;
 
 /**
  * Class SampleControllerTest
@@ -34,8 +35,11 @@ class SendPayloadTest extends AbstractControllerTestCase
         $applicationConfig = $serviceManager->get('ApplicationConfig');
 
         $this->setApplicationConfig($applicationConfig);
+        /** @var ControllerManager */
         $loader = $this->getApplicationServiceLocator()->get('ControllerManager');
-        $this->controller = $loader->get('CpmsCommonTest\Sample');
+        /** @var SampleController */
+        $controller = $loader->get('CpmsCommonTest\Sample');
+        $this->controller = $controller;
         $this->controller->setServiceLocator($this->getApplicationServiceLocator());
         $request = new Request();
         $this->controller->dispatch($request);

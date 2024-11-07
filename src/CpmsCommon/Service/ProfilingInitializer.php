@@ -27,7 +27,7 @@ class ProfilingInitializer implements InitializerInterface
     public const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
 
     /**
-     * @param $instance
+     * @param object $instance
      * @param ServiceLocatorInterface $serviceLocator
      * @return void
      * @throws \Psr\Container\ContainerExceptionInterface

@@ -4,6 +4,7 @@ namespace CpmsCommonTest\View;
 
 use CpmsCommonTest\Bootstrap;
 use CpmsCommon\View\Helper\Revision;
+use Laminas\View\HelperPluginManager;
 
 /**
  * Class RevisionTest
@@ -28,6 +29,7 @@ class RevisionTest extends \PHPUnit\Framework\TestCase
 
     public function testRevisionHelper(): void
     {
+        /** @var HelperPluginManager */
         $viewHelperManager = $this->serviceManager->get('ViewHelperManager');
         $helper = $viewHelperManager->get('displayRevision');
         $this->assertInstanceOf(Revision::class, $helper);
@@ -42,11 +44,12 @@ class RevisionTest extends \PHPUnit\Framework\TestCase
             unlink($config['revision_file']);
         }
 
+        /** @var HelperPluginManager */
         $viewHelperManager = $this->serviceManager->get('ViewHelperManager');
         /** @var Revision */
         $helper = $viewHelperManager->get('displayRevision');
         $helper->setServiceLocator($this->serviceManager);
-        $data   = $helper();
+        $data = $helper();
 
         $this->assertNotEmpty($data);
         $this->assertTrue(is_string($data));
@@ -54,17 +57,18 @@ class RevisionTest extends \PHPUnit\Framework\TestCase
 
     public function testRevisionWithFile(): void
     {
-        $date    = date('r');
+        $date = date('r');
         $release = 'phpunit';
         /** @var array */
-        $config  = $this->serviceManager->get('config');
+        $config = $this->serviceManager->get('config');
         file_put_contents($config['revision_file'], $release . ';' . $date);
 
+        /** @var HelperPluginManager */
         $viewHelperManager = $this->serviceManager->get('ViewHelperManager');
         /** @var Revision */
         $helper = $viewHelperManager->get('displayRevision');
         $helper->setServiceLocator($this->serviceManager);
-        $data   = $helper();
+        $data = $helper();
 
         $this->assertNotEmpty($data);
         $this->assertTrue(is_string($data));

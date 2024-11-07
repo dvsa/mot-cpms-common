@@ -187,6 +187,7 @@ class ErrorCodeService
         }
 
         $message = $this->printMessage(static::$errorCodes[$code], $replacement);
+        /** @var string */
         $message = preg_replace('/(\n|\s+)/', ' ', $message);
         $return  = array(
             static::ERROR_CODE_KEY    => $code,
@@ -245,11 +246,11 @@ class ErrorCodeService
     }
 
     /**
-     * @param \Exception $exception
+     * @param \Throwable $exception
      *
-     * @return \Exception
+     * @return \Throwable
      */
-    public static function getFirstException(\Exception $exception)
+    public static function getFirstException($exception)
     {
         if ($previous = $exception->getPrevious()) {
             return static::getFirstException($previous);

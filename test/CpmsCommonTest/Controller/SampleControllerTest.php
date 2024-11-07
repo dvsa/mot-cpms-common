@@ -16,6 +16,7 @@ use Laminas\Mvc\Application;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Router\Http\TreeRouteStack as HttpRouter;
 use Laminas\Router\RouteMatch;
+use Laminas\Mvc\Controller\ControllerManager;
 
 /**
  * Class SampleControllerTest
@@ -47,7 +48,10 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         /** @var array */
         $applicationConfig = $this->serviceManager->get('ApplicationConfig');
         $this->setApplicationConfig($applicationConfig);
-        $controller = $this->serviceManager->get('ControllerManager')->get('CpmsCommonTest\Sample');
+        /** @var ControllerManager */
+        $controllerManager =  $this->serviceManager->get('ControllerManager');
+        /** @var SampleController */
+        $controller = $controllerManager->get('CpmsCommonTest\Sample');
 
         $this->controller = $controller;
         $this->controller->setServiceLocator($this->serviceManager);
@@ -205,6 +209,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $strategy->setDisplayExceptions(true);
         $strategy->prepareExceptionViewModel($event);
 
+        /** @var Response */
         $res = $event->getResponse();
         $this->assertSame(500, $res->getStatusCode());
 

@@ -27,12 +27,12 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
 
     public function testPreEvent(): void
     {
-
         $initializer = new ProfilingInitializer();
         $service     = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
+        /** @phpstan-ignore method.void */
         $initializerResult = $initializer->initialize($service, $this->serviceManager);
 
         $service->fireEvent('pre');
@@ -42,12 +42,12 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
 
     public function testPostEvent(): void
     {
-
         $initializer = new ProfilingInitializer();
         $service     = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
+        /** @phpstan-ignore method.void */
         $initializerResult = $initializer->initialize($service, $this->serviceManager);
 
         $service->fireEvent('post');

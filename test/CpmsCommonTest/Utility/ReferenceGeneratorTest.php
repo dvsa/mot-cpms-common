@@ -26,7 +26,7 @@ class ReferenceGeneratorTest extends TestCase
 
     public function testGenerateReference(): string
     {
-        $reference = $this->referenceGenerator->generate('mot2', 2);
+        $reference = $this->referenceGenerator->generate('mot2', '2');
 
         $valid     = (bool)preg_match('/' . ReferenceGenerator::REFERENCE_REGEX . '/', $reference);
 
@@ -86,7 +86,7 @@ class ReferenceGeneratorTest extends TestCase
     {
         $list = array();
         for ($i = 0; $i < 1000; $i++) {
-            $reference = ReferenceGenerator::generate('mot', 1);
+            $reference = ReferenceGenerator::generate('mot', '1');
             $this->assertFalse(in_array($reference, $list));
             $list[] = $reference;
         }

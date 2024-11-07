@@ -5,7 +5,7 @@ namespace CpmsCommon\Queue\Adapter\Synchronous;
 use CpmsCommon\Queue\JobInterface;
 use CpmsCommon\Queue\QueueInterface;
 use CpmsCommon\Utility\LoggerAwareTrait;
-use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class SynchronousQueueAdapter
@@ -17,8 +17,14 @@ class SynchronousQueueAdapter implements QueueInterface
     use LoggerAwareTrait;
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    /**
+     * @var ServiceLocatorInterface $serviceLocator
+     */
     private $serviceLocator;
 
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     */
     public function setServiceLocator($serviceLocator): SynchronousQueueAdapter
     {
         $this->serviceLocator = $serviceLocator;
@@ -27,7 +33,7 @@ class SynchronousQueueAdapter implements QueueInterface
     }
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {
@@ -57,7 +63,8 @@ class SynchronousQueueAdapter implements QueueInterface
         try {
             return $job->handle($this->serviceLocator);
         } catch (\Exception $e) {
-            return $this->logException($e);
+            $this->logException($e);
+            return false;
         }
     }
 }

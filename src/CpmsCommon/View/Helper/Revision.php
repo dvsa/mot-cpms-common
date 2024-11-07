@@ -4,6 +4,7 @@ namespace CpmsCommon\View\Helper;
 
 use Interop\Container\ContainerInterface;
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class Revision
@@ -19,23 +20,23 @@ class Revision extends AbstractHelper
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     /**
-     * @var ContainerInterface $serviceLocator
+     * @var ServiceLocatorInterface $serviceLocator
      */
     private $serviceLocator;
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
-    public function getServiceLocator(): ContainerInterface
+    public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
     /**
-     * @param ContainerInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator
      * @return Revision
      */
-    public function setServiceLocator(ContainerInterface $serviceLocator)
+    public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -53,17 +54,16 @@ class Revision extends AbstractHelper
         /** @var ContainerInterface $serviceLocator */
         $serviceLocator = $this->getServiceLocator();
         /** @var array */
-        $config         = $serviceLocator->get('config');
-        $revisionFile   = $config['revision_file'];
+        $config = $serviceLocator->get('config');
+        $revisionFile = $config['revision_file'];
 
-        if (file_exists($revisionFile)) {
-            $revisionData = file_get_contents($revisionFile);
+        if (file_exists($revisionFile) && $revisionData = file_get_contents($revisionFile)) {
             list($release, $dateDeployed) = explode(';', $revisionData);
         } else {
-            $branch       = exec('git rev-parse --abbrev-ref HEAD');
-            $revision     = exec('git rev-parse HEAD');
+            $branch = exec('git rev-parse --abbrev-ref HEAD');
+            $revision = exec('git rev-parse HEAD');
             $dateDeployed = date('r');
-            $release      = $branch . ' ' . $revision;
+            $release = $branch . ' ' . $revision;
         }
 
         if ($format) {

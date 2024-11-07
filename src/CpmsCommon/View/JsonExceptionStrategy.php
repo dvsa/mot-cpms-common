@@ -106,7 +106,7 @@ class JsonExceptionStrategy extends ExceptionStrategy
     private function getResponseData(MvcEvent $event, $errorCode, $statusCode): array
     {
         $data = array();
-        /** @var \Exception $exception */
+        /** @var ?\Exception $exception */
         $exception = $event->getParam('exception');
         if ($exception) {
             if ($app = $event->getApplication()) {

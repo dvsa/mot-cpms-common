@@ -49,9 +49,9 @@ class DownloadTest extends AbstractControllerTestCase
 
     public function testDownload(): void
     {
-        $testFile     = self::$rootPath . 'test/test.global.php';
+        $testFile = self::$rootPath . 'test/test.global.php';
         $maskFileName = 'same.txt';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response\Stream', $response);
         $this->assertSame(200, $response->getStatusCode());
@@ -59,9 +59,9 @@ class DownloadTest extends AbstractControllerTestCase
 
     public function testDownloadNotExist(): void
     {
-        $testFile     = self::$rootPath . 'test/non-test.global.php';
+        $testFile = self::$rootPath . 'test/non-test.global.php';
         $maskFileName = 'same.txt';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response', $response);
         $this->assertSame(404, $response->getStatusCode());
@@ -69,9 +69,9 @@ class DownloadTest extends AbstractControllerTestCase
 
     public function testDownloadWithoutMask(): void
     {
-        $testFile     = self::$rootPath . 'test/test.global.php';
+        $testFile = self::$rootPath . 'test/test.global.php';
         $maskFileName = '';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response\Stream', $response);
         $this->assertSame(200, $response->getStatusCode());

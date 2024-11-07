@@ -117,9 +117,9 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var InputFilterProviderInterface $filterProvider */
         $filterProviderClass = $this->getClassName($requestedName . 'Provider', $container);
-        $filterProvider      = new $filterProviderClass();
+        /** @var InputFilterProviderInterface $filterProvider */
+        $filterProvider = new $filterProviderClass();
         if ($filterProvider instanceof ServiceLocatorAwareInterface) {
             $filterProvider->setServiceLocator($container);
         }

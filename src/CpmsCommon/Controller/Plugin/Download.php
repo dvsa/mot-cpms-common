@@ -34,14 +34,21 @@ class Download extends AbstractPlugin
             $headers = new Headers();
             $maskedFilename = $maskedFile ?: $this->getMaskFilename($file);
 
-            $response->setStream(fopen($file, 'r'));
+            // We know the file is going to open as we have the exists check above, so we can force the
+            // $fileStream var to be a resource
+            /** @var resource */
+            $fileStream = fopen($file, 'r');
+            $response->setStream($fileStream);
             $response->setHeaders($headers);
             $response->setStatusCode(Response::STATUS_CODE_200);
+
+            /** @var int */
+            $fileSize = filesize($file);
 
             $headers->clearHeaders()
                 ->addHeaderLine('Content-Type', 'application/octet-stream')
                 ->addHeaderLine('Content-Disposition', "attachment; filename={$maskedFilename}")
-                ->addHeaderLine('Content-Length', filesize($file))
+                ->addHeaderLine('Content-Length', (string)$fileSize)
                 ->addHeaderLine('Content-Description', 'File Transfer');
         } else {
             $message  = $this->getController()->getMessage(ErrorCodeService::RESOURCE_NOT_FOUND, $file);

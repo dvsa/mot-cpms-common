@@ -51,7 +51,9 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
             $this->expectException(\RuntimeException::class);
         }
 
-        $validator->setFormat($format);
+        if (is_string($format)) {
+            $validator->setFormat($format);
+        }
 
         $this->assertFalse($validator->isValid($date));
         $this->assertArrayHasKey(DateDifference::INVALID_DATE, $validator->getMessages());
@@ -114,6 +116,15 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
         if ($expected === false) {
             $this->assertArrayHasKey(DateDifference::DIFFERENCE_TOO_LARGE, $validator->getMessages());
         }
+    }
+
+    /**
+     */
+    public function testMaxDeltaStringValidation(): void
+    {
+        $this->expectException(\Exception::class);
+
+        $this->validator->setMaxDelta('not a date string');
     }
 
     public function dataProvider(): array

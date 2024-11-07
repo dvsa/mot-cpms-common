@@ -2,6 +2,7 @@
 
 namespace CpmsCommon\Validator;
 
+use Exception as GlobalException;
 use Laminas\Validator\AbstractValidator;
 use Laminas\Validator\Exception;
 
@@ -69,8 +70,17 @@ class DateDifference extends AbstractValidator
      */
     public function setMaxDelta($spec): void
     {
-        $date = \DateInterval::createFromDateString($spec);
-        $this->maxDelta = $date;
+        try {
+            $date = \DateInterval::createFromDateString($spec);
+
+            if ($date == false) {
+                throw new \Exception('Invalid date string');
+            }
+
+            $this->maxDelta = $date;
+        } catch (\Exception $exception) {
+            throw new \Exception('Invalid date string');
+        }
     }
 
     /**
@@ -147,7 +157,7 @@ class DateDifference extends AbstractValidator
     }
 
     /**
-     * @param ?string $format
+     * @param string $format
      */
     public function setFormat($format): void
     {

@@ -22,6 +22,7 @@ use Laminas\Mvc\Controller\AbstractRestfulController as ZendRestfulController;
 use Laminas\Stdlib\RequestInterface as Request;
 use Laminas\Stdlib\ResponseInterface as Response;
 use Laminas\View\Model\JsonModel;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class AbstractRestfulController
@@ -39,8 +40,14 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     use ContentTypeTrait;
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    /** @var ServiceLocatorInterface */
     private $serviceLocator;
 
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return AbstractRestfulController
+     */
     public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
@@ -49,7 +56,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     }
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {
@@ -69,8 +76,9 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
         $logger = $this->getLogger();
         try {
             $data = parent::dispatch($request, $response);
-            /** @var  HttpResponse  */
+            /** @var  HttpResponse */
             $response = $this->getResponse();
+            /** @var HttpRequest $request */
             $logger->debug($request->toString());
 
             /** @var $request \Laminas\Http\PhpEnvironment\Request $data */

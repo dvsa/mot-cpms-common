@@ -9,6 +9,7 @@ use CpmsCommonTest\SampleController;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceManager;
+use Laminas\View\HelperPluginManager;
 use PHPUnit\Framework\TestCase;
 
 class ControllerPluginTest extends TestCase
@@ -32,6 +33,7 @@ class ControllerPluginTest extends TestCase
 
     public function testSendPayloadPlugin(): void
     {
+        /** @var HelperPluginManager */
         $controllerPluginManager = $this->serviceManager->get('ControllerPluginManager');
         /** @var SendPayload $plugin */
         $plugin = $controllerPluginManager->get('sendPayload');

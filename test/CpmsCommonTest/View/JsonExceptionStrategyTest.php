@@ -29,6 +29,7 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
     public function testPrepareExceptionViewModelWithNoError(): void
     {
         $event = $this->getEvent();
+        /** @phpstan-ignore argument.type */
         $event->setError(null);
 
         $result = $this->strategy->prepareExceptionViewModel($event);
@@ -63,8 +64,10 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNull($result);
         $this->assertInstanceOf('Laminas\View\Model\JsonModel', $event->getResult());
-        $this->assertInstanceOf('Laminas\Http\Response', $event->getResponse());
-        $this->assertEquals(500, $event->getResponse()->getStatusCode());
+        /** @var Response */
+        $response = $event->getResponse();
+        $this->assertInstanceOf('Laminas\Http\Response', $response);
+        $this->assertEquals(500, $response->getStatusCode());
 
         /** @var array */
         $variables = $event->getResult()->getVariables();
@@ -84,7 +87,9 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
         $result = $this->strategy->prepareExceptionViewModel($event);
 
         $this->assertNull($result);
-        $this->assertEquals(500, $event->getResponse()->getStatusCode());
+        /** @var Response */
+        $response = $event->getResponse();
+        $this->assertEquals(500, $response->getStatusCode());
     }
 
     private function getEvent(string $error = Application::ERROR_CONTROLLER_NOT_FOUND): MvcEvent

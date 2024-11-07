@@ -5,10 +5,11 @@ namespace CpmsCommon\ControllerTrait;
 use CpmsCommon\Utility\Util;
 use Laminas\Mvc\Controller\Plugin\Redirect;
 use Laminas\View\Model\ViewModel;
+use Laminas\Http\Response;
 
 /**
  * Class RedirectionDataTrait
- * @method sendPayload(array)
+ * @method sendPayload(array $payload)
  * @method Redirect redirect()
  *
  * @package CpmsCommon\ControllerTrait
@@ -21,7 +22,7 @@ trait RedirectionDataTrait
      *
      * @param array $redirectionData
      *
-     * @return ViewModel
+     * @return ViewModel|Response
      */
     protected function handleRedirectionData($redirectionData)
     {

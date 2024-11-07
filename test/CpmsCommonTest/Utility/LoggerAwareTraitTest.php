@@ -3,13 +3,12 @@
 namespace CpmsCommonTest\Utility;
 
 use CpmsCommonTest\Bootstrap;
-use CpmsCommon\Utility\LoggerAwareTrait;
 use Laminas\ServiceManager\ServiceManager;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
 {
-    private MockObject $trait;
+    /** @phpstan-ignore missingType.property */
+    private $trait;
 
     public function testLog(): void
     {

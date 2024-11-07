@@ -13,6 +13,7 @@ namespace CpmsCommon\Utility;
 use CpmsCommon\Service\LoggerService;
 use Laminas\Log\Logger;
 use Laminas\Log\LoggerAwareTrait as LaminasLoggerAwareTrait;
+use Laminas\Log\LoggerInterface;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
@@ -29,13 +30,13 @@ trait LoggerAwareTrait
     /**
      * Returns an instantiated instance of Zend Log.
      *
-     * @return LoggerService
+     * @return LoggerInterface
      * @throws \InvalidArgumentException
      */
     public function getLogger()
     {
         if (null === $this->logger) {
-            /** @var \Laminas\Log\Logger $logger */
+            /** @var LoggerInterface $logger */
             $logger = $this->getServiceLocator()->get('Logger');
             $this->setLogger($logger);
         }

@@ -10,6 +10,7 @@ use Interop\Container\ContainerInterface;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Http\Response;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class AbstractService
@@ -36,23 +37,23 @@ abstract class AbstractService implements EventManagerAwareInterface
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
     /**
-     * @var ContainerInterface $serviceLocator
+     * @var ServiceLocatorInterface $serviceLocator
      */
     private $serviceLocator;
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
-    public function getServiceLocator(): ContainerInterface
+    public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
     /**
-     * @param ContainerInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator
      * @return AbstractService
      */
-    public function setServiceLocator(ContainerInterface $serviceLocator)
+    public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -68,6 +69,7 @@ abstract class AbstractService implements EventManagerAwareInterface
      */
     public function getModel($modelName)
     {
+        /** @var array|object */
         return $this->getServiceLocator()->get('cpms\model\\' . $modelName);
     }
 

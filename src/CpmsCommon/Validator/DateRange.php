@@ -35,7 +35,7 @@ class DateRange extends AbstractValidator
 
     protected ?string $after = null;
     protected ?string $before = null;
-    protected ?string $format = 'Y-m-d H:i:s';
+    protected string $format = 'Y-m-d H:i:s';
     protected bool $inclusive = false;
 
     /**
@@ -183,7 +183,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @return ?string
+     * @return string
      */
     public function getFormat()
     {
@@ -191,7 +191,7 @@ class DateRange extends AbstractValidator
     }
 
     /**
-     * @param ?string $format
+     * @param string $format
      */
     public function setFormat($format): void
     {

@@ -42,8 +42,8 @@ class Util
      */
     public static function deleteDir($path)
     {
-        if (is_dir($path) === true) {
-            $files = array_diff(scandir($path), array('.', '..'));
+        if (is_dir($path) === true && $fileList = scandir($path)) {
+            $files = array_diff($fileList, array('.', '..'));
 
             foreach ($files as $file) {
                 self::deleteDir(realpath($path) . '/' . $file);

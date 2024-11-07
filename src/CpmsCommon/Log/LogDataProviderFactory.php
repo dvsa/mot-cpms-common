@@ -36,8 +36,12 @@ class LogDataProviderFactory implements FactoryInterface
             /** @var \CpmsCommon\Service\BaseAuthenticationService $authService */
             $authService = $container->get(self::AUTH_SERVICE_ALIAS);
 
-            $logData->setUserId($authService->getOptions()->getUser());
-            $logData->setAccessToken($authService->getOptions()->getAccessToken());
+            /** @var string */
+            $userId = $authService->getOptions()->getUser();
+            $logData->setUserId($userId);
+            /** @var string */
+            $accessToken = $authService->getOptions()->getAccessToken();
+            $logData->setAccessToken($accessToken);
         }
 
         return $logData;

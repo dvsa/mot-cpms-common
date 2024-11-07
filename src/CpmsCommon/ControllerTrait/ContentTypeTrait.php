@@ -6,7 +6,7 @@ use CpmsCommon\Controller\AbstractRestfulController;
 
 /**
  * Class RedirectionDataTrait
- * @method sendPayload(array)
+ * @method sendPayload(array $payload)
  *
  * @package CpmsCommon\ControllerTrait
  */

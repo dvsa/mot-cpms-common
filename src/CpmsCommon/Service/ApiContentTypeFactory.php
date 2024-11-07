@@ -3,30 +3,23 @@
 namespace CpmsCommon\Service;
 
 use Interop\Container\ContainerInterface;
-use Interop\Container\Exception\ContainerException;
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use Laminas\ServiceManager\Exception\ServiceNotFoundException;
-use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class ApiVersion
  *
  * @package CpmsCommon\Service
  */
-class ApiContentTypeFactory implements FactoryInterface
+class ApiContentTypeFactory
 {
     /**
      * Create an object
      *
      * @param  ContainerInterface $container
-     * @param  string $requestedName
-     * @param  null|array $options
      * @return string
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container)
     {
         /** @var array */
         $config = $container->get('config');

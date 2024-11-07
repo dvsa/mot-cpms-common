@@ -14,6 +14,7 @@ namespace CpmsCommon\Utility;
 use CpmsCommon\Service\ErrorCodeService;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Stdlib\ParametersInterface;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
@@ -37,10 +38,10 @@ trait ErrorCodeAwareTrait
      */
     public function getErrorMessage($errorCode, $replacement = [], $httpStatusCode = null, $data = array())
     {
-        /** @var ErrorCodeService $errorService */
-        /** @var Request $request */
+
         $replacement = (array)$replacement;
         $container = $this->getServiceLocator();
+        /** @var ErrorCodeService $errorService */
         $errorService = $container->get('cpms/errorCodeService');
 
         $httpStatusCode = empty($httpStatusCode) ? Response::STATUS_CODE_400 : $httpStatusCode;
@@ -49,6 +50,7 @@ trait ErrorCodeAwareTrait
         if ($this->getServiceLocator()->has('logger')) {
             $this->getServiceLocator()->get('logger')->debug(print_r($message, true));
             if (isset($message['code']) and $message['code'] == ErrorCodeService::GENERIC_ERROR_CODE) {
+                /** @var Request $request */
                 $request = $this->getServiceLocator()->get('request');
 
                 if ($request instanceof Request) {
@@ -56,7 +58,9 @@ trait ErrorCodeAwareTrait
                         'server' => $request->getServer()->getArrayCopy(),
                         'request' => $request->toString(),
                     ];
-                    $debugInfo['getParams'] = $request->getQuery()->getArrayCopy();
+                    /** @var ParametersInterface */
+                    $query = $request->getQuery();
+                    $debugInfo['getParams'] = $query->getArrayCopy();
                     $debugInfo['postParams'] = $request->getPost()->getArrayCopy();
                     $this->getServiceLocator()->get('logger')->debug(print_r($debugInfo, true));
                 }
@@ -87,7 +91,7 @@ trait ErrorCodeAwareTrait
      * @param int $code
      * @param string $replacement
      *
-     * @return mixed
+     * @return string
      */
     public function getMessage($code, $replacement = '')
     {
