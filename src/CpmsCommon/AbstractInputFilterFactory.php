@@ -2,7 +2,7 @@
 
 namespace CpmsCommon;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Laminas\InputFilter\Factory;
 use Laminas\InputFilter\InputFilterProviderInterface;
@@ -75,7 +75,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
             if (empty($routeMatch)) {
                 $version = $defaultVersion;
             } else {
-                $version = (int)$routeMatch->getParam('version');
+                $version = $routeMatch->getParam('version');
                 if ($version == 0) {
                     $version = $defaultVersion;
                 }
@@ -120,11 +120,13 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
         $filterProviderClass = $this->getClassName($requestedName . 'Provider', $container);
         /** @var InputFilterProviderInterface $filterProvider */
         $filterProvider = new $filterProviderClass();
-        if ($filterProvider instanceof ServiceLocatorAwareInterface) {
+
+        if (method_exists($filterProvider, 'setServiceLocator')) {
             $filterProvider->setServiceLocator($container);
         }
+
         $factory = new Factory();
 
-        return $factory->createInputFilter($filterProvider->getInputFilterSpecification());
+        return $factory->createInputFilter(new \ArrayObject($filterProvider->getInputFilterSpecification()));
     }
 }

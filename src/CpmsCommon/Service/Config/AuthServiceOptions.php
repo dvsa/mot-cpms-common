@@ -22,7 +22,7 @@ class AuthServiceOptions extends AbstractOptions
     /**
      * The scope required for the API endpoint
      *
-     * @var string
+     * @var string|bool
      */
     protected $requiredScope = null;
     /**
@@ -206,7 +206,7 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @return string
+     * @return string|bool
      */
     public function getRequiredScope()
     {

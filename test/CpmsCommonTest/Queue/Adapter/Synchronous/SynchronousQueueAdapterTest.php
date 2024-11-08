@@ -29,7 +29,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $sl = Bootstrap::getInstance()->getServiceManager();
         $sl->get('cpms\queue\synchronous');
         $factory = new SynchronousQueueAdapterFactory();
-        $instance = $factory->__invoke(new ServiceManager(), null);
+        $instance = $factory->__invoke(new ServiceManager());
         $this->assertInstanceOf(SynchronousQueueAdapter::class, $instance);
     }
 

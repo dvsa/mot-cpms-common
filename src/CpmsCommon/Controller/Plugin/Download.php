@@ -51,7 +51,7 @@ class Download extends AbstractPlugin
                 ->addHeaderLine('Content-Length', (string)$fileSize)
                 ->addHeaderLine('Content-Description', 'File Transfer');
         } else {
-            $message  = $this->getController()->getMessage(ErrorCodeService::RESOURCE_NOT_FOUND, $file);
+            $message = $this->getController()->getMessage(ErrorCodeService::RESOURCE_NOT_FOUND, $file);
             $response = $this->getController()->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_404);
             $response->setReasonPhrase($message);
@@ -70,8 +70,8 @@ class Download extends AbstractPlugin
     protected function getMaskFilename($file)
     {
         $pathInfo = pathinfo($file);
-        $name     = substr(basename($file), 0, -4);
-        $fileName = $name . '-' . date('d-m-Y') . '.' . $pathInfo['extension'];
+        $name = substr(basename($file), 0, -4);
+        $fileName = $name . '-' . date('d-m-Y') . '.' . ($pathInfo['extension'] ?? '');
 
         return $fileName;
     }

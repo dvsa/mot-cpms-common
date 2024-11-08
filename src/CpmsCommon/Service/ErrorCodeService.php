@@ -263,7 +263,7 @@ class ErrorCodeService
      * @param int $code
      * @param array  $replacement
      *
-     * @return mixed
+     * @return string
      */
     public static function getMessage($code, $replacement = [])
     {

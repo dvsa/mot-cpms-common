@@ -29,7 +29,7 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  * @method HttpRequest getRequest()
  * @method HttpResponse getResponse()
  * @method sendPayload($payLoad)
- * @method download()
+ * @method download($file, $maskedFile)
  *
  * @package CpmsCommon\Controller
  */

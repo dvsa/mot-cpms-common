@@ -8,7 +8,7 @@
 
 namespace CpmsCommon\Service;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\ServiceManager\Initializer\InitializerInterface;
@@ -70,7 +70,7 @@ class ProfilingInitializer implements InitializerInterface
                 /** @var LoggerService */
                 $logger = $container->get('Logger');
 
-                $exploded  = explode('.', $event->getName());
+                $exploded  = explode('.', $event->getName() ?? '');
                 $eventName = $exploded[0];
 
                 $queueLabel = 'invoked';
@@ -86,7 +86,7 @@ class ProfilingInitializer implements InitializerInterface
                     }
                 }
 
-                $target = get_class($event->getTarget());
+                $target = get_class((object)$event->getTarget());
                 $params = json_encode($event->getParams());
 
                 $logger->debug(

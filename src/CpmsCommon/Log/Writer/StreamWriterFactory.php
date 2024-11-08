@@ -3,7 +3,8 @@
 namespace CpmsCommon\Log\Writer;
 
 use CpmsCommon\Log\LogDataAwareInterface;
-use Interop\Container\ContainerInterface;
+use CpmsCommon\Log\LogData;
+use Psr\Container\ContainerInterface;
 use Laminas\Log\Filter\Priority;
 use Laminas\Log\Writer\Stream;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -41,11 +42,12 @@ class StreamWriterFactory implements FactoryInterface
         $logData         = null;
 
         if (!empty($serviceConfig['logger']['replacement'])) {
+            /** @var LogData */
             $logData = $container->get($serviceConfig['logger']['replacement']);
         }
 
         if (!empty($this->logConfig['formatter'])) {
-            /** @var \Laminas\Log\Formatter\FormatterInterface | LogDataAwareInterface $formatter */
+            /** @var \Laminas\Log\Formatter\FormatterInterface & LogDataAwareInterface $formatter */
             $formatter = $container->get($this->logConfig['formatter']);
             $fileWriter->setFormatter($formatter);
 

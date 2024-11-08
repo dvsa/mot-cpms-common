@@ -29,8 +29,8 @@ class LogData extends AbstractOptions
     protected $exceptionType;
     /** @var  string */
     protected $exceptionMessage;
-    /** @var  int */
-    protected $exceptionCode;
+    /** @var  ?int */
+    protected $exceptionCode = null;
     /** @var  string */
     protected $stackTrace;
     /** @var  string */
@@ -127,7 +127,7 @@ class LogData extends AbstractOptions
     }
 
     /**
-     * @return int
+     * @return ?int
      */
     public function getExceptionCode()
     {
@@ -135,7 +135,7 @@ class LogData extends AbstractOptions
     }
 
     /**
-     * @param int $exceptionCode
+     * @param ?int $exceptionCode
      *
      * @return void
      */
@@ -241,16 +241,10 @@ class LogData extends AbstractOptions
      */
     public function toArray()
     {
-        $array = array();
+        $properties = get_object_vars($this);
+        unset($properties['__strictMode__']);
 
-        foreach ($this as $key => $value) {
-            if ($key === '__strictMode__') {
-                continue;
-            }
-            $array[$key] = $value;
-        }
-
-        return $array;
+        return $properties;
     }
 
     /**
@@ -274,7 +268,7 @@ class LogData extends AbstractOptions
         $this->setClassMethod('');
         $this->setEntryType('');
         $this->setExceptionMessage('');
-        $this->setExceptionCode('');
+        $this->setExceptionCode(null);
         $this->setStackTrace('');
         $this->setData('');
         $this->setExceptionType('');

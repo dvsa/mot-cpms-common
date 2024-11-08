@@ -3,10 +3,10 @@
 namespace CpmsCommon\Controller\Plugin;
 
 use CpmsCommon\Service\ErrorCodeService;
+use CpmsCommon\Controller\AbstractRestfulController;
 use Laminas\Http\Header\ContentType;
 use Laminas\Http\PhpEnvironment\Response;
 use Laminas\Mvc\Application;
-use Laminas\Mvc\Controller\AbstractRestfulController;
 use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 use Laminas\Router\Http\RouteMatch;
 
@@ -35,7 +35,9 @@ class SendPayload extends AbstractPlugin
         $serviceLocator = $controller->getServiceLocator();
 
         $payLoad = (array)$payLoad;
+        /** @var array */
         $config = $serviceLocator->get('config');
+        /** @var string */
         $contentType = $serviceLocator->get('cpms\api\contentType');
         /** @var Response $response */
         $response = $controller->getResponse();

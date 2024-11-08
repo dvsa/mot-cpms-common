@@ -17,7 +17,7 @@ use Laminas\Mvc\Controller\AbstractActionController as ZendActionController;
 /**
  * Class AbstractActionController
  * Base Abstract class for action controllers
- * @method download()
+ * @method download($file, $maskedFile)
  *
  * @package CpmsCommon\Controller
  */

@@ -15,7 +15,9 @@ use CpmsCommon\Service\ErrorCodeService;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Http\PhpEnvironment\Response;
 use Laminas\Stdlib\ParametersInterface;
+use Laminas\Stdlib\Parameters;
 use Laminas\ServiceManager\ServiceManager;
+use CpmsCommon\Service\LoggerService;
 
 /**
  * Class Error CodeAwareTrait
@@ -48,21 +50,29 @@ trait ErrorCodeAwareTrait
         $message = $errorService->getErrorMessage($errorCode, $replacement, $httpStatusCode, $data);
 
         if ($this->getServiceLocator()->has('logger')) {
-            $this->getServiceLocator()->get('logger')->debug(print_r($message, true));
+            /** @var LoggerService $logger */
+            $logger = $this->getServiceLocator()->get('logger');
+            $logger->debug(print_r($message, true));
             if (isset($message['code']) and $message['code'] == ErrorCodeService::GENERIC_ERROR_CODE) {
                 /** @var Request $request */
                 $request = $this->getServiceLocator()->get('request');
 
                 if ($request instanceof Request) {
-                    $debugInfo               = [
-                        'server' => $request->getServer()->getArrayCopy(),
+                    /** @var Parameters */
+                    $server = $request->getServer();
+                    $debugInfo = [
+                        'server' => $server->getArrayCopy(),
                         'request' => $request->toString(),
                     ];
-                    /** @var ParametersInterface */
+                    /** @var Parameters */
                     $query = $request->getQuery();
+                    /** @var Parameters */
+                    $post = $request->getPost();
                     $debugInfo['getParams'] = $query->getArrayCopy();
-                    $debugInfo['postParams'] = $request->getPost()->getArrayCopy();
-                    $this->getServiceLocator()->get('logger')->debug(print_r($debugInfo, true));
+                    $debugInfo['postParams'] = $post->getArrayCopy();
+                    /** @var LoggerService */
+                    $logger = $this->getServiceLocator()->get('logger');
+                    $logger->debug(print_r($debugInfo, true));
                 }
             }
         }
