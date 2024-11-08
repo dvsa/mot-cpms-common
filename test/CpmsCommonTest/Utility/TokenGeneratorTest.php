@@ -36,7 +36,7 @@ class TokenGeneratorTest extends TestCase
     public function testThrowsExceptionWithInvalidPrefix(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('CpmsCommon\Utility\TokenGenerator::generate(): Argument #1 ($prefix) must be of type int, string given, called in /Users/robert.waring/Code/dvsa/mot-cpms-common/src/CpmsCommon/Utility/TokenGenerator.php on line 107');
+        $this->expectExceptionMessageMatches('/CpmsCommon\\\\Utility\\\\TokenGenerator::generate\\(\\): Argument #1 \\(\\$prefix\\) must be of type int, string given/');
 
         /** @phpstan-ignore argument.type */
         TokenGenerator::create('badgers love mash potato');
