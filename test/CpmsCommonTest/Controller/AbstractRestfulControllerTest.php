@@ -5,7 +5,7 @@ namespace CpmsCommonTest\Controller;
 use CpmsCommon\Controller\AbstractRestfulController;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleController;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\Http\Request;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\PluginManager;

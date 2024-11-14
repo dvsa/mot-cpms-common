@@ -6,7 +6,6 @@ use CpmsCommon\Service\Config\ServiceOptions;
 use CpmsCommon\Service\ErrorCodeService;
 use CpmsCommon\Utility\ErrorCodeAwareTrait;
 use CpmsCommon\Utility\LoggerAwareTrait;
-use Interop\Container\ContainerInterface;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Http\Response;

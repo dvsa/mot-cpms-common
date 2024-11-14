@@ -2,7 +2,7 @@
 
 namespace CpmsCommonTest\InputFilter;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 

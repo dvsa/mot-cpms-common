@@ -2,7 +2,7 @@
 
 namespace CpmsCommon\Queue;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use RuntimeException;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

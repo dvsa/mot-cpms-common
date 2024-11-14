@@ -2,7 +2,7 @@
 
 namespace CpmsCommon\Service;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class ApiVersion

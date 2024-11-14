@@ -3,7 +3,7 @@
 namespace CpmsCommon\Service;
 
 use CpmsCommon\Log\LogData;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\Log\Writer\WriterInterface;
 
