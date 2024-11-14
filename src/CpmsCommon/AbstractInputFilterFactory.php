@@ -63,7 +63,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
             $namespaceParts[$i] = ucfirst($namespaceParts[$i]);
         }
 
-        if (count($namespaceParts) > 0 and in_array($namespaceParts[0], $this->versionedNamespaces)) {
+        if (in_array($namespaceParts[0], $this->versionedNamespaces)) {
             /** @var array */
             $config = $serviceLocator->get('config');
             $defaultVersion = $config['api-tools-versioning']['default_version'];

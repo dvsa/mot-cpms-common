@@ -109,6 +109,7 @@ class JsonExceptionStrategy extends ExceptionStrategy
         /** @var ?\Exception $exception */
         $exception = $event->getParam('exception');
         if ($exception) {
+            /** @phpstan-ignore if.alwaysTrue */
             if ($app = $event->getApplication()) {
                 $serviceLocator = $app->getServiceManager();
                 /** @var ErrorCodeService */
