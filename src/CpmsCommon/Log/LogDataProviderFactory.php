@@ -3,11 +3,8 @@
 namespace CpmsCommon\Log;
 
 use Interop\Container\ContainerInterface;
-use Interop\Container\Exception\ContainerException;
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Service\BaseAuthenticationService;
 
 /**
  * Class LogDataFactory
@@ -33,13 +30,13 @@ class LogDataProviderFactory implements FactoryInterface
     {
         $logData = new LogData();
         if ($container->has(self::AUTH_SERVICE_ALIAS)) {
-            /** @var \CpmsCommon\Service\BaseAuthenticationService $authService */
+            /** @var BaseAuthenticationService $authService */
             $authService = $container->get(self::AUTH_SERVICE_ALIAS);
 
-            /** @var string */
+            /** @var string $userId */
             $userId = $authService->getOptions()->getUser();
             $logData->setUserId($userId);
-            /** @var string */
+            /** @var string $accessToken */
             $accessToken = $authService->getOptions()->getAccessToken();
             $logData->setAccessToken($accessToken);
         }

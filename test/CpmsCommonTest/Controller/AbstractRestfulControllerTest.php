@@ -2,6 +2,7 @@
 
 namespace CpmsCommonTest\Controller;
 
+use CpmsCommon\Controller\AbstractRestfulController;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleController;
 use Interop\Container\ContainerInterface;
@@ -13,12 +14,9 @@ use Laminas\View\Model\JsonModel;
 
 class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \CpmsCommon\Controller\AbstractRestfulController
-     */
-    private $controller;
-    /** @var  ContainerInterface */
-    protected $serviceManager;
+    private AbstractRestfulController $controller;
+
+    protected ContainerInterface $serviceManager;
 
 
     public function setUp(): void
@@ -72,9 +70,9 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf('Laminas\Http\PhpEnvironment\Response', $result);
         $this->assertEquals(500, $result->getStatusCode());
-        /** @var string */
+        /** @var string $resultContent */
         $resultContent = $result->getContent();
-        /** @var array */
+        /** @var array $content */
         $content = json_decode($resultContent, true);
         $this->assertSame(108, $content['code']);
     }

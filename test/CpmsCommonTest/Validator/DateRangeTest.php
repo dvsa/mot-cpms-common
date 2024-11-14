@@ -10,8 +10,7 @@ use DateTime;
  */
 class DateRangeTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  DateRange */
-    protected $validator;
+    protected DateRange $validator;
 
     public function setUp(): void
     {

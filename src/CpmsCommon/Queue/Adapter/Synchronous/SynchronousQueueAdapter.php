@@ -17,10 +17,7 @@ class SynchronousQueueAdapter implements QueueInterface
     use LoggerAwareTrait;
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /**
-     * @var ServiceLocatorInterface $serviceLocator
-     */
-    private $serviceLocator;
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
      * @param ServiceLocatorInterface $serviceLocator

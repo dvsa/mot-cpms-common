@@ -5,6 +5,7 @@ namespace CpmsCommonTest\Log\Writer;
 use CpmsCommon\Log\Writer\StreamWriterFactory;
 use CpmsCommon\Utility\Util;
 use CpmsCommonTest\Bootstrap;
+use Laminas\Log\Writer\Stream;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
@@ -14,10 +15,7 @@ use Laminas\ServiceManager\ServiceManager;
  */
 class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var StreamWriterFactory
-     */
-    private $writerFactory;
+    private StreamWriterFactory $writerFactory;
 
     public function setUp(): void
     {
@@ -40,9 +38,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $config['logger']['priority']  = '';
         $config['logger']['separator'] = '';
         $serviceManager                = $this->getServiceManager($config);
-        /**
-         * @var \Laminas\Log\Writer\Stream $result
-         */
+        /** @var Stream $result */
         $result = $this->writerFactory->__invoke($serviceManager, null);
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
@@ -60,9 +56,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         if (file_exists($config['logger']['location'])) {
             Util::deleteDir($config['logger']['location']);
         }
-        /**
-         * @var \Laminas\Log\Writer\Stream $result
-         */
+        /** @var Stream $result */
         $result = $this->writerFactory->__invoke($serviceManager, null);
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
@@ -72,7 +66,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
         if (!empty($config)) {
-            /** @var array */
+            /** @var array $managerConfig */
             $managerConfig = $serviceManager->get('config');
             $config = array_merge($managerConfig, $config);
 

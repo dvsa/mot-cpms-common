@@ -28,18 +28,12 @@ abstract class AbstractService implements EventManagerAwareInterface
     public const RESULT_TOTAL = 'total';
     public const RESULT_LIMIT = 'limit';
 
-    /** @var array */
-    public $requiredDataKeys = array();
-    /** @var array */
-    public $params = array();
-    /** @var  ServiceOptions */
-    public $options;
+    public array $requiredDataKeys = array();
+    public array $params = array();
+    public ServiceOptions $options;
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /**
-     * @var ServiceLocatorInterface $serviceLocator
-     */
-    private $serviceLocator;
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
      * @return ServiceLocatorInterface

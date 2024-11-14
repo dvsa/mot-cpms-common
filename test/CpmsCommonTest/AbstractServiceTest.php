@@ -7,13 +7,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class AbstractServiceTest extends \PHPUnit\Framework\TestCase
 {
-    private const MODEL_SERVICE        = 'cpms\model\temp';
+    private const MODEL_SERVICE = 'cpms\model\temp';
     private const ERROR_MESSAGE_RESULT = 'error';
 
-    /**
-     * @var AbstractService&MockObject
-     */
-    private $service;
+    private AbstractService&MockObject $service;
 
     public function setUp(): void
     {

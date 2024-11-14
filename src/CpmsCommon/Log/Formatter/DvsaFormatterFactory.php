@@ -27,7 +27,7 @@ class DvsaFormatterFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var array */
+        /** @var array $generalConfig */
         $generalConfig = $container->get('config');
         $config = $generalConfig['logger'];
         $replacements = $container->get($config['replacement']);

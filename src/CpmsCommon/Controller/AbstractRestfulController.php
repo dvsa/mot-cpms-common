@@ -40,8 +40,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     use ContentTypeTrait;
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /** @var ServiceLocatorInterface */
-    private $serviceLocator;
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
@@ -76,13 +75,12 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
         $logger = $this->getLogger();
         try {
             $data = parent::dispatch($request, $response);
-            /** @var  HttpResponse */
+            /** @var  HttpResponse $response */
             $response = $this->getResponse();
             /** @var HttpRequest $request */
             $logger->debug($request->toString());
 
-            /** @var $request \Laminas\Http\PhpEnvironment\Request $data */
-
+            /** @var HttpRequest $data */
             if ($response->getStatusCode() == $response::STATUS_CODE_405) {
                 $request = $this->getRequest();
 

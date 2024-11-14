@@ -8,19 +8,18 @@ use CpmsCommon\Utility\Util;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleService;
 use Laminas\Log\Logger;
+use Laminas\ServiceManager\ServiceManager;
 
 class SampleServiceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  SampleService */
-    protected $service;
+    protected SampleService $service;
 
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        $this->service        = new SampleService();
+        $this->service = new SampleService();
         $this->service->setOptions(new ServiceOptions());
 
         $this->service->setServiceLocator($this->serviceManager);
@@ -40,7 +39,7 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->logException(new \Exception('phpunit'));
         $this->service->log('phpunit', Logger::DEBUG);
 
-        /** @var array */
+        /** @var array $config */
         $config = $this->serviceManager->get('config');
         $logLocation = $config['logger']['location'];
         Util::deleteDir($logLocation);
@@ -48,12 +47,11 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
 
     public function testServiceMethod(): void
     {
-
         $model = $this->service->getModel('test');
         $this->assertSame('TEST-MODEL', $model);
 
         $required = array('one', 'two', 'three');
-        $data     = array(
+        $data = array(
             'one'   => 1,
             'two'   => 2,
             'three' => 3,

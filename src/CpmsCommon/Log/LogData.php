@@ -13,28 +13,17 @@ use Laminas\Stdlib\AbstractOptions;
  */
 class LogData extends AbstractOptions
 {
-    /** @var  string */
-    protected $entryType;
-    /** @var  string */
-    protected $userId;
-    /** @var  string */
-    protected $openAmToken;
-    /** @var  string */
-    protected $accessToken;
-    /** @var  string */
-    protected $correlationId;
-    /** @var  string */
-    protected $classMethod;
-    /** @var  string */
-    protected $exceptionType;
-    /** @var  string */
-    protected $exceptionMessage;
-    /** @var  ?int */
-    protected $exceptionCode = null;
-    /** @var  string */
-    protected $stackTrace;
-    /** @var  string */
-    protected $data;
+    protected string $entryType;
+    protected string $userId;
+    protected string $openAmToken;
+    protected string $accessToken;
+    protected string $correlationId;
+    protected string $classMethod;
+    protected string $exceptionType;
+    protected string $exceptionMessage;
+    protected ?int $exceptionCode = null;
+    protected string $stackTrace;
+    protected string $data;
 
     /**
      * @return string
@@ -231,7 +220,7 @@ class LogData extends AbstractOptions
      */
     public function setUserId($userId)
     {
-        $this->userId = $userId;
+        $this->userId = (string)$userId;
     }
 
     /**

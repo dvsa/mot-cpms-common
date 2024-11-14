@@ -14,78 +14,56 @@ class AuthServiceOptions extends AbstractOptions
     /**
      * OAuth 2 Scope
      * The scope provided by the client in the request
-     *
-     * @var string
      */
-    protected $scope = '';
+    protected string $scope = '';
 
     /**
      * The scope required for the API endpoint
-     *
-     * @var string|bool
      */
-    protected $requiredScope = null;
+    protected string|bool|null $requiredScope = null;
+
     /**
      * Scheme remote address
-     *
-     * @var string
      */
-    protected $ipAddress = null;
+    protected ?string $ipAddress = null;
 
     /**
      * IP address allowed to use this service
-     *
-     * @var array
      */
-    protected $ipWhiteList = array();
+    protected array $ipWhiteList = array();
 
     /**
      * Access token issued to client
-     *
-     * @var string
      */
-    protected $accessToken = '';
+    protected string $accessToken = '';
 
     /**
      * OAuth 2.0 grant type
-     *
-     * @var string
      */
-    protected $grantType = '';
+    protected string $grantType = '';
 
     /**
      * Unique ID of user making the request
-     *
-     * @var mixed
      */
-    protected $user;
+    protected mixed $user;
 
-    /** @var  string */
-    protected $clientCode;
+    protected string $clientCode;
 
-    /** @var  string */
-    protected $clientSecret;
+    protected string $clientSecret;
 
-    /** @var  bool */
-    protected $disabled = false;
+    protected bool $disabled = false;
 
     /**
      * Enforce the use of access token even in post request
-     *
-     * @var bool
      */
-    protected $enforceToken = false;
+    protected bool $enforceToken = false;
 
     /**
      * The HTTP request method
-     *
-     * @var string
      */
-    protected $method;
-    /**
-     * @var bool
-     */
-    protected $isDownload = false;
+    protected string $method;
+
+    protected bool $isDownload = false;
 
     /**
      * @return boolean
@@ -206,7 +184,7 @@ class AuthServiceOptions extends AbstractOptions
     }
 
     /**
-     * @return string|bool
+     * @return string|bool|null
      */
     public function getRequiredScope()
     {

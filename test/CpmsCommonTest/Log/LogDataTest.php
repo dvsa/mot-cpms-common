@@ -13,10 +13,7 @@ use Laminas\Json\Exception\InvalidArgumentException;
  */
 class LogDataTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var LogData
-     */
-    private $logData;
+    private LogData $logData;
 
     public function setUp(): void
     {
@@ -27,7 +24,7 @@ class LogDataTest extends \PHPUnit\Framework\TestCase
     {
         $data = [
             'accessToken'      => TokenGenerator::create(),
-            'userId'           => 2345,
+            'userId'           => '2345',
             'classMethod'      => get_class($this),
             'openAmToken'      => 'open-am-token',
             'correlationId'    => 'no-application',

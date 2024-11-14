@@ -3,17 +3,19 @@
 namespace CpmsCommonTest;
 
 use Laminas\Mvc\Application;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Test bootstrap, for setting up auto loading and paths
  */
 class Bootstrap
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected static $serviceManager;
+    protected static ServiceManager $serviceManager;
 
-    /** @var  string This is the root directory where the test is run from which likely the test directory */
-    protected static $dir;
+    /**
+     *  This is the root directory where the test is run from which likely the test directory 
+     */
+    protected static string $dir;
 
     protected static Application $application;
 

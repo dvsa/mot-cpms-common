@@ -21,7 +21,7 @@ class ApiContentTypeFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        /** @var array */
+        /** @var array $config */
         $config = $container->get('config');
         if (isset($config['api-tools-versioning']['default_version'])) {
             $version = $config['api-tools-versioning']['default_version'];

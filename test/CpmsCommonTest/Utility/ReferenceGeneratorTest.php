@@ -14,10 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ReferenceGeneratorTest extends TestCase
 {
-    /**
-     * @var ReferenceGenerator
-     */
-    protected $referenceGenerator;
+    protected ReferenceGenerator $referenceGenerator;
 
     public function setUp(): void
     {

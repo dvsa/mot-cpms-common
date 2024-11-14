@@ -19,10 +19,7 @@ class Revision extends AbstractHelper
     public const REVISION_RELEASE_KEY = 'release';
 
     // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /**
-     * @var ServiceLocatorInterface $serviceLocator
-     */
-    private $serviceLocator;
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
      * @return ServiceLocatorInterface
@@ -53,7 +50,7 @@ class Revision extends AbstractHelper
     {
         /** @var ContainerInterface $serviceLocator */
         $serviceLocator = $this->getServiceLocator();
-        /** @var array */
+        /** @var array $config */
         $config = $serviceLocator->get('config');
         $revisionFile = $config['revision_file'];
 

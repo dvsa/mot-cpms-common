@@ -12,20 +12,20 @@ use Laminas\Stdlib\AbstractOptions;
 class ServiceOptions extends AbstractOptions
 {
     public const MAX_LIMIT = 25;
-    /** @var int */
-    protected $limit = 25;
-    /** @var int */
-    protected $page = 1;
-    /** @var int */
-    protected $depth = 0;
-    /** @var array */
-    protected $requiredFields = array();
-    /** @var array */
-    protected $filters = array();
-    /** @var array */
-    protected $params = array();
-    /** @var mixed */
-    protected $sort;
+
+    protected int $limit = 25;
+
+    protected int $page = 1;
+
+    protected int $depth = 0;
+
+    protected array $requiredFields = array();
+
+    protected array $filters = array();
+
+    protected array $params = array();
+
+    protected mixed $sort;
 
     /**
      * @param int $depth

@@ -14,10 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenGeneratorTest extends TestCase
 {
-    /**
-     * @var TokenGenerator
-     */
-    protected $tokenGenerator;
+    protected TokenGenerator $tokenGenerator;
 
     public function setUp(): void
     {

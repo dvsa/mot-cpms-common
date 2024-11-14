@@ -9,8 +9,7 @@ namespace CpmsCommon\Log;
  */
 trait LogDataAwareTrait
 {
-    /** @var ?LogData */
-    protected $logData;
+    protected ?LogData $logData;
 
     /**
      * @return LogData

@@ -10,8 +10,7 @@ use CpmsCommon\Validator\DateDifference;
  */
 class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  DateDifference */
-    private $validator;
+    private DateDifference $validator;
 
     public function setUp(): void
     {
@@ -20,8 +19,6 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 
     public function testMaxDeltaGetAndSet(): void
     {
-        $this->assertNull($this->validator->getMaxDelta());
-
         $this->validator->setMaxDelta('6 months');
 
         $expected = new \DateInterval('P6M');

@@ -3,6 +3,7 @@
 namespace CpmsCommonTest\Service;
 
 use CpmsCommonTest\Bootstrap;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class LoggerServiceTest
@@ -11,8 +12,7 @@ use CpmsCommonTest\Bootstrap;
  */
 class DvsaLogFormatterTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {

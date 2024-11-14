@@ -13,10 +13,7 @@ use CpmsCommon\Utility\TokenGenerator;
  */
 class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var AuthServiceOptions
-     */
-    private $options;
+    private AuthServiceOptions $options;
 
     public function setUp(): void
     {

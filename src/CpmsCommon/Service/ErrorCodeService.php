@@ -135,10 +135,7 @@ class ErrorCodeService
 
     public const UNKNOWN_ERROR_MESSAGE = 'Unknown error occurred occurred, unable to log the error. Please contact support';
 
-    /**
-     * @var array
-     */
-    protected static $errorCodes = array();
+    protected static array $errorCodes = array();
 
     /**
      * Allow injection of error messages
@@ -187,7 +184,7 @@ class ErrorCodeService
         }
 
         $message = $this->printMessage(static::$errorCodes[$code], $replacement);
-        /** @var string */
+        /** @var string $message */
         $message = preg_replace('/(\n|\s+)/', ' ', $message);
         $return  = array(
             static::ERROR_CODE_KEY    => $code,

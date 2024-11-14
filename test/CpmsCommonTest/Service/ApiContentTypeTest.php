@@ -21,7 +21,7 @@ class ApiContentTypeTest extends \PHPUnit\Framework\TestCase
     {
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
         $serviceManager->setAllowOverride(true);
-        /** @var array */
+        /** @var array $config */
         $config = $serviceManager->get('config');
         $config['api-tools-versioning']['default_version'] = 75;
         $serviceManager->setService('config', $config);

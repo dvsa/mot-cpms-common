@@ -9,14 +9,13 @@ use CpmsCommonTest\Bootstrap;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Router\RouteMatch;
 use Laminas\Mvc\Application;
+use Laminas\ServiceManager\ServiceManager;
 
 class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  ValidationService */
-    protected $service;
+    protected ValidationService $service;
 
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     protected string $mockFilter = 'CpmsCommonTest\inputFilter\mockFilter';
 
@@ -25,7 +24,7 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
         $this->serviceManager->setAllowOverride(true);
 
-        /** @var ValidationService */
+        /** @var ValidationService $service */
         $service = $this->serviceManager->get('cpms\service\validationService');
 
         $this->service = $service;
@@ -41,8 +40,8 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
     public function testValid(): void
     {
-        $key    = 'test';
-        $key2   = 'test2';
+        $key = 'test';
+        $key2 = 'test2';
 
         $result = $this->service->validateData([$key => 'test', $key2 => 'a'], $this->mockFilter);
 
@@ -51,10 +50,10 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidIsEmpty(): void
     {
-        $key  = 'test';
+        $key = 'test';
         $key2 = 'test2';
 
-        /** @var array */
+        /** @var array $result */
         $result = $this->service->validateData(
             [$key => '', $key2 => 'as'],
             $this->mockFilter,
@@ -70,11 +69,11 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalid(): void
     {
-        $key     = 'test';
-        $key2    = 'test2';
+        $key = 'test';
+        $key2 = 'test2';
         $key2Min = 2;
 
-        /** @var array */
+        /** @var array $result */
         $result = $this->service->validateData(
             [$key => 'test', $key2 => 'test'],
             $this->mockFilter,
@@ -105,11 +104,11 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
             ->setService('CpmsCommonTest\inputFilter\mockFilter', $mockFilter);
 
         $data = array(
-            'collection_day'    => 5,
+            'collection_day' => 5,
             'product_reference' => 'test',
         );
 
-        /** @var array */
+        /** @var array $result */
         $result = $this->service->validateData($data, 'CpmsCommonTest\inputFilter\mockFilter');
 
         $this->assertArrayHasKey('code', $result);
@@ -120,12 +119,12 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
     public function testVersionedFilterNameByDefaultConfig(): void
     {
         $serviceFactory = new AbstractInputFilterFactory();
-        /** @var array */
+        /** @var array $config */
         $config = $this->serviceManager->get('config');
         $configVersion = 47;
         $config['api-tools-versioning']['default_version'] = $configVersion;
         $this->serviceManager->setService('config', $config);
-        $serviceName    = 'payment\inputFilter\MockFilterProvider';
+        $serviceName = 'payment\inputFilter\MockFilterProvider';
 
         $generatedClassName = $serviceFactory->getClassName($serviceName, $this->serviceManager);
         $expectedClassName = sprintf('Payment\%s%s\InputFilter\MockFilterProvider', AbstractInputFilterFactory::VERSION_PREFIX, $configVersion);
@@ -135,15 +134,15 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
     public function testVersionedFilterNameByDefaultConfigWithRouteMatch(): void
     {
         $serviceFactory = new AbstractInputFilterFactory();
-        $expectedVersion        = 42;
-        $serviceName    = 'payment\inputFilter\MockFilterProvider';
+        $expectedVersion = 42;
+        $serviceName = 'payment\inputFilter\MockFilterProvider';
         $configVersion = 42;
         $config['api-tools-versioning']['default_version'] = $configVersion;
         $this->serviceManager->setService('config', $config);
 
-        /** @var Application */
+        /** @var Application $application */
         $application = $this->serviceManager->get('Application');
-        /** @var MvcEvent */
+        /** @var MvcEvent $event */
         $event = $application->getMvcEvent();
         $routeMatch = new RouteMatch([]);
 
@@ -158,12 +157,12 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
     public function testVersionedFilterNameByRouteMatch(): void
     {
         $serviceFactory = new AbstractInputFilterFactory();
-        $expectedVersion        = 12;
-        $serviceName    = 'payment\inputFilter\MockFilterProvider';
+        $expectedVersion = 12;
+        $serviceName = 'payment\inputFilter\MockFilterProvider';
 
-        /** @var Application */
+        /** @var Application $application */
         $application = $this->serviceManager->get('Application');
-        /** @var MvcEvent */
+        /** @var MvcEvent $event */
         $event = $application->getMvcEvent();
         $routeMatch = new RouteMatch([]);
         $routeMatch->setParam('version', $expectedVersion);

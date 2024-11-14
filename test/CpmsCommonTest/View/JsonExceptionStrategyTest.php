@@ -15,10 +15,7 @@ use Laminas\Mvc\MvcEvent;
  */
 class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var JsonExceptionStrategy
-     */
-    private $strategy;
+    private JsonExceptionStrategy $strategy;
 
     public function setUp(): void
     {
@@ -64,12 +61,12 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNull($result);
         $this->assertInstanceOf('Laminas\View\Model\JsonModel', $event->getResult());
-        /** @var Response */
+        /** @var Response $response */
         $response = $event->getResponse();
         $this->assertInstanceOf('Laminas\Http\Response', $response);
         $this->assertEquals(500, $response->getStatusCode());
 
-        /** @var array */
+        /** @var array $variables */
         $variables = $event->getResult()->getVariables();
 
         $this->assertArrayHasKey('code', $variables);
@@ -87,7 +84,7 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
         $result = $this->strategy->prepareExceptionViewModel($event);
 
         $this->assertNull($result);
-        /** @var Response */
+        /** @var Response $response */
         $response = $event->getResponse();
         $this->assertEquals(500, $response->getStatusCode());
     }

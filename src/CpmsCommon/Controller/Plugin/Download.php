@@ -36,13 +36,13 @@ class Download extends AbstractPlugin
 
             // We know the file is going to open as we have the exists check above, so we can force the
             // $fileStream var to be a resource
-            /** @var resource */
+            /** @var resource $fileStream */
             $fileStream = fopen($file, 'r');
             $response->setStream($fileStream);
             $response->setHeaders($headers);
             $response->setStatusCode(Response::STATUS_CODE_200);
 
-            /** @var int */
+            /** @var int $fileSize */
             $fileSize = filesize($file);
 
             $headers->clearHeaders()

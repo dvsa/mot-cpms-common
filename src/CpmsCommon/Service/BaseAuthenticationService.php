@@ -18,8 +18,7 @@ abstract class BaseAuthenticationService extends ZendAuthService
     use ErrorCodeAwareTrait;
     use LoggerAwareTrait;
 
-    /** @var  AuthServiceOptions */
-    protected $options;
+    protected AuthServiceOptions $options;
 
     /**
      * @param AuthServiceOptions $options

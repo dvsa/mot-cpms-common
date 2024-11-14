@@ -58,19 +58,19 @@ trait ErrorCodeAwareTrait
                 $request = $this->getServiceLocator()->get('request');
 
                 if ($request instanceof Request) {
-                    /** @var Parameters */
+                    /** @var Parameters $server */
                     $server = $request->getServer();
                     $debugInfo = [
                         'server' => $server->getArrayCopy(),
                         'request' => $request->toString(),
                     ];
-                    /** @var Parameters */
+                    /** @var Parameters $query */
                     $query = $request->getQuery();
-                    /** @var Parameters */
+                    /** @var Parameters $post */
                     $post = $request->getPost();
                     $debugInfo['getParams'] = $query->getArrayCopy();
                     $debugInfo['postParams'] = $post->getArrayCopy();
-                    /** @var LoggerService */
+                    /** @var LoggerService $logger */
                     $logger = $this->getServiceLocator()->get('logger');
                     $logger->debug(print_r($debugInfo, true));
                 }

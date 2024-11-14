@@ -53,7 +53,7 @@ class ProfilingInitializer implements InitializerInterface
             return;
         }
 
-        /** @var array */
+        /** @var array $config */
         $config = $container->get('Config');
 
         if (!isset($config[self::CONFIG_KEY_PROFILE_ENABLED])) {
@@ -67,7 +67,7 @@ class ProfilingInitializer implements InitializerInterface
         $instance->getEventManager()->attach(
             '*',
             function (Event $event) use ($container) {
-                /** @var LoggerService */
+                /** @var LoggerService $logger */
                 $logger = $container->get('Logger');
 
                 $exploded  = explode('.', $event->getName() ?? '');

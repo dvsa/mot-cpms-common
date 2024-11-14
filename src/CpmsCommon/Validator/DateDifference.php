@@ -2,9 +2,7 @@
 
 namespace CpmsCommon\Validator;
 
-use Exception as GlobalException;
 use Laminas\Validator\AbstractValidator;
-use Laminas\Validator\Exception;
 
 /**
  * Class DateDifference
@@ -26,24 +24,21 @@ class DateDifference extends AbstractValidator
     ];
 
     /**
-     * @var \DateInterval The maximum length of time allowed between the two dates
+     * The maximum length of time allowed between the two dates
      */
-    protected $maxDelta;
+    protected \DateInterval $maxDelta;
 
     /**
-     * @var string The name of the field/input/key of the second date for comparison, which will be passed into context
+     * The name of the field/input/key of the second date for comparison, which will be passed into context
      */
-    protected $fieldToCompareWith;
+    protected string $fieldToCompareWith;
 
     /**
-     * @var string Date format to check for when creating dates
+     * Date format to check for when creating dates
      */
-    protected $format = 'Y-m-d H:i:s';
+    protected string $format = 'Y-m-d H:i:s';
 
-    /**
-     * @var array
-     */
-    protected $messageVariables = array(
+    protected array $messageVariables = array(
         'format' => 'format'
     );
 

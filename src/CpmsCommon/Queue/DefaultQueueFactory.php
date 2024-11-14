@@ -25,7 +25,7 @@ class DefaultQueueFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var array */
+        /** @var array $config */
         $config = $container->get('config');
         if (empty($config['default_queue_adapter'])) {
             throw new RuntimeException('Default queue adapter not configured');

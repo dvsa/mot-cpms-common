@@ -17,6 +17,7 @@ use Laminas\Mvc\MvcEvent;
 use Laminas\Router\Http\TreeRouteStack as HttpRouter;
 use Laminas\Router\RouteMatch;
 use Laminas\Mvc\Controller\ControllerManager;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class SampleControllerTest
@@ -25,17 +26,15 @@ use Laminas\Mvc\Controller\ControllerManager;
  */
 class SampleControllerTest extends AbstractHttpControllerTestCase
 {
-    /** @var  SampleController */
-    protected $controller;
+    protected SampleController $controller;
 
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
-    /** @var  \Laminas\Mvc\MvcEvent */
-    protected $event;
-    /** @var  RouteMatch */
-    protected $routeMatch;
-    /** @var  Request */
-    protected $request;
+    protected ServiceManager $serviceManager;
+
+    protected MvcEvent $event;
+
+    protected RouteMatch $routeMatch;
+
+    protected Request $request;
 
     public function setUp(bool $noConfig = false): void
     {
@@ -45,26 +44,26 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         );
 
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        /** @var array */
+        /** @var array $applicationConfig */
         $applicationConfig = $this->serviceManager->get('ApplicationConfig');
         $this->setApplicationConfig($applicationConfig);
-        /** @var ControllerManager */
-        $controllerManager =  $this->serviceManager->get('ControllerManager');
-        /** @var SampleController */
+        /** @var ControllerManager $controllerManager */
+        $controllerManager = $this->serviceManager->get('ControllerManager');
+        /** @var SampleController $controller */
         $controller = $controllerManager->get('CpmsCommonTest\Sample');
 
         $this->controller = $controller;
         $this->controller->setServiceLocator($this->serviceManager);
 
-        $this->request    = new Request();
+        $this->request = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'export'));
-        $this->event      = new MvcEvent();
+        $this->event = new MvcEvent();
 
-        /** @var array */
-        $config       = $this->serviceManager->get('Config');
+        /** @var array $config */
+        $config = $this->serviceManager->get('Config');
 
         $routerConfig = isset($config['router']) ? $config['router'] : array();
-        $router       = HttpRouter::factory($routerConfig);
+        $router = HttpRouter::factory($routerConfig);
 
         $this->event->setRouter($router);
         $this->event->setRouteMatch($this->routeMatch);
@@ -92,7 +91,6 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function testDispatch(): void
     {
-        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
         $headers = new Headers();
         $headers->addHeader(ContentType::fromString('Content-Type: application/json'));
@@ -113,7 +111,6 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function testDispatchWithRedirect(): void
     {
-        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
         $headers = new Headers();
         $headers->addHeader(ContentType::fromString('Content-Type: application/json'));
@@ -133,7 +130,6 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function test405Dispatch(): void
     {
-        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
         $headers = new Headers();
         $headers->addHeader(ContentType::fromString('Content-Type: application/json'));
@@ -154,7 +150,6 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function testDispatchException(): void
     {
-        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
         $headers = new Headers();
         $headers->addHeader(ContentType::fromString('Content-Type: application/json'));
@@ -168,7 +163,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
         $this->controller->dispatch($request);
         $res = $this->controller->getResponse();
-        /** @var string */
+        /** @var string $responseContent */
         $responseContent = $res->getContent();
         $content = \json_decode($responseContent, true);
 
@@ -181,7 +176,6 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function testExceptionStrategy(): void
     {
-        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->request;
         $headers = new Headers();
         $headers->addHeader(ContentType::fromString('Content-Type: application/json'));
@@ -209,7 +203,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
         $strategy->setDisplayExceptions(true);
         $strategy->prepareExceptionViewModel($event);
 
-        /** @var Response */
+        /** @var Response $res */
         $res = $event->getResponse();
         $this->assertSame(500, $res->getStatusCode());
 
@@ -222,7 +216,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     public function testGetMessage(): void
     {
-        $request    = new Request();
+        $request = new Request();
         $controller = clone $this->controller;
         $controller->getServiceLocator()->setService('request', $request);
         $message = $this->controller->getErrorMessage(ErrorCodeService::GENERIC_ERROR_CODE, [0]);

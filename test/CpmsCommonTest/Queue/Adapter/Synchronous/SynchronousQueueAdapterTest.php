@@ -12,8 +12,7 @@ use Laminas\ServiceManager\ServiceManager;
 
 class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  SynchronousQueueAdapter */
-    private $adapter;
+    private SynchronousQueueAdapter $adapter;
 
     public function setUp(): void
     {

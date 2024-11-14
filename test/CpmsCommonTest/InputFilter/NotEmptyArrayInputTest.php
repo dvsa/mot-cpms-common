@@ -11,8 +11,7 @@ use CpmsCommon\InputFilter\NotEmptyArrayInput;
  */
 class NotEmptyArrayInputTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  NotEmptyArrayInput */
-    protected $filter;
+    protected NotEmptyArrayInput $filter;
 
     public function setUp(): void
     {

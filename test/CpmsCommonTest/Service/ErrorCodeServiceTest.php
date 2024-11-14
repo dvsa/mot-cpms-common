@@ -4,6 +4,7 @@ namespace CpmsCommonTest\Service;
 
 use CpmsCommon\Service\ErrorCodeService;
 use CpmsCommonTest\Bootstrap;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class ErrorCodeServiceTest
@@ -12,16 +13,14 @@ use CpmsCommonTest\Bootstrap;
  */
 class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
-    /** @var ErrorCodeService $errorService */
-    private $errorService;
+    private ErrorCodeService $errorService;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        /** @var ErrorCodeService */
+        /** @var ErrorCodeService $errorService */
         $errorService = $this->serviceManager->get('cpms\errorCodeService');
         $this->errorService = $errorService;
 
@@ -38,7 +37,7 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
         ];
 
         $errorService = new ErrorCodeService($customMessages);
-        $actual       = $errorService->getErrorMessage($code);
+        $actual = $errorService->getErrorMessage($code);
 
         $this->assertArrayHasKey(ErrorCodeService::ERROR_CODE_KEY, $actual);
         $this->assertArrayHasKey(ErrorCodeService::ERROR_MESSAGE_KEY, $actual);
@@ -72,7 +71,7 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSuccessMessage(): void
     {
-        $data    = array(
+        $data = array(
             'token' => '223'
         );
         $message = $this->errorService->getSuccessMessage($data);
@@ -108,12 +107,12 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
     {
         $firstMessage  = 'First Message';
         $secondMessage = 'Second Message';
-        $exception     = new \InvalidArgumentException($firstMessage, 101);
-        $output        = ErrorCodeService::getFirstException($exception);
+        $exception = new \InvalidArgumentException($firstMessage, 101);
+        $output = ErrorCodeService::getFirstException($exception);
         $this->assertSame($firstMessage, $output->getMessage());
 
         $exception2 = new \InvalidArgumentException($secondMessage, 102, $exception);
-        $output     = ErrorCodeService::getFirstException($exception2);
+        $output = ErrorCodeService::getFirstException($exception2);
         $this->assertSame($firstMessage, $output->getMessage());
     }
 

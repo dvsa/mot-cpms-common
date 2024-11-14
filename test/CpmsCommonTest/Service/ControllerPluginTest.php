@@ -14,17 +14,15 @@ use PHPUnit\Framework\TestCase;
 
 class ControllerPluginTest extends TestCase
 {
-    /** @var  ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
-    /** @var ErrorCodeService $errorService */
-    private $errorService;
+    private ErrorCodeService $errorService;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
 
-        /** @var ErrorCodeService */
+        /** @var ErrorCodeService $errorCodeService */
         $errorCodeService = $this->serviceManager->get('cpms\errorCodeService');
         $this->errorService = $errorCodeService;
 
@@ -33,14 +31,14 @@ class ControllerPluginTest extends TestCase
 
     public function testSendPayloadPlugin(): void
     {
-        /** @var HelperPluginManager */
+        /** @var HelperPluginManager $controllerPluginManager */
         $controllerPluginManager = $this->serviceManager->get('ControllerPluginManager');
         /** @var SendPayload $plugin */
         $plugin = $controllerPluginManager->get('sendPayload');
         $this->assertInstanceOf('CpmsCommon\Controller\Plugin\SendPayload', $plugin);
-        /** @var \CpmsCommonTest\SampleController $controller */
-        $controller = new SampleController();// $this->serviceManager->get('CpmsCommonTest\Controller\Sample');
-        $event      = new MvcEvent();
+        /** @var SampleController $controller */
+        $controller = new SampleController();
+        $event = new MvcEvent();
         $event->setRequest(new Request());
         $controller->setEvent($event);
         $controller->setServiceLocator($this->serviceManager);

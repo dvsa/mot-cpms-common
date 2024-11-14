@@ -6,18 +6,18 @@ use CpmsCommon\Service\ProfilingInitializer;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\Mock\SimpleServiceMock;
 use Laminas\EventManager\EventManager;
+use Laminas\ServiceManager\ServiceManager;
 
 class ProfilerTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
         $this->serviceManager->setAllowOverride(true);
 
-        /** @var array */
+        /** @var array $config */
         $config = $this->serviceManager->get('Config');
         $config['cpms_profiler_enabled'] = true;
         $this->serviceManager->setService('Config', $config);
@@ -28,7 +28,7 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
     public function testPreEvent(): void
     {
         $initializer = new ProfilingInitializer();
-        $service     = new SimpleServiceMock();
+        $service = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
@@ -43,7 +43,7 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
     public function testPostEvent(): void
     {
         $initializer = new ProfilingInitializer();
-        $service     = new SimpleServiceMock();
+        $service = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
@@ -57,9 +57,9 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
 
     public function testAmountFormatterTrait(): void
     {
-        $pound   = 10;
+        $pound = 10;
         $service = new SimpleServiceMock();
-        $amount  = $service->formatPoundsToPence($pound);
+        $amount = $service->formatPoundsToPence($pound);
         $this->assertEquals($pound * 100, $amount);
     }
 }

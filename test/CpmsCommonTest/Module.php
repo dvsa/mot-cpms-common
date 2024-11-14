@@ -21,13 +21,13 @@ class Module
      */
     public function onBootstrap(MvcEvent $event): void
     {
-        $application         = $event->getApplication();
-        $eventManager        = $application->getEventManager();
+        $application = $event->getApplication();
+        $eventManager = $application->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
-        /** @var array */
-        $config              = $application->getServiceManager()->get('Config');
-        $displayExceptions   = $config['display_exception'];
-        $exceptionStrategy   = new JsonExceptionStrategy();
+        /** @var array $config */
+        $config = $application->getServiceManager()->get('Config');
+        $displayExceptions = $config['display_exception'];
+        $exceptionStrategy = new JsonExceptionStrategy();
 
         $exceptionStrategy->setDisplayExceptions($displayExceptions);
         $moduleRouteListener->attach($eventManager);

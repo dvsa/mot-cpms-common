@@ -26,9 +26,9 @@ class ErrorCodeServiceFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var array */
-        $serviceConfig  = $container->get('config');
-        $class          = $serviceConfig['error_code']['provider'];
+        /** @var array $serviceConfig */
+        $serviceConfig = $container->get('config');
+        $class = $serviceConfig['error_code']['provider'];
         $customMessages = (array)$serviceConfig['error_code']['messages'];
 
         /** @var ErrorCodeService $service */

@@ -12,6 +12,8 @@ namespace CpmsCommonTest\Controller;
 
 use Laminas\Http\Header\ContentType;
 use Laminas\Http\Headers;
+use Laminas\Http\Request;
+use Laminas\Mvc\Application;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendTestCase;
 
 /**
@@ -55,7 +57,7 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
 
         $this->url($url, $method);
 
-        /** @var \Laminas\Http\Request $request */
+        /** @var Request $request */
         $request = $this->getRequest();
         $request->setContent($body);
 
@@ -68,8 +70,8 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
         if (true !== $this->traceError) {
             return;
         }
-        /** @var \Laminas\Mvc\Application $app */
-        $app       = $this->getApplication();
+        /** @var Application $app */
+        $app = $this->getApplication();
         $exception = $app->getMvcEvent()->getParam('exception');
         if ($exception instanceof \Exception) {
             throw $exception;

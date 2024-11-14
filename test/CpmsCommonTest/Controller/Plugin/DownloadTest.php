@@ -17,10 +17,9 @@ class DownloadTest extends AbstractControllerTestCase
 {
     private static string $rootPath = __DIR__ . '/../../../../';
 
-    /** @var SampleController */
-    protected $controller;
-    /** @var  Download */
-    protected $plugin;
+    protected SampleController $controller;
+
+    protected Download $plugin;
 
     public function setUp(): void
     {
@@ -29,12 +28,12 @@ class DownloadTest extends AbstractControllerTestCase
         );
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
-        /** @var array */
+        /** @var array $applicationConfig */
         $applicationConfig = $serviceManager->get('ApplicationConfig');
         $this->setApplicationConfig($applicationConfig);
-        /** @var ControllerManager */
+        /** @var ControllerManager $loader */
         $loader = $this->getApplicationServiceLocator()->get('ControllerManager');
-        /** @var SampleController */
+        /** @var SampleController $controller */
         $controller = $loader->get('CpmsCommonTest\Sample');
         $this->controller = $controller;
         $this->controller->setServiceLocator($this->getApplicationServiceLocator());
