@@ -76,7 +76,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
                 $version = $defaultVersion;
             } else {
                 $version = $routeMatch->getParam('version');
-                if ($version == 0) {
+                if ($version ==  0 || $version == '0') {
                     $version = $defaultVersion;
                 }
             }
