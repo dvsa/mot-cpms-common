@@ -6,13 +6,9 @@ use CpmsCommon\Queue\JobInterface;
 use CpmsCommon\Queue\QueueInterface;
 use CpmsCommon\Utility\LoggerAwareTrait;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
-/**
- * Class SynchronousQueueAdapter
- *
- * @package CpmsCommon\Queue\Adapter\Memory
- */
-class SynchronousQueueAdapter implements QueueInterface
+class SynchronousQueueAdapter implements QueueInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 

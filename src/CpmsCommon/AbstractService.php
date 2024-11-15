@@ -10,13 +10,14 @@ use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Http\Response;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
 /**
  * Class AbstractService
  *
  * @package PaymentService\Service
  */
-abstract class AbstractService implements EventManagerAwareInterface
+abstract class AbstractService implements EventManagerAwareInterface, LoggerAwareInterface
 {
     use EventManagerAwareTrait;
     use LoggerAwareTrait;

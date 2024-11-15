@@ -2,10 +2,6 @@
 
 /**
  * An abstract controller that all CPMS restful controllers inherit from
- *
- * @package     olcscommon
- * @subpackage  controller
- * @author      Pelle Wessman <pelle.wessman@valtech.se>
  */
 
 namespace CpmsCommon\Controller;
@@ -23,6 +19,7 @@ use Laminas\Stdlib\RequestInterface as Request;
 use Laminas\Stdlib\ResponseInterface as Response;
 use Laminas\View\Model\JsonModel;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
 /**
  * Class AbstractRestfulController
@@ -33,7 +30,7 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  *
  * @package CpmsCommon\Controller
  */
-abstract class AbstractRestfulController extends ZendRestfulController implements ContentTypeAwareInterface
+abstract class AbstractRestfulController extends ZendRestfulController implements ContentTypeAwareInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
     use ErrorCodeAwareTrait;

@@ -4,11 +4,11 @@ namespace CpmsCommonTest\Utility;
 
 use CpmsCommonTest\Bootstrap;
 use Laminas\ServiceManager\ServiceManager;
+use CpmsCommonTest\Mock\LoggerAwareTraitMock;
 
 class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
 {
-    /** @phpstan-ignore missingType.property */
-    private $trait;
+    private LoggerAwareTraitMock $trait;
 
     public function testLog(): void
     {
@@ -35,19 +35,8 @@ class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
      */
     private function setUpTrait(ServiceManager $serviceManager): void
     {
-        $this->trait = $this->getMockForTrait(
-            'CpmsCommon\Utility\LoggerAwareTrait',
-            [],
-            '',
-            true,
-            true,
-            true,
-            ['getServiceLocator']
-        );
-
-        $this->trait->expects($this->any())
-            ->method('getServiceLocator')
-            ->will($this->returnValue($serviceManager));
+        $this->trait = new LoggerAwareTraitMock();
+        $this->trait->setServiceLocator($serviceManager);
     }
 
     private function getServiceLocator(): ServiceManager
