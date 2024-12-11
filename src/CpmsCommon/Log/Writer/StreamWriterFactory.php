@@ -1,9 +1,12 @@
 <?php
+
 namespace CpmsCommon\Log\Writer;
 
 use CpmsCommon\Log\LogDataAwareInterface;
-use Interop\Container\ContainerInterface;
+use CpmsCommon\Log\LogData;
+use Psr\Container\ContainerInterface;
 use Laminas\Log\Filter\Priority;
+use Laminas\Log\Formatter\FormatterInterface;
 use Laminas\Log\Writer\Stream;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
@@ -16,13 +19,13 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
  */
 class StreamWriterFactory implements FactoryInterface
 {
-    private $logConfig = array();
+    private array $logConfig = array();
 
     /**
      * Create an object
      *
      * @param  ContainerInterface $container
-     * @param  string $requestedName
+     * @param  null|string $requestedName
      * @param  null|array $options
      * @return object
      * @throws \Psr\Container\ContainerExceptionInterface
@@ -30,20 +33,22 @@ class StreamWriterFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $serviceConfig   = $container->get('config');
+        /** @var array $serviceConfig */
+        $serviceConfig = $container->get('config');
         $this->logConfig = $serviceConfig['logger'];
-        $priority        = $this->getLogPriority();
-        $filePath        = $this->getFilePath();
-        $filter          = new Priority($priority);
-        $fileWriter      = new Stream($filePath, null, $this->logConfig['separator']);
-        $logData         = null;
+        $priority = $this->getLogPriority();
+        $filePath = $this->getFilePath();
+        $filter = new Priority($priority);
+        $fileWriter = new Stream($filePath, null, $this->logConfig['separator']);
+        $logData = null;
 
         if (!empty($serviceConfig['logger']['replacement'])) {
+            /** @var LogData $logData */
             $logData = $container->get($serviceConfig['logger']['replacement']);
         }
 
         if (!empty($this->logConfig['formatter'])) {
-            /** @var \Laminas\Log\Formatter\FormatterInterface | LogDataAwareInterface $formatter */
+            /** @var FormatterInterface&LogDataAwareInterface $formatter */
             $formatter = $container->get($this->logConfig['formatter']);
             $fileWriter->setFormatter($formatter);
 

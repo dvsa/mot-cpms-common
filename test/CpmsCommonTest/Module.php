@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package      CPMS Payment
  * @subpackage   controller
@@ -18,26 +19,27 @@ class Module
      *
      * @param MvcEvent $event
      */
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(MvcEvent $event): void
     {
-        $application         = $event->getApplication();
-        $eventManager        = $application->getEventManager();
+        $application = $event->getApplication();
+        $eventManager = $application->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
-        $config              = $application->getServiceManager()->get('Config');
-        $displayExceptions   = $config['display_exception'];
-        $exceptionStrategy   = new JsonExceptionStrategy();
+        /** @var array $config */
+        $config = $application->getServiceManager()->get('Config');
+        $displayExceptions = $config['display_exception'];
+        $exceptionStrategy = new JsonExceptionStrategy();
 
         $exceptionStrategy->setDisplayExceptions($displayExceptions);
         $moduleRouteListener->attach($eventManager);
         $exceptionStrategy->attach($eventManager);
     }
 
-    public function getConfig()
+    public function getConfig(): array
     {
         return include __DIR__ . '/../test.global.php';
     }
 
-    public function getAutoloaderConfig()
+    public function getAutoloaderConfig(): array
     {
         return array(
             'Laminas\Loader\StandardAutoloader' => array(

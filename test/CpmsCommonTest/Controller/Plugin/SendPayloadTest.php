@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Controller\Plugin;
 
 use CpmsCommon\Controller\Plugin\SendPayload;
@@ -7,6 +8,7 @@ use CpmsCommonTest\SampleController;
 use Laminas\Http\Request;
 use Laminas\Router\Http\RouteMatch;
 use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use Laminas\Mvc\Controller\ControllerManager;
 
 /**
  * Class SampleControllerTest
@@ -15,13 +17,9 @@ use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
  */
 class SendPayloadTest extends AbstractControllerTestCase
 {
-    /**
-     * @var SampleController
-     */
-    private $controller;
+    private SampleController $controller;
 
-    /** @var SendPayload */
-    private $plugin;
+    private SendPayload $plugin;
 
     public function setUp(): void
     {
@@ -29,10 +27,15 @@ class SendPayloadTest extends AbstractControllerTestCase
             include __DIR__ . '/../../../../config/application.config.php'
         );
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
+        /** @var array $applicationConfig */
+        $applicationConfig = $serviceManager->get('ApplicationConfig');
 
-        $this->setApplicationConfig($serviceManager->get('ApplicationConfig'));
+        $this->setApplicationConfig($applicationConfig);
+        /** @var ControllerManager $loader */
         $loader = $this->getApplicationServiceLocator()->get('ControllerManager');
-        $this->controller = $loader->get('CpmsCommonTest\Sample');
+        /** @var SampleController $controller */
+        $controller = $loader->get('CpmsCommonTest\Sample');
+        $this->controller = $controller;
         $this->controller->setServiceLocator($this->getApplicationServiceLocator());
         $request = new Request();
         $this->controller->dispatch($request);
@@ -41,21 +44,23 @@ class SendPayloadTest extends AbstractControllerTestCase
         $this->plugin = new SendPayload();
     }
 
-    public function testVersionInPayload()
+    public function testVersionInPayload(): void
     {
         $result = $this->controller->sendPayload([]);
         $payload = $result->getVariables();
         $this->assertArrayNotHasKey(SendPayload::API_VERSION_KEY, $payload);
 
-        $version                                     = 7;
+        $version = 7;
         $config ['api-tools-versioning']['default_version'] = $version;
-        $result                                      = $this->plugin->setApiVersion([], $config, null);
+        /** @var array $result */
+        $result = $this->plugin->setApiVersion([], $config, null);
         $this->assertArrayHasKey(SendPayload::API_VERSION_KEY, $result);
         $this->assertSame($version, $result[SendPayload::API_VERSION_KEY]);
 
-        $version    = 10;
+        $version = 10;
         $routeMatch = new RouteMatch(['version' => $version]);
-        $result     = $this->plugin->setApiVersion([], [], $routeMatch);
+        /** @var array $result */
+        $result = $this->plugin->setApiVersion([], [], $routeMatch);
         $this->assertArrayHasKey(SendPayload::API_VERSION_KEY, $result);
         $this->assertSame($version, $result[SendPayload::API_VERSION_KEY]);
     }

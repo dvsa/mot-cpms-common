@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest;
 
 use CpmsCommon\Utility\Util;
@@ -10,7 +11,7 @@ use CpmsCommon\Utility\Util;
  */
 class UtilTest extends \PHPUnit\Framework\TestCase
 {
-    public function testAppendQueryParam()
+    public function testAppendQueryParam(): void
     {
         $url  = 'http://google.com';
         $url2 = 'http://google.com?home=1';

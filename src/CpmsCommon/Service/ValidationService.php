@@ -17,27 +17,27 @@ class ValidationService extends AbstractService
     use ErrorCodeAwareTrait;
 
     // Payment validators
-    const BATCH_REFUND_FILTER         = 'payment\inputFilter\batchRefundFilter';
-    const BATCH_REFUND_PAYMENT_FILTER = 'payment\inputFilter\batchRefundPaymentFilter';
-    const REFUND_FILTER               = 'payment\inputFilter\refundFilter';
-    const CHARGEBACK_FILTER           = 'payment\inputFilter\chargeBackFilter';
-    const PAYMENT_FILTER              = 'payment\inputFilter\paymentFilter';
-    const REGISTER_STORED_CARD_FILTER = 'payment\inputFilter\registerStoredCardFilter';
-    const STORED_CARD_FILTER          = 'payment\inputFilter\storedCardFilter';
-    const STORED_CARD_PAYMENT_FILTER  = 'payment\inputFilter\storedCardPaymentFilter';
-    const LIST_CRITERIA_FILTER        = 'payment\inputFilter\listCriteriaFilter';
-    const REALLOCATE_FILTER           = 'payment\inputFilter\ReallocateFilter';
+    public const BATCH_REFUND_FILTER         = 'payment\inputFilter\batchRefundFilter';
+    public const BATCH_REFUND_PAYMENT_FILTER = 'payment\inputFilter\batchRefundPaymentFilter';
+    public const REFUND_FILTER               = 'payment\inputFilter\refundFilter';
+    public const CHARGEBACK_FILTER           = 'payment\inputFilter\chargeBackFilter';
+    public const PAYMENT_FILTER              = 'payment\inputFilter\paymentFilter';
+    public const REGISTER_STORED_CARD_FILTER = 'payment\inputFilter\registerStoredCardFilter';
+    public const STORED_CARD_FILTER          = 'payment\inputFilter\storedCardFilter';
+    public const STORED_CARD_PAYMENT_FILTER  = 'payment\inputFilter\storedCardPaymentFilter';
+    public const LIST_CRITERIA_FILTER        = 'payment\inputFilter\listCriteriaFilter';
+    public const REALLOCATE_FILTER           = 'payment\inputFilter\ReallocateFilter';
 
     // Direct debit validators
-    const CREATE_MANDATE_FILTER = 'directDebit\inputFilter\createMandateFilter';
-    const UPDATE_MANDATE_FILTER = 'directDebit\inputFilter\updateMandateFilter';
+    public const CREATE_MANDATE_FILTER = 'directDebit\inputFilter\createMandateFilter';
+    public const UPDATE_MANDATE_FILTER = 'directDebit\inputFilter\updateMandateFilter';
 
-    const SCOPE_FILTER = 'cpmsAuth\inputFilter\scopeFilter';
+    public const SCOPE_FILTER = 'cpmsAuth\inputFilter\scopeFilter';
 
     /**
      * @param array $data
-     * @param       $inputFilterAlias
-     * @param null  $redirectUriOnFail
+     * @param string $inputFilterAlias
+     * @param boolean|null  $redirectUriOnFail
      *
      * @return array | boolean
      */
@@ -55,7 +55,7 @@ class ValidationService extends AbstractService
             return true;
         }
 
-        return $this->getErrorFromFilter($inputFilter, $redirectUriOnFail);
+        return $this->getErrorFromFilter($inputFilter);
     }
 
     /**
@@ -73,19 +73,20 @@ class ValidationService extends AbstractService
                 foreach ($fieldDetails as $validatorName => $errorMessage) {
                     // check if the validator name is a string (as an integer indicates a nested error message) and is
                     // missing. Otherwise, don't give too much away and return a "invalid parameter" message.
-                    if ((is_string($validatorName) && $validatorName == 'isEmpty')
+                    if (
+                        (is_string($validatorName) && $validatorName == 'isEmpty')
                         || $errorMessage == "Value is required"
                     ) {
                         return $this->getErrorMessage(
                             ErrorCodeService::MISSING_PARAMETER,
-                            $fieldName,
+                            [$fieldName],
                             Response::STATUS_CODE_400,
                             $data
                         );
                     } else {
                         return $this->getErrorMessage(
                             ErrorCodeService::INVALID_PARAMETER,
-                            $fieldName,
+                            [$fieldName],
                             Response::STATUS_CODE_400,
                             [
                                 ErrorCodeService::ERROR_MESSAGE_KEY => $errorMessage
@@ -100,7 +101,7 @@ class ValidationService extends AbstractService
 
         return $this->getErrorMessage(
             ErrorCodeService::UNKNOWN_ERROR,
-            "[$filterClass validation]",
+            ["[$filterClass validation]"],
             Response::STATUS_CODE_400,
             $data
         );

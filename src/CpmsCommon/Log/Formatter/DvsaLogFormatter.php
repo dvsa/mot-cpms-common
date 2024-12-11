@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Log\Formatter;
 
 use CpmsCommon\Log\LogDataAwareInterface;
@@ -65,8 +66,8 @@ class DvsaLogFormatter extends Simple implements LogDataAwareInterface
     private function getReplacementValues()
     {
         $dateObject                = new DateTime();
-        $date                      = $dateObject->format(\DateTime::ISO8601);
-        $replacements              = $this->logData->toArray();
+        $date                      = $dateObject->format(\DateTime::ATOM);
+        $replacements              = $this->logData ? $this->logData->toArray() : [];
         $replacements['timestamp'] = $date;
 
         return $replacements;

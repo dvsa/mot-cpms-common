@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A trait that allows getting error messages
  * The class using this trait must also implement ServiceLocatorAwareInterface
@@ -13,7 +14,10 @@ namespace CpmsCommon\Utility;
 use CpmsCommon\Service\ErrorCodeService;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Stdlib\ParametersInterface;
+use Laminas\Stdlib\Parameters;
 use Laminas\ServiceManager\ServiceManager;
+use CpmsCommon\Service\LoggerService;
 
 /**
  * Class Error CodeAwareTrait
@@ -27,37 +31,48 @@ trait ErrorCodeAwareTrait
     /**
      * Return an array with error code and message
      *
-     * @param        $errorCode
-     * @param array  $replacement
-     * @param null   $httpStatusCode
-     * @param array  $data
+     * @param int $errorCode
+     * @param array $replacement
+     * @param ?int $httpStatusCode
+     * @param array $data
      *
      * @return array
      */
     public function getErrorMessage($errorCode, $replacement = [], $httpStatusCode = null, $data = array())
     {
-        /** @var ErrorCodeService $errorService */
-        /** @var Request $request */
-        $replacement    = (array)$replacement;
+
+        $replacement = (array)$replacement;
         $container = $this->getServiceLocator();
-        $errorService   = $container->get('cpms/errorCodeService');
+        /** @var ErrorCodeService $errorService */
+        $errorService = $container->get('cpms/errorCodeService');
 
         $httpStatusCode = empty($httpStatusCode) ? Response::STATUS_CODE_400 : $httpStatusCode;
-        $message        = $errorService->getErrorMessage($errorCode, $replacement, $httpStatusCode, $data);
+        $message = $errorService->getErrorMessage($errorCode, $replacement, $httpStatusCode, $data);
 
         if ($this->getServiceLocator()->has('logger')) {
-            $this->getServiceLocator()->get('logger')->debug(print_r($message, true));
+            /** @var LoggerService $logger */
+            $logger = $this->getServiceLocator()->get('logger');
+            $logger->debug(print_r($message, true));
             if (isset($message['code']) and $message['code'] == ErrorCodeService::GENERIC_ERROR_CODE) {
+                /** @var Request $request */
                 $request = $this->getServiceLocator()->get('request');
 
                 if ($request instanceof Request) {
-                    $debugInfo               = [
-                        'server'  => $request->getServer()->getArrayCopy(),
+                    /** @var Parameters $server */
+                    $server = $request->getServer();
+                    $debugInfo = [
+                        'server' => $server->getArrayCopy(),
                         'request' => $request->toString(),
                     ];
-                    $debugInfo['getParams']  = $request->getQuery()->getArrayCopy();
-                    $debugInfo['postParams'] = $request->getPost()->getArrayCopy();
-                    $this->getServiceLocator()->get('logger')->debug(print_r($debugInfo, true));
+                    /** @var Parameters $query */
+                    $query = $request->getQuery();
+                    /** @var Parameters $post */
+                    $post = $request->getPost();
+                    $debugInfo['getParams'] = $query->getArrayCopy();
+                    $debugInfo['postParams'] = $post->getArrayCopy();
+                    /** @var LoggerService $logger */
+                    $logger = $this->getServiceLocator()->get('logger');
+                    $logger->debug(print_r($debugInfo, true));
                 }
             }
         }
@@ -83,16 +98,16 @@ trait ErrorCodeAwareTrait
     /**
      * Get error message
      *
-     * @param        $code
+     * @param int $code
      * @param string $replacement
      *
-     * @return mixed
+     * @return string
      */
     public function getMessage($code, $replacement = '')
     {
         /** @var ErrorCodeService $errorService */
         $errorService = $this->getServiceLocator()->get('cpms\errorCodeService');
 
-        return $errorService->getMessage($code, $replacement);
+        return $errorService->getMessage($code, [$replacement]);
     }
 }

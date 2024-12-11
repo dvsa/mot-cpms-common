@@ -1,10 +1,7 @@
 <?php
+
 /**
  * An abstract controller that all CPMS restful controllers inherit from
- *
- * @package     olcscommon
- * @subpackage  controller
- * @author      Pelle Wessman <pelle.wessman@valtech.se>
  */
 
 namespace CpmsCommon\Controller;
@@ -21,25 +18,32 @@ use Laminas\Mvc\Controller\AbstractRestfulController as ZendRestfulController;
 use Laminas\Stdlib\RequestInterface as Request;
 use Laminas\Stdlib\ResponseInterface as Response;
 use Laminas\View\Model\JsonModel;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
 /**
  * Class AbstractRestfulController
  * @method HttpRequest getRequest()
  * @method HttpResponse getResponse()
  * @method sendPayload($payLoad)
- * @method download()
+ * @method download($file, $maskedFile)
  *
  * @package CpmsCommon\Controller
  */
-abstract class AbstractRestfulController extends ZendRestfulController implements ContentTypeAwareInterface
+abstract class AbstractRestfulController extends ZendRestfulController implements ContentTypeAwareInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
     use ErrorCodeAwareTrait;
     use ContentTypeTrait;
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    private $serviceLocator;
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    private ServiceLocatorInterface $serviceLocator;
 
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return AbstractRestfulController
+     */
     public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
@@ -48,7 +52,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     }
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {
@@ -67,20 +71,20 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
     {
         $logger = $this->getLogger();
         try {
-            /** @var $response HttpResponse $data */
-            $data     = parent::dispatch($request, $response);
+            $data = parent::dispatch($request, $response);
+            /** @var  HttpResponse $response */
             $response = $this->getResponse();
+            /** @var HttpRequest $request */
             $logger->debug($request->toString());
 
-            /** @var $request \Laminas\Http\PhpEnvironment\Request $data */
-
+            /** @var HttpRequest $data */
             if ($response->getStatusCode() == $response::STATUS_CODE_405) {
                 $request = $this->getRequest();
 
                 $viewModel = new JsonModel(
                     $this->getErrorMessage(
                         ErrorCodeService::NOT_IMPLEMENTED,
-                        $request->getMethod()
+                        [$request->getMethod()]
                     )
                 );
                 $viewModel->setTerminal(true);
@@ -99,7 +103,7 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
             $viewModel = new JsonModel(
                 $this->getErrorMessage(
                     ErrorCodeService::AN_ERROR_OCCURRED,
-                    '',
+                    [''],
                     HttpResponse::STATUS_CODE_500
                 )
             );

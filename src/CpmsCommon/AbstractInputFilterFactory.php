@@ -2,7 +2,7 @@
 
 namespace CpmsCommon;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Laminas\InputFilter\Factory;
 use Laminas\InputFilter\InputFilterProviderInterface;
@@ -11,6 +11,7 @@ use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Application;
 
 /**
  * Class AbstractInputFilterFactory
@@ -19,15 +20,14 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class AbstractInputFilterFactory implements AbstractFactoryInterface
 {
-    const VERSION_PREFIX = 'V';
+    public const VERSION_PREFIX = 'V';
 
-    private $configPrefix;
+    private string $configPrefix;
 
-    protected $versionedNamespaces
-        = [
-            'Payment',
-            'DirectDebit',
-        ];
+    protected array $versionedNamespaces = [
+        'Payment',
+        'DirectDebit',
+    ];
 
     public function __construct()
     {
@@ -38,8 +38,8 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      * Create service with name
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @param                         $name
-     * @param                         $requestedName
+     * @param string $name
+     * @param string $requestedName
      *
      * @return mixed
      * @throws ContainerException
@@ -50,7 +50,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
     }
 
     /**
-     * @param                         $name
+     * @param string $name
      * @param ContainerInterface $serviceLocator
      *
      * @return string
@@ -63,18 +63,20 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
             $namespaceParts[$i] = ucfirst($namespaceParts[$i]);
         }
 
-        if (count($namespaceParts) > 0 and in_array($namespaceParts[0], $this->versionedNamespaces)) {
-
-            $config         = $serviceLocator->get('config');
+        if (in_array($namespaceParts[0], $this->versionedNamespaces)) {
+            /** @var array $config */
+            $config = $serviceLocator->get('config');
             $defaultVersion = $config['api-tools-versioning']['default_version'];
-            /** @var RouteMatch $routeMatch */
-            $routeMatch = $serviceLocator->get('Application')->getMvcEvent()->getRouteMatch();
+            /** @var Application $application */
+            $application = $serviceLocator->get('Application');
+            /** @var ?RouteMatch $routeMatch */
+            $routeMatch = $application->getMvcEvent()->getRouteMatch();
 
             if (empty($routeMatch)) {
                 $version = $defaultVersion;
             } else {
-                $version = (int)$routeMatch->getParam('version');
-                if ($version == 0) {
+                $version = $routeMatch->getParam('version');
+                if ($version ==  0 || $version == '0') {
                     $version = $defaultVersion;
                 }
             }
@@ -115,14 +117,16 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var InputFilterProviderInterface $filterProvider */
         $filterProviderClass = $this->getClassName($requestedName . 'Provider', $container);
-        $filterProvider      = new $filterProviderClass();
-        if ($filterProvider instanceof ServiceLocatorAwareInterface) {
+        /** @var InputFilterProviderInterface $filterProvider */
+        $filterProvider = new $filterProviderClass();
+
+        if (method_exists($filterProvider, 'setServiceLocator')) {
             $filterProvider->setServiceLocator($container);
         }
+
         $factory = new Factory();
 
-        return $factory->createInputFilter($filterProvider->getInputFilterSpecification());
+        return $factory->createInputFilter(new \ArrayObject($filterProvider->getInputFilterSpecification()));
     }
 }

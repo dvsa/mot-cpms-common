@@ -16,7 +16,7 @@ class RedirectionDataTraitMock
         handleRedirectionData as public;
     }
 
-    public function sendPayload($data)
+    public function sendPayload(mixed $data): mixed
     {
         return $data;
     }

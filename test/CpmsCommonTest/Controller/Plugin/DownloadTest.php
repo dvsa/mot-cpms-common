@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Controller\Plugin;
 
 use CpmsCommon\Controller\Plugin\Download;
@@ -14,12 +15,11 @@ use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
  */
 class DownloadTest extends AbstractControllerTestCase
 {
-    private static $rootPath = __DIR__ . '/../../../../';
+    private static string $rootPath = __DIR__ . '/../../../../';
 
-    /** @var SampleController */
-    protected $controller;
-    /** @var  Download */
-    protected $plugin;
+    protected SampleController $controller;
+
+    protected Download $plugin;
 
     public function setUp(): void
     {
@@ -28,44 +28,49 @@ class DownloadTest extends AbstractControllerTestCase
         );
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
-        $this->setApplicationConfig($serviceManager->get('ApplicationConfig'));
+        /** @var array $applicationConfig */
+        $applicationConfig = $serviceManager->get('ApplicationConfig');
+        $this->setApplicationConfig($applicationConfig);
+        /** @var ControllerManager $loader */
         $loader = $this->getApplicationServiceLocator()->get('ControllerManager');
-        $this->controller = $loader->get('CpmsCommonTest\Sample');
+        /** @var SampleController $controller */
+        $controller = $loader->get('CpmsCommonTest\Sample');
+        $this->controller = $controller;
         $this->controller->setServiceLocator($this->getApplicationServiceLocator());
         $serviceManager->setAllowOverride(true);
         parent::setUp();
     }
 
-    public function testInstance()
+    public function testInstance(): void
     {
         $this->assertInstanceOf('CpmsCommon\Controller\Plugin\Download', $this->controller->plugin(Download::class));
     }
 
-    public function testDownload()
+    public function testDownload(): void
     {
-        $testFile     = self::$rootPath . 'test/test.global.php';
+        $testFile = self::$rootPath . 'test/test.global.php';
         $maskFileName = 'same.txt';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response\Stream', $response);
         $this->assertSame(200, $response->getStatusCode());
     }
 
-    public function testDownloadNotExist()
+    public function testDownloadNotExist(): void
     {
-        $testFile     = self::$rootPath . 'test/non-test.global.php';
+        $testFile = self::$rootPath . 'test/non-test.global.php';
         $maskFileName = 'same.txt';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response', $response);
         $this->assertSame(404, $response->getStatusCode());
     }
 
-    public function testDownloadWithoutMask()
+    public function testDownloadWithoutMask(): void
     {
-        $testFile     = self::$rootPath . 'test/test.global.php';
+        $testFile = self::$rootPath . 'test/test.global.php';
         $maskFileName = '';
-        $response     = $this->controller->download($testFile, $maskFileName);
+        $response = $this->controller->download($testFile, $maskFileName);
 
         $this->assertInstanceOf('Laminas\Http\Response\Stream', $response);
         $this->assertSame(200, $response->getStatusCode());

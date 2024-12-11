@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Log;
 
 use Laminas\Stdlib\AbstractOptions;
@@ -12,29 +13,17 @@ use Laminas\Stdlib\AbstractOptions;
  */
 class LogData extends AbstractOptions
 {
-    /** @var  string */
-    protected $entryType;
-    /** @var  string */
-    protected $userId;
-    /** @var  string */
-    protected $openAmToken;
-    /** @var  string */
-    protected $accessToken;
-    /** @var  string */
-    protected $correlationId;
-    /** @var  string */
-    protected $classMethod;
-    /** @var  string */
-    protected $exceptionType;
-    /** @var  string */
-    protected $exceptionMessage;
-    /** @var  int */
-    protected $exceptionCode;
-    /** @var  string */
-    protected $stackTrace;
-    /** @var  string */
-    protected $data;
-    /** @var bool */
+    protected string $entryType;
+    protected string $userId;
+    protected string $openAmToken;
+    protected string $accessToken;
+    protected string $correlationId;
+    protected string $classMethod;
+    protected string $exceptionType;
+    protected string $exceptionMessage;
+    protected ?int $exceptionCode = null;
+    protected string $stackTrace;
+    protected string $data;
 
     /**
      * @return string
@@ -46,6 +35,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $accessToken
+     *
+     * @return void
      */
     public function setAccessToken($accessToken)
     {
@@ -62,6 +53,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $classMethod
+     *
+     * @return void
      */
     public function setClassMethod($classMethod)
     {
@@ -78,6 +71,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $correlationId
+     *
+     * @return void
      */
     public function setCorrelationId($correlationId)
     {
@@ -94,6 +89,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $data
+     *
+     * @return void
      */
     public function setData($data)
     {
@@ -110,6 +107,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $entryType
+     *
+     * @return void
      */
     public function setEntryType($entryType)
     {
@@ -117,7 +116,7 @@ class LogData extends AbstractOptions
     }
 
     /**
-     * @return int
+     * @return ?int
      */
     public function getExceptionCode()
     {
@@ -125,7 +124,9 @@ class LogData extends AbstractOptions
     }
 
     /**
-     * @param int $exceptionCode
+     * @param ?int $exceptionCode
+     *
+     * @return void
      */
     public function setExceptionCode($exceptionCode)
     {
@@ -142,6 +143,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $exceptionMessage
+     *
+     * @return void
      */
     public function setExceptionMessage($exceptionMessage)
     {
@@ -158,6 +161,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $exceptionType
+     *
+     * @return void
      */
     public function setExceptionType($exceptionType)
     {
@@ -174,6 +179,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $openAmToken
+     *
+     * @return void
      */
     public function setOpenAmToken($openAmToken)
     {
@@ -190,6 +197,8 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $stackTrace
+     *
+     * @return void
      */
     public function setStackTrace($stackTrace)
     {
@@ -206,10 +215,12 @@ class LogData extends AbstractOptions
 
     /**
      * @param string $userId
+     *
+     * @return void
      */
     public function setUserId($userId)
     {
-        $this->userId = $userId;
+        $this->userId = (string)$userId;
     }
 
     /**
@@ -219,20 +230,16 @@ class LogData extends AbstractOptions
      */
     public function toArray()
     {
-        $array = array();
+        $properties = get_object_vars($this);
+        unset($properties['__strictMode__']);
 
-        foreach ($this as $key => $value) {
-            if ($key === '__strictMode__') {
-                continue;
-            }
-            $array[$key] = $value;
-        }
-
-        return $array;
+        return $properties;
     }
 
     /**
      * @param boolean $_strictMode__
+     *
+     * @return void
      */
     public function setStrictMode($_strictMode__)
     {
@@ -241,6 +248,8 @@ class LogData extends AbstractOptions
 
     /**
      *  Reset error specific data
+     *
+     * @return void
      */
     public function resetData()
     {
@@ -248,7 +257,7 @@ class LogData extends AbstractOptions
         $this->setClassMethod('');
         $this->setEntryType('');
         $this->setExceptionMessage('');
-        $this->setExceptionCode('');
+        $this->setExceptionCode(null);
         $this->setStackTrace('');
         $this->setData('');
         $this->setExceptionType('');

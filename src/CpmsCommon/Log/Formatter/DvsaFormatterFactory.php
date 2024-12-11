@@ -1,8 +1,9 @@
 <?php
+
 namespace CpmsCommon\Log\Formatter;
 
 use CpmsCommon\Log\LogData;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
@@ -26,9 +27,11 @@ class DvsaFormatterFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config       = $container->get('config')['logger'];
+        /** @var array $generalConfig */
+        $generalConfig = $container->get('config');
+        $config = $generalConfig['logger'];
         $replacements = $container->get($config['replacement']);
-        $formatter    = new DvsaLogFormatter($config['dateTimeFormat']);
+        $formatter = new DvsaLogFormatter($config['dateTimeFormat']);
 
         if ($replacements instanceof LogData) {
             $replacements->setStrictMode(false);

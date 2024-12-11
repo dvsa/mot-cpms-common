@@ -1,8 +1,10 @@
 <?php
+
 namespace CpmsCommon\View\Helper;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class Revision
@@ -12,29 +14,26 @@ use Laminas\View\Helper\AbstractHelper;
  */
 class Revision extends AbstractHelper
 {
-    const REVISION_DATE_KEY    = 'data';
-    const REVISION_ENV_KEY     = 'environment';
-    const REVISION_RELEASE_KEY = 'release';
+    public const REVISION_DATE_KEY    = 'data';
+    public const REVISION_ENV_KEY     = 'environment';
+    public const REVISION_RELEASE_KEY = 'release';
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /**
-     * @var ContainerInterface $serviceLocator
-     */
-    private $serviceLocator;
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
-    public function getServiceLocator(): ContainerInterface
+    public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
     /**
-     * @param ContainerInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator
      * @return Revision
      */
-    public function setServiceLocator(ContainerInterface $serviceLocator)
+    public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -47,22 +46,21 @@ class Revision extends AbstractHelper
      * obtained from GIT
      * Invoke helper to render release / deployment information
      */
-    public function __invoke($format = false)
+    public function __invoke(bool $format = false): string
     {
         /** @var ContainerInterface $serviceLocator */
         $serviceLocator = $this->getServiceLocator();
+        /** @var array $config */
+        $config = $serviceLocator->get('config');
+        $revisionFile = $config['revision_file'];
 
-        $config         = $serviceLocator->get('config');
-        $revisionFile   = $config['revision_file'];
-
-        if (file_exists($revisionFile)) {
-            $revisionData = file_get_contents($revisionFile);
+        if (file_exists($revisionFile) && $revisionData = file_get_contents($revisionFile)) {
             list($release, $dateDeployed) = explode(';', $revisionData);
         } else {
-            $branch       = exec('git rev-parse --abbrev-ref HEAD');
-            $revision     = exec('git rev-parse HEAD');
+            $branch = exec('git rev-parse --abbrev-ref HEAD');
+            $revision = exec('git rev-parse HEAD');
             $dateDeployed = date('r');
-            $release      = $branch . ' ' . $revision;
+            $release = $branch . ' ' . $revision;
         }
 
         if ($format) {

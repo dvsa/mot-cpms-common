@@ -2,17 +2,17 @@
 
 namespace CpmsCommonTest;
 
+use CpmsCommon\AbstractService;
+use PHPUnit\Framework\MockObject\MockObject;
+
 class AbstractServiceTest extends \PHPUnit\Framework\TestCase
 {
-    const MODEL_SERVICE        = 'cpms\model\temp';
-    const ERROR_MESSAGE_RESULT = 'error';
+    private const MODEL_SERVICE = 'cpms\model\temp';
+    private const ERROR_MESSAGE_RESULT = 'error';
 
-    /**
-     * @var \CpmsCommon\AbstractService
-     */
-    private $service;
+    private AbstractService&MockObject $service;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         $this->service = $this->getMockForAbstractClass(
             'CpmsCommon\AbstractService',
@@ -40,14 +40,14 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue(self::ERROR_MESSAGE_RESULT));
     }
 
-    public function testGetModel()
+    public function testGetModel(): void
     {
         $result = $this->service->getModel('temp');
 
         $this->assertEquals($this->getModelService(), $result);
     }
 
-    public function testGetParamsWithRequired()
+    public function testGetParamsWithRequired(): void
     {
         $required = [
             'param1'
@@ -60,7 +60,7 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data, $result['params']);
     }
 
-    public function testGetParamsWithNotRequired()
+    public function testGetParamsWithNotRequired(): void
     {
         $required = [
             'param1',
@@ -75,13 +75,13 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider amountToValidate
      */
-    public function testValidPositiveAmount($input, $output)
+    public function testValidPositiveAmount(string|float $input, bool $output): void
     {
         $result = $this->service->validPositiveAmount($input);
         $this->assertEquals($output, $result);
     }
 
-    public function amountToValidate()
+    public function amountToValidate(): array
     {
         return [
             [1, true],
@@ -97,7 +97,7 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    private function getModelService()
+    private function getModelService(): \stdClass
     {
         return new \stdClass();
     }

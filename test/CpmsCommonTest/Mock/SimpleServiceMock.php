@@ -8,11 +8,10 @@ use Laminas\EventManager\EventManagerAwareTrait;
 
 class SimpleServiceMock implements EventManagerAwareInterface
 {
-
     use EventManagerAwareTrait;
     use AmountFormatterTrait;
 
-    public function fireEvent($suffix = 'pre')
+    public function fireEvent(string $suffix = 'pre'): void
     {
 
         $this->getEventManager()->trigger(__METHOD__ . '.' . $suffix, $this, compact('suffix'));

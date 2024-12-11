@@ -1,17 +1,13 @@
 <?php
+
 /**
  * A trait so that controllers can easily integrate logging.
- *
- * @package     cpmsommon
- * @subpackage  utility
- * @author      Shaun Lizzio <shaun.lizzio@valtech.co.uk>
  */
 
 namespace CpmsCommon\Utility;
 
 use CpmsCommon\Service\LoggerService;
 use Laminas\Log\Logger;
-use Laminas\Log\LoggerAwareTrait as LaminasLoggerAwareTrait;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
@@ -23,33 +19,39 @@ use Laminas\ServiceManager\ServiceManager;
  */
 trait LoggerAwareTrait
 {
-    use LaminasLoggerAwareTrait;
+    protected ?LoggerService $logger = null;
 
     /**
      * Returns an instantiated instance of Zend Log.
      *
-     * @return LoggerService
      * @throws \InvalidArgumentException
      */
-    public function getLogger()
+    public function getLogger(): LoggerService
     {
         if (null === $this->logger) {
-            /** @var \Laminas\Log\Logger $logger */
+            /** @var LoggerService $logger */
             $logger = $this->getServiceLocator()->get('Logger');
             $this->setLogger($logger);
         }
 
+        /** @var LoggerService */
         return $this->logger;
     }
 
     /**
-     * Logs a message to the defined logger.
-     *
-     * @param       $message
-     * @param int   $priority
-     * @param array $extra
+     * Set logger object
      */
-    public function log($message, $priority = Logger::INFO, $extra = array())
+    public function setLogger(LoggerService $logger): self
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * Logs a message to the defined logger.
+     */
+    public function log(string $message, int $priority = Logger::INFO, array $extra = array()): void
     {
         $this->getLogger()->log($priority, $message, $extra);
     }
@@ -57,11 +59,11 @@ trait LoggerAwareTrait
     /**
      * Logs an exception
      *
-     * @param $exception
+     * @param \Exception $exception
      *
-     * @return $this
+     * @return LoggerService
      */
-    public function logException($exception)
+    public function logException(\Exception $exception): LoggerService
     {
         return $this->getLogger()->logException($exception);
     }

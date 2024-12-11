@@ -1,5 +1,8 @@
 <?php
+
 namespace CpmsCommon\Log;
+
+use CpmsCommon\Log\LogData;
 
 /**
  * Interface LogDataAwareInterface
@@ -9,7 +12,7 @@ namespace CpmsCommon\Log;
 interface LogDataAwareInterface
 {
     /**
-     * @param $logData
+     * @param LogData $logData
      *
      * @return mixed
      */

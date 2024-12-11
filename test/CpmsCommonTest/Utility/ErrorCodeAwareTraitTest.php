@@ -8,7 +8,7 @@ use CpmsCommonTest\Mock\ErrorCodeAwareMock;
 
 class ErrorCodeAwareTraitTest extends \PHPUnit\Framework\TestCase
 {
-    public function testGetErrorMessageWithSampleCode()
+    public function testGetErrorMessageWithSampleCode(): void
     {
         $trait = $this->getMockBuilder(ErrorCodeAwareMock::class)->addMethods(['getServiceLocator'])->getMock();
 

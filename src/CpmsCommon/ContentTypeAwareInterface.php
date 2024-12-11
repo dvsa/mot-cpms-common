@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon;
 
 /**
@@ -9,7 +10,7 @@ namespace CpmsCommon;
 interface ContentTypeAwareInterface
 {
     /**
-     * @param $type string
+     * @param string $type
      *
      * @return mixed
      */

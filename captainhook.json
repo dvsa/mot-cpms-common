@@ -21,6 +21,12 @@
             {
                 "action": "composer test",
                 "options": []
+            },
+            {
+                "action": "composer phpcs"
+            },
+            {
+                "action": "composer phpstan"
             }
         ]
     }

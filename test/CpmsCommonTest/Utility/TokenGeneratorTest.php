@@ -4,7 +4,6 @@ namespace CpmsCommonTest\Utility;
 
 use CpmsCommon\Utility\TokenGenerator;
 use InvalidArgumentException;
-use PaymentDb\Entity\AbstractEntity;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,42 +14,40 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenGeneratorTest extends TestCase
 {
-    /**
-     * @var TokenGenerator
-     */
-    protected $tokenGenerator;
+    protected TokenGenerator $tokenGenerator;
 
     public function setUp(): void
     {
         $this->tokenGenerator = new TokenGenerator();
     }
 
-    public function testGeneratesToken()
+    public function testGeneratesToken(): void
     {
         $token = $this->tokenGenerator->create(TokenGenerator::PREFIX);
-        $this->assertTrue((boolean)preg_match('/^' . TokenGenerator::TOKEN_REGEX . '$/', $token));
+        $this->assertTrue((bool)preg_match('/^' . TokenGenerator::TOKEN_REGEX . '$/', $token));
 
         $token = TokenGenerator::create(TokenGenerator::PREFIX);
         $this->assertTrue($this->tokenGenerator->verify($token));
     }
 
-    public function testThrowsExceptionWithInvalidPrefix()
+    public function testThrowsExceptionWithInvalidPrefix(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid token prefix');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessageMatches('/CpmsCommon\\\\Utility\\\\TokenGenerator::generate\\(\\): Argument #1 \\(\\$prefix\\) must be of type int, string given/');
 
+        /** @phpstan-ignore argument.type */
         TokenGenerator::create('badgers love mash potato');
     }
 
-    public function testVerifyWithNotNumericPrefix()
+    public function testVerifyWithNotNumericPrefix(): void
     {
         $token        = $this->tokenGenerator->create(TokenGenerator::PREFIX);
-        $invalidToken = str_replace(TokenGenerator::PREFIX, 'a', $token);
+        $invalidToken = str_replace(strval(TokenGenerator::PREFIX), 'a', $token);
 
         $this->assertFalse($this->tokenGenerator->verify($invalidToken));
     }
 
-    public function testVerifyWithIncorrectLength()
+    public function testVerifyWithIncorrectLength(): void
     {
         $token        = $this->tokenGenerator->create(TokenGenerator::PREFIX);
         $invalidToken = substr($token, 0, 32);

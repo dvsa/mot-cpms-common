@@ -3,13 +3,14 @@
 namespace CpmsCommonTest\Utility;
 
 use CpmsCommonTest\Bootstrap;
+use Laminas\ServiceManager\ServiceManager;
+use CpmsCommonTest\Mock\LoggerAwareTraitMock;
 
 class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
 {
+    private LoggerAwareTraitMock $trait;
 
-    private $trait;
-
-    public function testLog()
+    public function testLog(): void
     {
         $this->setUpTrait($this->getServiceLocator());
 
@@ -18,7 +19,7 @@ class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('CpmsCommon\Service\LoggerService', $this->trait->getLogger());
     }
 
-    public function testLogException()
+    public function testLogException(): void
     {
         $this->setUpTrait($this->getServiceLocator());
 
@@ -32,26 +33,14 @@ class LoggerAwareTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @param $serviceManager
      */
-    private function setUpTrait($serviceManager)
+    private function setUpTrait(ServiceManager $serviceManager): void
     {
-        $this->trait = $this->getMockForTrait(
-            'CpmsCommon\Utility\LoggerAwareTrait',
-            [],
-            '',
-            true,
-            true,
-            true,
-            ['getServiceLocator']
-        );
-
-        $this->trait->expects($this->any())
-            ->method('getServiceLocator')
-            ->will($this->returnValue($serviceManager));
+        $this->trait = new LoggerAwareTraitMock();
+        $this->trait->setServiceLocator($serviceManager);
     }
 
-    private function getServiceLocator()
+    private function getServiceLocator(): ServiceManager
     {
         return Bootstrap::getInstance()->getServiceManager();
     }
-
 }

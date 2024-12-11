@@ -13,7 +13,7 @@ use Laminas\ServiceManager\ServiceManager;
  */
 class DefaultQueueFactoryTest extends TestCase
 {
-    public function testThrowsExceptionIfDefaultQueueAdapterNotSet()
+    public function testThrowsExceptionIfDefaultQueueAdapterNotSet(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Default queue adapter not configured');
@@ -26,7 +26,7 @@ class DefaultQueueFactoryTest extends TestCase
         $factory->__invoke($serviceLocator, null);
     }
 
-    public function testThrowsExceptionIfClassIsNotDefinedForAdapter()
+    public function testThrowsExceptionIfClassIsNotDefinedForAdapter(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Class for default queue not set');
@@ -39,7 +39,7 @@ class DefaultQueueFactoryTest extends TestCase
         $factory->__invoke($serviceLocator, null);
     }
 
-    public function testThrowsExceptionWhenConfiguredClassDoesNotSatisfyQueueInterface()
+    public function testThrowsExceptionWhenConfiguredClassDoesNotSatisfyQueueInterface(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Could not load Queue adapter');
@@ -57,7 +57,7 @@ class DefaultQueueFactoryTest extends TestCase
         $factory->__invoke($serviceLocator, null);
     }
 
-    public function testCanCreateInstance()
+    public function testCanCreateInstance(): void
     {
         $factory = new DefaultQueueFactory();
         $serviceLocator = new ServiceManager();

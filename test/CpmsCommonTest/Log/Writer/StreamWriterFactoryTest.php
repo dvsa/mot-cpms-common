@@ -5,6 +5,8 @@ namespace CpmsCommonTest\Log\Writer;
 use CpmsCommon\Log\Writer\StreamWriterFactory;
 use CpmsCommon\Utility\Util;
 use CpmsCommonTest\Bootstrap;
+use Laminas\Log\Writer\Stream;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class StreamWriterFactoryTest
@@ -13,18 +15,14 @@ use CpmsCommonTest\Bootstrap;
  */
 class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
 {
-
-    /**
-     * @var StreamWriterFactory
-     */
-    private $writerFactory;
+    private StreamWriterFactory $writerFactory;
 
     public function setUp(): void
     {
         $this->writerFactory = new StreamWriterFactory();
     }
 
-    public function testCreateService()
+    public function testCreateService(): void
     {
         $serviceManager = $this->getServiceManager();
         $result         = $this->writerFactory->__invoke($serviceManager, null);
@@ -32,7 +30,7 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    public function testCreateServiceWithNoFileName()
+    public function testCreateServiceWithNoFileName(): void
     {
         $config['logger']['filename']  = null;
         $config['logger']['location']  = null;
@@ -40,14 +38,12 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         $config['logger']['priority']  = '';
         $config['logger']['separator'] = '';
         $serviceManager                = $this->getServiceManager($config);
-        /**
-         * @var \Laminas\Log\Writer\Stream $result
-         */
+        /** @var Stream $result */
         $result = $this->writerFactory->__invoke($serviceManager, null);
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    public function testCreateLogDir()
+    public function testCreateLogDir(): void
     {
         $config['logger']['filename']    = null;
         $config['logger']['location']    = sys_get_temp_dir() . '/log';
@@ -60,24 +56,22 @@ class StreamWriterFactoryTest extends \PHPUnit\Framework\TestCase
         if (file_exists($config['logger']['location'])) {
             Util::deleteDir($config['logger']['location']);
         }
-        /**
-         * @var \Laminas\Log\Writer\Stream $result
-         */
+        /** @var Stream $result */
         $result = $this->writerFactory->__invoke($serviceManager, null);
         $this->assertInstanceOf('Laminas\Log\Writer\Stream', $result);
     }
 
-    private function getServiceManager($config = null)
+    private function getServiceManager(array $config = null): ServiceManager
     {
         $serviceManager = Bootstrap::getInstance()->getServiceManager();
 
         if (!empty($config)) {
-
-            $config = array_merge($serviceManager->get('config'), $config);
+            /** @var array $managerConfig */
+            $managerConfig = $serviceManager->get('config');
+            $config = array_merge($managerConfig, $config);
 
             $serviceManager->setAllowOverride(true);
             $serviceManager->setService('config', $config);
-
         }
 
         return $serviceManager;

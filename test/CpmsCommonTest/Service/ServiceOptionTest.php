@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommon\AbstractService;
@@ -6,11 +7,11 @@ use CpmsCommon\Service\Config\ServiceOptions;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleService;
 use Laminas\Filter\Word\UnderscoreToCamelCase;
+use Laminas\ServiceManager\ServiceManager;
 
 class ServiceOptionTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {
@@ -19,21 +20,21 @@ class ServiceOptionTest extends \PHPUnit\Framework\TestCase
         parent::setUp();
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $filter = new UnderscoreToCamelCase();
 
         $data = array(
-            'sort'            => array('id' => 'asc'),
-            'page'            => 1,
-            'limit'           => 23,
-            'depth'           => -1,
-            'params'          => array(
+            'sort' => array('id' => 'asc'),
+            'page' => 1,
+            'limit' => 23,
+            'depth' => -1,
+            'params' => array(
                 'required_fields' => array('id'),
-                'depth'           => -1,
+                'depth' => -1,
             ),
             'required_fields' => array('id'),
-            'filters'         => array()
+            'filters' => array()
         );
 
         $options = new ServiceOptions($data);
@@ -41,25 +42,26 @@ class ServiceOptionTest extends \PHPUnit\Framework\TestCase
 
         foreach ($data as $key => $value) {
             $method = 'get' . $filter->filter($key);
-            $check  = $options->$method();
+            $check = $options->$method();
             $this->assertSame($value, $check);
         }
 
         $options->setLimit(100);
         $this->assertSame(ServiceOptions::MAX_LIMIT, $options->getLimit());
 
-        $data    = array(
+        $data = array(
             'sort' => 'id:desc',
         );
         $options = new ServiceOptions($data);
-        $this->assertSame('DESC', $options->getSort()['id']);
-
+        /** @var array $sort */
+        $sort = $options->getSort();
+        $this->assertSame('DESC', $sort['id']);
     }
 
-    public function testResultArray()
+    public function testResultArray(): void
     {
         $service = new SampleService();
-        $result  = $service->getResult();
+        $result = $service->getResult();
 
         $this->assertArrayHasKey(AbstractService::RESULT_ITEMS, $result);
         $this->assertArrayHasKey(AbstractService::RESULT_PAGE, $result);

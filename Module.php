@@ -5,6 +5,7 @@
  */
 namespace CpmsCommon;
 
+use Laminas\Mvc\Controller\PluginManager;
 use Laminas\Mvc\Router\RouteMatch;
 
 /**
@@ -42,15 +43,16 @@ class Module
         return array(
             'initializers' => array(
                 function ($controller, $pluginManager) {
-                    /** @var $pluginManager \Laminas\Mvc\Controller\PluginManager */
-                    /** @var RouteMatch $routeMatch */
+                    /** @var PluginManager $pluginManager */
                     if ($controller instanceof ContentTypeAwareInterface) {
-                        $locator  = $pluginManager->getServiceLocator();
-                        $config   = $locator->get('config');
+                        $locator = $pluginManager->getServiceLocator();
+                        $config = $locator->get('config');
                         $versions = [];
                         if (isset($config['api-tools-versioning']['default_version'])) {
                             $versions[] = $config['api-tools-versioning']['default_version'];
                         }
+
+                        /** @var RouteMatch $routeMatch */
                         $routeMatch = $locator->get('Application')->getMvcEvent()->getRouteMatch();
 
                         if ($routeMatch) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Generates JSON responses on exceptions
  *
@@ -10,6 +11,7 @@
 namespace CpmsCommon\View;
 
 use CpmsCommon\Service\ErrorCodeService;
+use CpmsCommon\Service\LoggerService;
 use Laminas\Http\Response;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Application;
@@ -34,9 +36,9 @@ class JsonExceptionStrategy extends ExceptionStrategy
      *
      * @param  MvcEvent $event
      *
-     * @return void
+     * @return null
      */
-    public function prepareExceptionViewModel(MvcEvent $event)
+    public function prepareExceptionViewModel(MvcEvent $event): null
     {
         $omittedErrors = array(
             Application::ERROR_CONTROLLER_NOT_FOUND,
@@ -66,10 +68,10 @@ class JsonExceptionStrategy extends ExceptionStrategy
 
     /**
      * @param MvcEvent $event
-     * @param null     $errorCode
-     * @param null     $statusCode
+     * @param ?int    $errorCode
+     * @param ?int     $statusCode
      */
-    private function handleException(MvcEvent $event, $errorCode = null, $statusCode = null)
+    private function handleException(MvcEvent $event, $errorCode = null, $statusCode = null): void
     {
 
         $errorCode  = $errorCode ?: ErrorCodeService::UNKNOWN_ERROR;
@@ -96,20 +98,26 @@ class JsonExceptionStrategy extends ExceptionStrategy
 
     /**
      * @param MvcEvent $event
-     * @param          $errorCode
-     * @param          $statusCode
+     * @param int $errorCode
+     * @param ?int $statusCode
      *
      * @return array
      */
-    private function getResponseData(MvcEvent $event, $errorCode, $statusCode)
+    private function getResponseData(MvcEvent $event, $errorCode, $statusCode): array
     {
         $data = array();
-        if ($exception = $event->getParam('exception')) {
+        /** @var ?\Exception $exception */
+        $exception = $event->getParam('exception');
+        if ($exception) {
+            /** @phpstan-ignore if.alwaysTrue */
             if ($app = $event->getApplication()) {
                 $serviceLocator = $app->getServiceManager();
-                $errorService   = $serviceLocator->get('cpms\errorCodeService');
-                $data           = $errorService->getErrorMessage($errorCode);
-                $serviceLocator->get('Logger')->logException($exception);
+                /** @var ErrorCodeService $errorService */
+                $errorService = $serviceLocator->get('cpms\errorCodeService');
+                $data = $errorService->getErrorMessage($errorCode);
+                /** @var LoggerService $logger */
+                $logger = $serviceLocator->get('Logger');
+                $logger->logException($exception);
             } else {
                 $data = array(
                     ErrorCodeService::ERROR_CODE_KEY    => ErrorCodeService::CRITICAL_ERROR,

@@ -13,31 +13,31 @@ use InvalidArgumentException;
 class ReferenceGenerator
 {
     /** Year reference for validation */
-    const YEAR_REFERENCE = 2014;
+    public const YEAR_REFERENCE = 2014;
 
     /** Scheme identifier length */
-    const IDENTIFIER_LENGTH = 4;
+    public const IDENTIFIER_LENGTH = 4;
 
     /** Payment type identifier length */
-    const PAYMENT_TYPE_LENGTH = 2;
+    public const PAYMENT_TYPE_LENGTH = 2;
 
     /** Unique identifier length */
-    const UNIQUE_ID_LENGTH = 8;
+    public const UNIQUE_ID_LENGTH = 8;
     /**
      * Segment separator
      */
-    const SEPARATOR = '-';
+    public const SEPARATOR = '-';
 
     /**
      * Regular expression to validate references
      */
-    const REFERENCE_REGEX = '[A-Z0-9]{4}\-[0-9]{2}\-[0-9]{8}\-[0-9]{6}\-[0-9A-Z]{8}';
+    public const REFERENCE_REGEX = '[A-Z0-9]{4}\-[0-9]{2}\-[0-9]{8}\-[0-9]{6}\-[0-9A-Z]{8}';
 
     /**
      * Generate reference
      *
-     * @param $schemeId
-     * @param $paymentType
+     * @param string $schemeId
+     * @param string $paymentType
      *
      * @return string
      */
@@ -89,7 +89,7 @@ class ReferenceGenerator
     /**
      * Verify reference is in the correct format
      *
-     * @param $reference
+     * @param string $reference
      *
      * @return bool
      */
@@ -109,7 +109,7 @@ class ReferenceGenerator
     /**
      * Verify time segment
      *
-     * @param $time
+     * @param string $time
      *
      * @return bool
      */
@@ -147,7 +147,7 @@ class ReferenceGenerator
     /**
      * Verify date segment of the reference
      *
-     * @param $date
+     * @param string $date
      *
      * @return bool
      */

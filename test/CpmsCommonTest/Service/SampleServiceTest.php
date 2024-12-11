@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommonTest\Controller;
 
 use CpmsCommon\Service\Config\ServiceOptions;
@@ -7,25 +8,24 @@ use CpmsCommon\Utility\Util;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleService;
 use Laminas\Log\Logger;
+use Laminas\ServiceManager\ServiceManager;
 
 class SampleServiceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  SampleService */
-    protected $service;
+    protected SampleService $service;
 
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
-        $this->service        = new SampleService();
+        $this->service = new SampleService();
         $this->service->setOptions(new ServiceOptions());
 
         $this->service->setServiceLocator($this->serviceManager);
     }
 
-    public function testServiceInstance()
+    public function testServiceInstance(): void
     {
         $this->assertInstanceOf('CpmsCommon\AbstractService', $this->service);
         $this->assertInstanceOf('Laminas\Log\Logger', $this->service->getLogger());
@@ -39,19 +39,19 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->logException(new \Exception('phpunit'));
         $this->service->log('phpunit', Logger::DEBUG);
 
-        $config      = $this->serviceManager->get('config');
+        /** @var array $config */
+        $config = $this->serviceManager->get('config');
         $logLocation = $config['logger']['location'];
         Util::deleteDir($logLocation);
     }
 
-    public function testServiceMethod()
+    public function testServiceMethod(): void
     {
-
         $model = $this->service->getModel('test');
         $this->assertSame('TEST-MODEL', $model);
 
         $required = array('one', 'two', 'three');
-        $data     = array(
+        $data = array(
             'one'   => 1,
             'two'   => 2,
             'three' => 3,
@@ -71,7 +71,7 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(400, $results['http_status_code']);
     }
 
-    public function testPositiveAmount()
+    public function testPositiveAmount(): void
     {
         $done = $this->service->validPositiveAmount(-90.89);
         $this->assertFalse($done);

@@ -1,17 +1,11 @@
 <?php
+
 namespace CpmsCommon\Service;
 
 use CpmsCommon\Log\LogDataAwareInterface;
 use CpmsCommon\Log\LogDataAwareTrait;
 use Laminas\Log\Logger;
 
-/**
- * Class Logger Service
- *
- * @package       CpmsCommon
- * @subpackage    Log
- * @author        Pele Odiase <pele.odiase@valtech.co.uk>
- */
 class LoggerService extends Logger implements LogDataAwareInterface
 {
     use LogDataAwareTrait;
@@ -60,8 +54,8 @@ class LoggerService extends Logger implements LogDataAwareInterface
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return $this
      */

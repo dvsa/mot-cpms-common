@@ -1,36 +1,38 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommon\Service\ProfilingInitializer;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\Mock\SimpleServiceMock;
 use Laminas\EventManager\EventManager;
+use Laminas\ServiceManager\ServiceManager;
 
 class ProfilerTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
         $this->serviceManager->setAllowOverride(true);
 
-        $config                          = $this->serviceManager->get('Config');
+        /** @var array $config */
+        $config = $this->serviceManager->get('Config');
         $config['cpms_profiler_enabled'] = true;
         $this->serviceManager->setService('Config', $config);
 
         parent::setUp();
     }
 
-    public function testPreEvent()
+    public function testPreEvent(): void
     {
-
         $initializer = new ProfilingInitializer();
-        $service     = new SimpleServiceMock();
+        $service = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
+        /** @phpstan-ignore method.void */
         $initializerResult = $initializer->initialize($service, $this->serviceManager);
 
         $service->fireEvent('pre');
@@ -38,14 +40,14 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($initializerResult);
     }
 
-    public function testPostEvent()
+    public function testPostEvent(): void
     {
-
         $initializer = new ProfilingInitializer();
-        $service     = new SimpleServiceMock();
+        $service = new SimpleServiceMock();
 
         $service->setEventManager(new EventManager());
 
+        /** @phpstan-ignore method.void */
         $initializerResult = $initializer->initialize($service, $this->serviceManager);
 
         $service->fireEvent('post');
@@ -53,11 +55,11 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($initializerResult);
     }
 
-    public function testAmountFormatterTrait()
+    public function testAmountFormatterTrait(): void
     {
-        $pound   = 10;
+        $pound = 10;
         $service = new SimpleServiceMock();
-        $amount  = $service->formatPoundsToPence($pound);
+        $amount = $service->formatPoundsToPence($pound);
         $this->assertEquals($pound * 100, $amount);
     }
 }

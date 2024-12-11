@@ -5,21 +5,20 @@ namespace CpmsCommon\Queue\Adapter\Synchronous;
 use CpmsCommon\Queue\JobInterface;
 use CpmsCommon\Queue\QueueInterface;
 use CpmsCommon\Utility\LoggerAwareTrait;
-use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
-/**
- * Class SynchronousQueueAdapter
- *
- * @package CpmsCommon\Queue\Adapter\Memory
- */
-class SynchronousQueueAdapter implements QueueInterface
+class SynchronousQueueAdapter implements QueueInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    private $serviceLocator;
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    private ServiceLocatorInterface $serviceLocator;
 
-    public function setServiceLocator($serviceLocator)
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator($serviceLocator): SynchronousQueueAdapter
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -27,7 +26,7 @@ class SynchronousQueueAdapter implements QueueInterface
     }
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {
@@ -37,12 +36,12 @@ class SynchronousQueueAdapter implements QueueInterface
     /**
      * @param JobInterface $job
      */
-    public function enqueue(JobInterface $job)
+    public function enqueue(JobInterface $job): void
     {
         $this->process($job);
     }
 
-    public function enqueueAll(array $jobs)
+    public function enqueueAll(array $jobs): void
     {
         array_map([$this, 'enqueue'], $jobs);
     }
@@ -57,7 +56,8 @@ class SynchronousQueueAdapter implements QueueInterface
         try {
             return $job->handle($this->serviceLocator);
         } catch (\Exception $e) {
-            return $this->logException($e);
+            $this->logException($e);
+            return false;
         }
     }
 }

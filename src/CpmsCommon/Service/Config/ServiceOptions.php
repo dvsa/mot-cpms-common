@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Service\Config;
 
 use Laminas\Stdlib\AbstractOptions;
@@ -10,24 +11,26 @@ use Laminas\Stdlib\AbstractOptions;
  */
 class ServiceOptions extends AbstractOptions
 {
-    const MAX_LIMIT = 25;
-    /** @var int */
-    protected $limit = 25;
-    /** @var int */
-    protected $page = 1;
-    /** @var int */
-    protected $depth = 0;
-    /** @var array */
-    protected $requiredFields = array();
-    /** @var array */
-    protected $filters = array();
-    /** @var array */
-    protected $params = array();
-    /** @var */
-    protected $sort;
+    public const MAX_LIMIT = 25;
+
+    protected int $limit = 25;
+
+    protected int $page = 1;
+
+    protected int $depth = 0;
+
+    protected array $requiredFields = array();
+
+    protected array $filters = array();
+
+    protected array $params = array();
+
+    protected mixed $sort;
 
     /**
      * @param int $depth
+     *
+     * @return void
      */
     public function setDepth($depth)
     {
@@ -44,6 +47,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $filters
+     *
+     * @return void
      */
     public function setFilters($filters)
     {
@@ -60,6 +65,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param int $limit
+     *
+     * @return void
      */
     public function setLimit($limit)
     {
@@ -79,6 +86,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param int $page
+     *
+     * @return void
      */
     public function setPage($page)
     {
@@ -95,6 +104,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $params
+     *
+     * @return void
      */
     public function setParams($params)
     {
@@ -119,6 +130,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param array $requiredFields
+     *
+     * @return void
      */
     public function setRequiredFields($requiredFields)
     {
@@ -137,6 +150,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param mixed $sortOrder
+     *
+     * @return void
      */
     public function setSort($sortOrder)
     {
@@ -161,6 +176,8 @@ class ServiceOptions extends AbstractOptions
 
     /**
      * @param boolean $_strictMode__
+     *
+     * @return void
      */
     public function setStrictMode($_strictMode__)
     {

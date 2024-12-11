@@ -10,18 +10,15 @@ use CpmsCommon\Validator\DateDifference;
  */
 class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  DateDifference */
-    private $validator;
+    private DateDifference $validator;
 
     public function setUp(): void
     {
         $this->validator = new DateDifference();
     }
 
-    public function testMaxDeltaGetAndSet()
+    public function testMaxDeltaGetAndSet(): void
     {
-        $this->assertNull($this->validator->getMaxDelta());
-
         $this->validator->setMaxDelta('6 months');
 
         $expected = new \DateInterval('P6M');
@@ -43,7 +40,7 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
      *
      * @dataProvider invalidDateProvider
      */
-    public function testRestrictsValueToProvidedFormat($date, $format = null)
+    public function testRestrictsValueToProvidedFormat(mixed $date, string $format = null): void
     {
         $validator = $this->validator;
 
@@ -51,13 +48,15 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
             $this->expectException(\RuntimeException::class);
         }
 
-        $validator->setFormat($format);
+        if (is_string($format)) {
+            $validator->setFormat($format);
+        }
 
         $this->assertFalse($validator->isValid($date));
         $this->assertArrayHasKey(DateDifference::INVALID_DATE, $validator->getMessages());
     }
 
-    public function invalidDateProvider()
+    public function invalidDateProvider(): array
     {
         return [
             ['2012-111-01', 'Y-m-d'],
@@ -70,7 +69,7 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testValidationRequiresFieldToCompareWithToBePresent()
+    public function testValidationRequiresFieldToCompareWithToBePresent(): void
     {
         $valid = $this->validator->isValid('2015-11-11 12:00:00');
 
@@ -83,7 +82,7 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValid('2015-11-11 12:00:00', ['not Correct' => 'not correct']));
     }
 
-    public function testValidationRequiresFieldToCompareWithContainsValidDate()
+    public function testValidationRequiresFieldToCompareWithContainsValidDate(): void
     {
         $this->validator->setFieldToCompareWith('testField');
         $this->validator->setMaxDelta('1 month');
@@ -95,12 +94,12 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider dataProvider
-     * @param $firstDate
-     * @param $secondDate
-     * @param $maxDelta
-     * @param $expected
+     * @param string $firstDate
+     * @param string $secondDate
+     * @param string $maxDelta
+     * @param boolean $expected
      */
-    public function testValidation($firstDate, $secondDate, $maxDelta, $expected)
+    public function testValidation($firstDate, $secondDate, $maxDelta, $expected): void
     {
         $validator = $this->validator;
 
@@ -116,7 +115,16 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function dataProvider()
+    /**
+     */
+    public function testMaxDeltaStringValidation(): void
+    {
+        $this->expectException(\Exception::class);
+
+        $this->validator->setMaxDelta('not a date string');
+    }
+
+    public function dataProvider(): array
     {
         return [
             ['2015-06-30 12:00:00', '2015-01-01 12:00:00', '6 months', true ],

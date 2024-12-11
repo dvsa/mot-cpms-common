@@ -3,7 +3,6 @@
 namespace CpmsCommon\Validator;
 
 use Laminas\Validator\AbstractValidator;
-use Laminas\Validator\Exception;
 
 /**
  * Class DateDifference
@@ -12,12 +11,12 @@ use Laminas\Validator\Exception;
  */
 class DateDifference extends AbstractValidator
 {
-    const COMPARISON_KEY_NOT_FOUND = 'comparisonKeyNotFound';
-    const INVALID_DATE             = 'invalidDate';
-    const INVALID_COMP_DATE        = 'invalidCompDate';
-    const DIFFERENCE_TOO_LARGE     = 'differenceTooLarge';
+    public const COMPARISON_KEY_NOT_FOUND = 'comparisonKeyNotFound';
+    public const INVALID_DATE             = 'invalidDate';
+    public const INVALID_COMP_DATE        = 'invalidCompDate';
+    public const DIFFERENCE_TOO_LARGE     = 'differenceTooLarge';
 
-    protected $messageTemplates = [
+    protected array $messageTemplates = [
         self::INVALID_DATE             => "Date supplied is not valid. Expected format %format%, got %value%",
         self::DIFFERENCE_TOO_LARGE     => "Gap between dates is too large",
         self::COMPARISON_KEY_NOT_FOUND => "A second date must be specified for comparison",
@@ -25,24 +24,21 @@ class DateDifference extends AbstractValidator
     ];
 
     /**
-     * @var \DateInterval The maximum length of time allowed between the two dates
+     * The maximum length of time allowed between the two dates
      */
-    protected $maxDelta;
+    protected \DateInterval $maxDelta;
 
     /**
-     * @var string The name of the field/input/key of the second date for comparison, which will be passed into context
+     * The name of the field/input/key of the second date for comparison, which will be passed into context
      */
-    protected $fieldToCompareWith;
+    protected string $fieldToCompareWith;
 
     /**
-     * @var string Date format to check for when creating dates
+     * Date format to check for when creating dates
      */
-    protected $format = 'Y-m-d H:i:s';
+    protected string $format = 'Y-m-d H:i:s';
 
-    /**
-     * @var array
-     */
-    protected $messageVariables = array(
+    protected array $messageVariables = array(
         'format' => 'format'
     );
 
@@ -57,7 +53,7 @@ class DateDifference extends AbstractValidator
     /**
      * @param string $fieldToCompareWith
      */
-    public function setFieldToCompareWith($fieldToCompareWith)
+    public function setFieldToCompareWith($fieldToCompareWith): void
     {
         $this->fieldToCompareWith = $fieldToCompareWith;
     }
@@ -67,10 +63,19 @@ class DateDifference extends AbstractValidator
      *
      * @param string $spec A string using the relative formats, as used by the strtotime() function
      */
-    public function setMaxDelta($spec)
+    public function setMaxDelta($spec): void
     {
-        $date           = \DateInterval::createFromDateString($spec);
-        $this->maxDelta = $date;
+        try {
+            $date = \DateInterval::createFromDateString($spec);
+
+            if ($date == false) {
+                throw new \Exception('Invalid date string');
+            }
+
+            $this->maxDelta = $date;
+        } catch (\Exception $exception) {
+            throw new \Exception('Invalid date string');
+        }
     }
 
     /**
@@ -149,7 +154,7 @@ class DateDifference extends AbstractValidator
     /**
      * @param string $format
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }

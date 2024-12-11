@@ -1,27 +1,24 @@
 <?php
+
 namespace CpmsCommon\Service;
 
 use CpmsCommon\Service\Config\AuthServiceOptions;
 use CpmsCommon\Utility\ErrorCodeAwareTrait;
 use CpmsCommon\Utility\LoggerAwareTrait;
 use Laminas\Authentication\AuthenticationService as ZendAuthService;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
-/**
- * Class BaseAuthenticationService
- *
- * @author       Pele Odiase <pele.odiase@valtech.co.uk>
- * @copyright    2014 ValTech
- */
-abstract class BaseAuthenticationService extends ZendAuthService
+abstract class BaseAuthenticationService extends ZendAuthService implements LoggerAwareInterface
 {
     use ErrorCodeAwareTrait;
     use LoggerAwareTrait;
 
-    /** @var  AuthServiceOptions */
-    protected $options;
+    protected AuthServiceOptions $options;
 
     /**
      * @param AuthServiceOptions $options
+     *
+     * @return void
      */
     public function setOptions($options)
     {

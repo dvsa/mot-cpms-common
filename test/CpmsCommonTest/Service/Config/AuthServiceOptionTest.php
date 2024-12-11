@@ -13,11 +13,7 @@ use CpmsCommon\Utility\TokenGenerator;
  */
 class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
 {
-
-    /**
-     * @var AuthServiceOptions
-     */
-    private $options;
+    private AuthServiceOptions $options;
 
     public function setUp(): void
     {
@@ -27,7 +23,7 @@ class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testSetsPropertiesCorrectly($data)
+    public function testSetsPropertiesCorrectly(array $data): void
     {
         foreach ($data as $property => $value) {
             $method = 'set' . ucfirst($property);
@@ -49,7 +45,7 @@ class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return
             [

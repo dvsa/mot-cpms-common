@@ -1,4 +1,5 @@
 <?php
+
 namespace CpmsCommon\Log;
 
 /**
@@ -8,8 +9,7 @@ namespace CpmsCommon\Log;
  */
 trait LogDataAwareTrait
 {
-    /** @var  LogData */
-    protected $logData;
+    protected ?LogData $logData;
 
     /**
      * @return LogData
@@ -25,7 +25,7 @@ trait LogDataAwareTrait
     }
 
     /**
-     * @param LogData $logData
+     * @param ?LogData $logData
      */
     public function setLogData($logData)
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Profiling Initializer
  *
@@ -7,7 +8,7 @@
 
 namespace CpmsCommon\Service;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\ServiceManager\Initializer\InitializerInterface;
@@ -21,14 +22,14 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 class ProfilingInitializer implements InitializerInterface
 {
+    public const CLASS_PATH = __CLASS__;
 
-    const CLASS_PATH = __CLASS__;
-
-    const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
+    public const CONFIG_KEY_PROFILE_ENABLED = 'cpms_profiler_enabled';
 
     /**
-     * @param $instance
+     * @param object $instance
      * @param ServiceLocatorInterface $serviceLocator
+     * @return void
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -52,6 +53,7 @@ class ProfilingInitializer implements InitializerInterface
             return;
         }
 
+        /** @var array $config */
         $config = $container->get('Config');
 
         if (!isset($config[self::CONFIG_KEY_PROFILE_ENABLED])) {
@@ -65,16 +67,15 @@ class ProfilingInitializer implements InitializerInterface
         $instance->getEventManager()->attach(
             '*',
             function (Event $event) use ($container) {
-
+                /** @var LoggerService $logger */
                 $logger = $container->get('Logger');
 
-                $exploded  = explode('.', $event->getName());
+                $exploded  = explode('.', $event->getName() ?? '');
                 $eventName = $exploded[0];
 
                 $queueLabel = 'invoked';
 
                 if (isset($exploded[1])) {
-
                     switch ($exploded[1]) {
                         case 'pre':
                             $queueLabel = 'started';
@@ -85,7 +86,7 @@ class ProfilingInitializer implements InitializerInterface
                     }
                 }
 
-                $target = get_class($event->getTarget());
+                $target = get_class((object)$event->getTarget());
                 $params = json_encode($event->getParams());
 
                 $logger->debug(

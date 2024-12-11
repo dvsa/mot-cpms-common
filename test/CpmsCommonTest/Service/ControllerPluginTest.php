@@ -1,44 +1,51 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
+use CpmsCommon\Controller\Plugin\SendPayload;
 use CpmsCommon\Service\ErrorCodeService;
 use CpmsCommonTest\Bootstrap;
 use CpmsCommonTest\SampleController;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Mvc\MvcEvent;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\View\HelperPluginManager;
+use PHPUnit\Framework\TestCase;
 
-class ControllerPluginTest extends \PHPUnit\Framework\TestCase
+class ControllerPluginTest extends TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
-    /** @var \CpmsCommon\Service\ErrorCodeService $errorService */
-    private $errorService;
+    private ErrorCodeService $errorService;
 
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
 
-        $this->errorService = $this->serviceManager->get('cpms\errorCodeService');
+        /** @var ErrorCodeService $errorCodeService */
+        $errorCodeService = $this->serviceManager->get('cpms\errorCodeService');
+        $this->errorService = $errorCodeService;
 
         parent::setUp();
     }
 
-    public function testSendPayloadPlugin()
+    public function testSendPayloadPlugin(): void
     {
-        /** @var  \CpmsCommon\Controller\Plugin\SendPayload $plugin */
-        $plugin = $this->serviceManager->get('ControllerPluginManager')->get('sendPayload');
+        /** @var HelperPluginManager $controllerPluginManager */
+        $controllerPluginManager = $this->serviceManager->get('ControllerPluginManager');
+        /** @var SendPayload $plugin */
+        $plugin = $controllerPluginManager->get('sendPayload');
         $this->assertInstanceOf('CpmsCommon\Controller\Plugin\SendPayload', $plugin);
-        /** @var \CpmsCommonTest\SampleController $controller */
-        $controller = new SampleController();// $this->serviceManager->get('CpmsCommonTest\Controller\Sample');
-        $event      = new MvcEvent();
+        /** @var SampleController $controller */
+        $controller = new SampleController();
+        $event = new MvcEvent();
         $event->setRequest(new Request());
         $controller->setEvent($event);
         $controller->setServiceLocator($this->serviceManager);
         $plugin->setController($controller);
 
-        $payload = $this->errorService->getErrorMessage(ErrorCodeService::INVALID_CLIENT, '', 500);
-        /** @var  \Laminas\View\Model\ViewModel $model */
+        $payload = $this->errorService->getErrorMessage(ErrorCodeService::INVALID_CLIENT, [''], 500);
+
         $model = $plugin($payload);
 
         $this->assertInstanceOf('Laminas\View\Model\ViewModel', $model);

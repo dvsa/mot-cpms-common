@@ -20,7 +20,10 @@
         "laminas/laminas-test": "^4.0.0",
         "laminas/laminas-component-installer": "^3.4.0",
         "captainhook/captainhook": "^5.16",
-        "captainhook/plugin-composer": "^5.3"
+        "captainhook/plugin-composer": "^5.3",
+        "squizlabs/php_codesniffer": "^3.10",
+        "dvsa/coding-standards": "^2.0",
+        "phpstan/phpstan": "^1.12"
     },
     "autoload": {
         "psr-0": {
@@ -35,6 +38,15 @@
     "scripts": {
         "test": [
             "vendor/bin/phpunit"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs"
+        ],
+        "phpcs:fix": [
+            "vendor/bin/phpcbf"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan"
         ]
     },
     "config": {

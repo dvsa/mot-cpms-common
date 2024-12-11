@@ -11,5 +11,5 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
  */
 interface JobInterface
 {
-    public function handle(ServiceLocatorInterface $serviceLocator);
+    public function handle(ServiceLocatorInterface $serviceLocator): bool;
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * An abstract controller that all ordinary CPMS controllers
  *
@@ -11,6 +12,8 @@ namespace CpmsCommonTest\Controller;
 
 use Laminas\Http\Header\ContentType;
 use Laminas\Http\Headers;
+use Laminas\Http\Request;
+use Laminas\Mvc\Application;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendTestCase;
 
 /**
@@ -21,10 +24,10 @@ use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendTestCa
  */
 abstract class AbstractHttpControllerTestCase extends ZendTestCase
 {
-    protected $clientMock = array();
-    protected $configDir = '/../../../../../config/test/application.config.php';
+    protected array $clientMock = array();
+    protected string $configDir = '/../../../../../config/test/application.config.php';
 
-    public function setUp($noConfig = false): void
+    public function setUp(bool $noConfig = false): void
     {
         if (!$noConfig) {
             $this->setApplicationConfig(include $this->configDir);
@@ -34,7 +37,6 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
 
         $serviceManager = $this->getApplicationServiceLocator();
         $serviceManager->setAllowOverride(true);
-
     }
 
     /**
@@ -47,7 +49,7 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
      *
      * @throws \Exception
      */
-    public function dispatchBody($url, $method, $body, $contentType = 'application/json')
+    public function dispatchBody($url, $method, $body, $contentType = 'application/json'): void
     {
         if (!is_string($body) && $contentType == 'application/json') {
             $body = json_encode($body);
@@ -55,7 +57,7 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
 
         $this->url($url, $method);
 
-        /** @var \Laminas\Http\Request $request */
+        /** @var Request $request */
         $request = $this->getRequest();
         $request->setContent($body);
 
@@ -68,8 +70,8 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
         if (true !== $this->traceError) {
             return;
         }
-        /** @var \Laminas\Mvc\Application $app */
-        $app       = $this->getApplication();
+        /** @var Application $app */
+        $app = $this->getApplication();
         $exception = $app->getMvcEvent()->getParam('exception');
         if ($exception instanceof \Exception) {
             throw $exception;

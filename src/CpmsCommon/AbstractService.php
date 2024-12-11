@@ -1,57 +1,53 @@
 <?php
+
 namespace CpmsCommon;
 
 use CpmsCommon\Service\Config\ServiceOptions;
 use CpmsCommon\Service\ErrorCodeService;
 use CpmsCommon\Utility\ErrorCodeAwareTrait;
 use CpmsCommon\Utility\LoggerAwareTrait;
-use Interop\Container\ContainerInterface;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Http\Response;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use CpmsCommon\Utility\LoggerAwareInterface;
 
 /**
  * Class AbstractService
  *
  * @package PaymentService\Service
  */
-abstract class AbstractService implements EventManagerAwareInterface
+abstract class AbstractService implements EventManagerAwareInterface, LoggerAwareInterface
 {
     use EventManagerAwareTrait;
     use LoggerAwareTrait;
     use ErrorCodeAwareTrait;
 
-    const RESULT_ITEMS = 'items';
-    const RESULT_PAGE  = 'page';
-    const RESULT_TOTAL = 'total';
-    const RESULT_LIMIT = 'limit';
+    public const RESULT_ITEMS = 'items';
+    public const RESULT_PAGE  = 'page';
+    public const RESULT_TOTAL = 'total';
+    public const RESULT_LIMIT = 'limit';
 
-    /** @var array */
-    public $requiredDataKeys = array();
-    /** @var array */
-    public $params = array();
-    /** @var  ServiceOptions */
-    public $options;
+    public array $requiredDataKeys = array();
+    public array $params = array();
+    public ServiceOptions $options;
 
-    // TODO this is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
-    /**
-     * @var ContainerInterface $serviceLocator
-     */
-    private $serviceLocator;
+    // This is an anti-pattern added here to make PoC zf2->zf3 migration happen. Sorry. This should be fixed in the future!
+    private ServiceLocatorInterface $serviceLocator;
 
     /**
-     * @return ContainerInterface
+     * @return ServiceLocatorInterface
      */
-    public function getServiceLocator(): ContainerInterface
+    public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
     /**
-     * @param ContainerInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator
      * @return AbstractService
      */
-    public function setServiceLocator(ContainerInterface $serviceLocator)
+    public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
 
@@ -61,12 +57,13 @@ abstract class AbstractService implements EventManagerAwareInterface
     /**
      * Return a database model
      *
-     * @param $modelName
+     * @param string $modelName
      *
      * @return array|object
      */
     public function getModel($modelName)
     {
+        /** @var array|object */
         return $this->getServiceLocator()->get('cpms\model\\' . $modelName);
     }
 
@@ -111,6 +108,8 @@ abstract class AbstractService implements EventManagerAwareInterface
 
     /**
      * @param ServiceOptions $options
+     *
+     * @return void
      */
     public function setOptions(ServiceOptions $options)
     {
@@ -128,10 +127,10 @@ abstract class AbstractService implements EventManagerAwareInterface
     /**
      * Get Page results
      *
-     * @param $items
-     * @param $page
-     * @param $total
-     * @param $limit
+     * @param mixed $items
+     * @param string|int|float $page
+     * @param string|int|float $total
+     * @param string|int|float $limit
      *
      * @return array
      */

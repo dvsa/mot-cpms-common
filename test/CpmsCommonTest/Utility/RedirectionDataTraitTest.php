@@ -6,8 +6,7 @@ use CpmsCommonTest\Mock\RedirectionDataTraitMock;
 
 class RedirectionDataTraitTest extends \PHPUnit\Framework\TestCase
 {
-
-    public function testTrait()
+    public function testTrait(): void
     {
         $mock = new RedirectionDataTraitMock();
 
@@ -23,7 +22,7 @@ class RedirectionDataTraitTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Laminas\View\Model\ViewModel', $result);
     }
 
-    public function testTraitWithNoGateway()
+    public function testTraitWithNoGateway(): void
     {
         $mock = new RedirectionDataTraitMock();
 

@@ -1,7 +1,8 @@
 <?php
+
 namespace CpmsCommon\Service;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
@@ -25,8 +26,9 @@ class ErrorCodeServiceFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $serviceConfig  = $container->get('config');
-        $class          = $serviceConfig['error_code']['provider'];
+        /** @var array $serviceConfig */
+        $serviceConfig = $container->get('config');
+        $class = $serviceConfig['error_code']['provider'];
         $customMessages = (array)$serviceConfig['error_code']['messages'];
 
         /** @var ErrorCodeService $service */

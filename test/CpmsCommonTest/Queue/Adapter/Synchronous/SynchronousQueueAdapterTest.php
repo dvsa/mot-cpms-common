@@ -12,8 +12,7 @@ use Laminas\ServiceManager\ServiceManager;
 
 class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  SynchronousQueueAdapter */
-    private $adapter;
+    private SynchronousQueueAdapter $adapter;
 
     public function setUp(): void
     {
@@ -24,25 +23,24 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->adapter->setLogger($logger);
     }
 
-    public function testCanCreateWithFactory()
+    public function testCanCreateWithFactory(): void
     {
         $sl = Bootstrap::getInstance()->getServiceManager();
         $sl->get('cpms\queue\synchronous');
         $factory = new SynchronousQueueAdapterFactory();
-        $instance = $factory->__invoke(new ServiceManager(), null);
+        $instance = $factory->__invoke(new ServiceManager());
         $this->assertInstanceOf(SynchronousQueueAdapter::class, $instance);
     }
 
-    public function testProcessesJobImmediately()
+    public function testProcessesJobImmediately(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle');
         /** @var JobInterface $job */
         $this->adapter->enqueue($job);
-
     }
 
-    public function testProcessesBulkJobsImmediately()
+    public function testProcessesBulkJobsImmediately(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle');
@@ -52,7 +50,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
         $this->adapter->enqueueAll([$job, $job2]);
     }
 
-    public function testBulkProcessContinuesDespiteExceptions()
+    public function testBulkProcessContinuesDespiteExceptions(): void
     {
         $job = $this->getMockBuilder(JobInterface::class)->getMock();
         $job->expects($this->once())->method('handle')->willThrowException(new \Exception());

@@ -12,8 +12,8 @@ use CpmsCommon\Utility\ApiAutoloader;
 class AutoloadMock extends ApiAutoloader
 {
     /**
-     * @param $class
-     * @param $directory
+     * @param string $class
+     * @param string $directory
      *
      * @return string
      */

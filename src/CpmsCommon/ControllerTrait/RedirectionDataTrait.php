@@ -5,10 +5,11 @@ namespace CpmsCommon\ControllerTrait;
 use CpmsCommon\Utility\Util;
 use Laminas\Mvc\Controller\Plugin\Redirect;
 use Laminas\View\Model\ViewModel;
+use Laminas\Http\Response;
 
 /**
  * Class RedirectionDataTrait
- * @method sendPayload(array)
+ * @method sendPayload(array $payload)
  * @method Redirect redirect()
  *
  * @package CpmsCommon\ControllerTrait
@@ -19,15 +20,14 @@ trait RedirectionDataTrait
      * Handle redirect to third party gateway if we have a gateway url
      * Redirect to redirect_uri if request is not restful
      *
-     * @param $redirectionData
+     * @param array $redirectionData
      *
-     * @return ViewModel
+     * @return ViewModel|Response
      */
     protected function handleRedirectionData($redirectionData)
     {
 
         if (!empty($redirectionData['gateway_url'])) {
-
             $gatewayUrl = $redirectionData['gateway_url'];
             unset($redirectionData['gateway_url']);
 

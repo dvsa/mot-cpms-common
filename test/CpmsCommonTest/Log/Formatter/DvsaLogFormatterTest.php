@@ -1,7 +1,9 @@
 <?php
+
 namespace CpmsCommonTest\Service;
 
 use CpmsCommonTest\Bootstrap;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class LoggerServiceTest
@@ -10,17 +12,16 @@ use CpmsCommonTest\Bootstrap;
  */
 class DvsaLogFormatterTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \Laminas\ServiceManager\ServiceManager */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
 
         parent::setUp();
     }
 
-    public function testFormatterInstance()
+    public function testFormatterInstance(): void
     {
         $formatter = $this->serviceManager->get('dvsa\formatter');
         $this->assertInstanceOf('CpmsCommon\Log\Formatter\DvsaLogFormatter', $formatter);
