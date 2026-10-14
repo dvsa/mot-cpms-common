@@ -73,14 +73,19 @@ return array(
             'cpms\api\contentType' => false
         )
     ),
-    'logger'            => array(
-        'priority'       => \LOG_DEBUG,
-        'location'       => 'data/logs', // log location
-        // 'replacement' => 'test\replacements',
-        'formatter'      => 'dvsa\formatter',
-        'separator'      => '^^*',
-        'replacement'    => 'logger\data\provider',
-        'dateTimeFormat' => 'Y-m-d H:i:s.u',
-        'writers'        => []
+    'mot_logger'        => array(
+        'loggers' => array(
+            'mot-cpms-common' => array(
+                'writers' => array(
+                    'stderr' => array(
+                        'enabled' => false,
+                    ),
+                    'file'   => array(
+                        'path'  => 'data/logs/' . \date('Y-m-d') . '-cpms-common.log',
+                        'level' => 'debug',
+                    ),
+                ),
+            ),
+        ),
     ),
 );

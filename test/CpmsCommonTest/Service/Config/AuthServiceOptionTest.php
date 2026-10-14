@@ -15,6 +15,7 @@ class AuthServiceOptionTest extends \PHPUnit\Framework\TestCase
 {
     private AuthServiceOptions $options;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->options = new AuthServiceOptions();

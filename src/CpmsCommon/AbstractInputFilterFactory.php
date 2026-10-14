@@ -69,7 +69,6 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
             $defaultVersion = $config['api-tools-versioning']['default_version'];
             /** @var Application $application */
             $application = $serviceLocator->get('Application');
-            /** @var ?RouteMatch $routeMatch */
             $routeMatch = $application->getMvcEvent()->getRouteMatch();
 
             if (empty($routeMatch)) {
@@ -94,6 +93,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      * @param  string $requestedName
      * @return bool
      */
+    #[\Override]
     public function canCreate(ContainerInterface $container, $requestedName)
     {
         if (stripos($requestedName, $this->configPrefix) > 0) {
@@ -115,6 +115,7 @@ class AbstractInputFilterFactory implements AbstractFactoryInterface
      *     creating a service.
      * @throws ContainerException if any other error occurs
      */
+    #[\Override]
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $filterProviderClass = $this->getClassName($requestedName . 'Provider', $container);

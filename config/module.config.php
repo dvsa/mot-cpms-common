@@ -7,6 +7,8 @@
  */
 
 use CpmsCommon\Service\ProfilingInitializer;
+use DvsaLogger\Factory\MotLoggerFactory;
+use DvsaLogger\Logger\MotLogger;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
@@ -23,6 +25,7 @@ return array(
             'cpms\service\validationService' => 'CpmsCommon\Service\ValidationServiceFactory',
             'cpms\queue\synchronous'         => 'CpmsCommon\Queue\Adapter\Synchronous\SynchronousQueueAdapterFactory',
             'cpms\queue'                     => 'CpmsCommon\Queue\DefaultQueueFactory',
+            MotLogger::class                 => MotLoggerFactory::class,
         ),
 
         'aliases'            => array(
@@ -48,10 +51,28 @@ return array(
             'download'    => \CpmsCommon\Controller\Plugin\Download::class,
         ),
     ),
-    'logger'                          => array(
-        'filename'       => \date('Y-m-d') . '-cpms-common.log',
-        'location'       => '/var/log/dvsa', // log location
-        'channel'        => 'cpms-common',
+    'mot_logger'                      => array(
+        'loggers' => array(
+            'mot-cpms-common' => array(
+                'channel' => 'cpms-common',
+                'writers' => array(
+                    'stderr' => array(
+                        'type'      => 'stream',
+                        'path'      => 'php://stderr',
+                        'formatter' => 'pipe',
+                        'level'     => 'error',
+                        'enabled'   => true,
+                    ),
+                    'file' => array(
+                        'type'      => 'stream',
+                        'path'      => '/var/log/dvsa/' . \date('Y-m-d') . '-cpms-common.log',
+                        'formatter' => 'json',
+                        'level'     => 'error',
+                        'enabled'   => true,
+                    ),
+                ),
+            ),
+        ),
     ),
     'error_code'                      => array(
         'messages' => array(),

@@ -16,6 +16,7 @@ class ReferenceGeneratorTest extends TestCase
 {
     protected ReferenceGenerator $referenceGenerator;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->referenceGenerator = new ReferenceGenerator();

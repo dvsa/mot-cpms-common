@@ -39,7 +39,6 @@ class SendPayload extends AbstractPlugin
         $config = $serviceLocator->get('config');
         /** @var string $contentType */
         $contentType = $serviceLocator->get('cpms\api\contentType');
-        /** @var Response $response */
         $response = $controller->getResponse();
         /** @var Application $application */
         $application = $serviceLocator->get('application');

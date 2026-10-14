@@ -7,6 +7,7 @@ use Monolog\Level;
 
 class LoggerService extends MotLogger
 {
+    #[\Override]
     public function log(Level|int $level, string $message, array $context = []): self
     {
         parent::log($level, $message, $context);
@@ -14,6 +15,7 @@ class LoggerService extends MotLogger
         return $this;
     }
 
+    #[\Override]
     public function debug(string $message, array $context = []): self
     {
         parent::debug($message, $context);
@@ -21,6 +23,7 @@ class LoggerService extends MotLogger
         return $this;
     }
 
+    #[\Override]
     public function error(string $message, array $context = []): self
     {
         parent::error($message, $context);

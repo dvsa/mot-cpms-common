@@ -15,6 +15,7 @@ class LogDataTest extends \PHPUnit\Framework\TestCase
 {
     private LogData $logData;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->logData = new LogData();

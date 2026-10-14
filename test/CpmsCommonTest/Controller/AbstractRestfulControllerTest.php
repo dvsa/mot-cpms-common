@@ -19,6 +19,7 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
     protected ContainerInterface $serviceManager;
 
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
@@ -59,7 +60,7 @@ class AbstractRestfulControllerTest extends \PHPUnit\Framework\TestCase
         $response->setStatusCode(405);
         $request = $this->getRequest();
         $request->setMethod('DELETE');
-        $result = $this->controller->dispatch($request, $response);
+        $this->controller->dispatch($request, $response);
 
         $this->assertEquals($response->getStatusCode(), 405);
     }

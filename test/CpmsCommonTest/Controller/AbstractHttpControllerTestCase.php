@@ -27,6 +27,7 @@ abstract class AbstractHttpControllerTestCase extends ZendTestCase
     protected array $clientMock = array();
     protected string $configDir = '/../../../../../config/test/application.config.php';
 
+    #[\Override]
     public function setUp(bool $noConfig = false): void
     {
         if (!$noConfig) {

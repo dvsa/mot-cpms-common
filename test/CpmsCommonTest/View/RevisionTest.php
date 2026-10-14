@@ -16,6 +16,7 @@ class RevisionTest extends \PHPUnit\Framework\TestCase
 {
     protected ServiceManager $serviceManager;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();

@@ -16,6 +16,7 @@ class TokenGeneratorTest extends TestCase
 {
     protected TokenGenerator $tokenGenerator;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->tokenGenerator = new TokenGenerator();

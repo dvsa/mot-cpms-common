@@ -19,6 +19,7 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
     protected string $mockFilter = 'CpmsCommonTest\inputFilter\mockFilter';
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
@@ -142,7 +143,6 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
         /** @var Application $application */
         $application = $this->serviceManager->get('Application');
-        /** @var MvcEvent $event */
         $event = $application->getMvcEvent();
         $routeMatch = new RouteMatch([]);
 
@@ -162,7 +162,6 @@ class ValidationServiceTest extends \PHPUnit\Framework\TestCase
 
         /** @var Application $application */
         $application = $this->serviceManager->get('Application');
-        /** @var MvcEvent $event */
         $event = $application->getMvcEvent();
         $routeMatch = new RouteMatch([]);
         $routeMatch->setParam('version', $expectedVersion);

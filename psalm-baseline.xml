@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.20.0@804f03c0c183d149fcd4b8c7c0c9b3fbf836d34c">
+  <file src="src/CpmsCommon/AbstractInputFilterFactory.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$name]]></code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/CpmsCommon/AbstractService.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$params]]></code>
+      <code><![CDATA[$requiredDataKeys]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/CpmsCommon/ContentTypeAwareInterface.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[mixed]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/CpmsCommon/ControllerTrait/ContentTypeTrait.php">
+    <InvalidReturnType>
+      <code><![CDATA[setCustomContentType]]></code>
+    </InvalidReturnType>
+  </file>
+  <file src="src/CpmsCommon/ControllerTrait/RedirectionDataTrait.php">
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[sendPayload(array $payload)]]></code>
+    </MoreSpecificImplementedParamType>
+    <UndefinedMethod>
+      <code><![CDATA[redirect]]></code>
+    </UndefinedMethod>
+  </file>
+  <file src="src/CpmsCommon/InputFilter/NotEmptyArrayInput.php">
+    <InvalidExtendClass>
+      <code><![CDATA[ArrayInput]]></code>
+    </InvalidExtendClass>
+    <MethodSignatureMismatch>
+      <code><![CDATA[#[\Override]]]></code>
+    </MethodSignatureMismatch>
+  </file>
+  <file src="src/CpmsCommon/Log/LogData.php">
+    <LessSpecificImplementedReturnType>
+      <code><![CDATA[array]]></code>
+    </LessSpecificImplementedReturnType>
+    <MissingTemplateParam>
+      <code><![CDATA[LogData]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/CpmsCommon/Log/LogDataAwareInterface.php">
+    <UnusedClass>
+      <code><![CDATA[LogDataAwareInterface]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/Queue/Adapter/Synchronous/SynchronousQueueAdapter.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[bool]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/CpmsCommon/Service/ApiContentTypeFactory.php">
+    <UnusedClass>
+      <code><![CDATA[ApiContentTypeFactory]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/Service/Config/AuthServiceOptions.php">
+    <MissingTemplateParam>
+      <code><![CDATA[AuthServiceOptions]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/CpmsCommon/Service/Config/ServiceOptions.php">
+    <MissingTemplateParam>
+      <code><![CDATA[ServiceOptions]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/CpmsCommon/Service/ErrorCodeService.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[static::$errorCodes[$code]]]></code>
+      <code><![CDATA[static::$errorCodes[$code]]]></code>
+    </InvalidArrayOffset>
+  </file>
+  <file src="src/CpmsCommon/Service/ErrorCodeServiceFactory.php">
+    <UnusedClass>
+      <code><![CDATA[ErrorCodeServiceFactory]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/Service/LoggerServiceFactory.php">
+    <UnusedClass>
+      <code><![CDATA[LoggerServiceFactory]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/Service/ValidationService.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$redirectUriOnFail]]></code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/CpmsCommon/Service/ValidationServiceFactory.php">
+    <UnusedClass>
+      <code><![CDATA[ValidationServiceFactory]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/Utility/ErrorCodeAwareTrait.php">
+    <UndefinedMethod>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[getServiceLocator]]></code>
+    </UndefinedMethod>
+  </file>
+  <file src="src/CpmsCommon/Utility/LoggerAwareInterface.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[self]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/CpmsCommon/Utility/LoggerAwareTrait.php">
+    <UndefinedMethod>
+      <code><![CDATA[getServiceLocator]]></code>
+    </UndefinedMethod>
+  </file>
+  <file src="src/CpmsCommon/Utility/ReferenceGenerator.php">
+    <InvalidArgument>
+      <code><![CDATA[$done]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="src/CpmsCommon/Utility/TokenGenerator.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$sum]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[int]]></code>
+    </InvalidReturnType>
+  </file>
+  <file src="src/CpmsCommon/Utility/Util.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[bool]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/CpmsCommon/Validator/ChequeDate.php">
+    <UnusedClass>
+      <code><![CDATA[ChequeDate]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CpmsCommon/View/JsonExceptionStrategy.php">
+    <ParamNameMismatch>
+      <code><![CDATA[$event]]></code>
+    </ParamNameMismatch>
+  </file>
+  <file src="test/CpmsCommonTest/Bootstrap.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getApplication]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/CpmsCommonTest/Controller/AbstractHttpControllerTestCase.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[dispatchBody]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$clientMock]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="test/CpmsCommonTest/InputFilter/MockFilterProvider.php">
+    <LessSpecificImplementedReturnType>
+      <code><![CDATA[array]]></code>
+    </LessSpecificImplementedReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getServiceLocator]]></code>
+      <code><![CDATA[setServiceLocator]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/CpmsCommonTest/Queue/DefaultQueueFactoryTest.php">
+    <InvalidClass>
+      <code><![CDATA[\StdClass]]></code>
+    </InvalidClass>
+  </file>
+  <file src="test/CpmsCommonTest/SampleController.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[indexAction]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/CpmsCommonTest/Service/ErrorCodeServiceTest.php">
+    <InvalidArgument>
+      <code><![CDATA['xx90sedf']]></code>
+    </InvalidArgument>
+  </file>
+  <file src="test/CpmsCommonTest/Service/ProfilerTest.php">
+    <AssignmentToVoid>
+      <code><![CDATA[$initializerResult]]></code>
+      <code><![CDATA[$initializerResult]]></code>
+    </AssignmentToVoid>
+    <UnusedVariable>
+      <code><![CDATA[$initializerResult]]></code>
+      <code><![CDATA[$initializerResult]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="test/CpmsCommonTest/Utility/TokenGeneratorTest.php">
+    <InvalidArgument>
+      <code><![CDATA['badgers love mash potato']]></code>
+    </InvalidArgument>
+  </file>
+  <file src="test/CpmsCommonTest/View/JsonExceptionStrategyTest.php">
+    <NullArgument>
+      <code><![CDATA[null]]></code>
+    </NullArgument>
+  </file>
+</files>

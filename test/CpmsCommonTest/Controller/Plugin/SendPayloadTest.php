@@ -21,6 +21,7 @@ class SendPayloadTest extends AbstractControllerTestCase
 
     private SendPayload $plugin;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->setApplicationConfig(

@@ -12,6 +12,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
 {
     protected DateRange $validator;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->validator = new DateRange();

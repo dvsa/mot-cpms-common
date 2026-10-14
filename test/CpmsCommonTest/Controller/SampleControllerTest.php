@@ -37,6 +37,7 @@ class SampleControllerTest extends AbstractHttpControllerTestCase
 
     protected Request $request;
 
+    #[\Override]
     public function setUp(bool $noConfig = false): void
     {
 

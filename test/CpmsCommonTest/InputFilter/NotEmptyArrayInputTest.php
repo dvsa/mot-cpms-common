@@ -13,6 +13,7 @@ class NotEmptyArrayInputTest extends \PHPUnit\Framework\TestCase
 {
     protected NotEmptyArrayInput $filter;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->filter = new NotEmptyArrayInput();

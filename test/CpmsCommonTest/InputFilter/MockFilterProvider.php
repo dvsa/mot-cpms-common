@@ -34,6 +34,7 @@ class MockFilterProvider implements InputFilterProviderInterface
     /**
      * @return array
      */
+    #[\Override]
     public function getInputFilterSpecification()
     {
         return [
