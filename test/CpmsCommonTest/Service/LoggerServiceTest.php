@@ -17,6 +17,7 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
     /** @var  \Laminas\ServiceManager\ServiceManager */
     protected $serviceManager;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
@@ -34,9 +35,7 @@ class LoggerServiceTest extends \PHPUnit\Framework\TestCase
         /** @var LoggerService $logger */
         $logger = $this->serviceManager->get('Logger');
 
-        $location = rtrim((string)($config['logger']['location'] ?? 'data/logs'), '/');
-        $filename = (string)($config['logger']['filename'] ?? 'cpms-common.log');
-        $logFile = $location . DIRECTORY_SEPARATOR . ltrim($filename, '/');
+        $logFile = (string) $config['mot_logger']['loggers']['mot-cpms-common']['writers']['file']['path'];
 
         $logger->info('logger service test message');
         $this->assertInstanceOf('CpmsCommon\Service\LoggerService', $logger);

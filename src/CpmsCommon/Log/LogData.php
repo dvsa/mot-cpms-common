@@ -228,6 +228,7 @@ class LogData extends AbstractOptions
      *
      * @return array
      */
+    #[\Override]
     public function toArray()
     {
         $properties = get_object_vars($this);

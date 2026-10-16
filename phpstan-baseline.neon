@@ -1,0 +1,589 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Binary operation "\." between ''V'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/CpmsCommon/AbstractInputFilterFactory.php
+
+		-
+			message: '#^Cannot access offset ''default_version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/AbstractInputFilterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$key of function array_key_exists expects int\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/AbstractService.php
+
+		-
+			message: '#^Parameter \#2 \$replacement of method CpmsCommon\\AbstractService\:\:getErrorMessage\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/AbstractService.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/AbstractService.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/AbstractActionController.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Controller/AbstractRestfulController.php
+
+		-
+			message: '#^Parameter \#1 \$variables of class Laminas\\View\\Model\\JsonModel constructor expects array\<string, mixed\>\|ArrayAccess\<string, mixed\>\|Traversable\<string, mixed\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/CpmsCommon/Controller/AbstractRestfulController.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/AbstractRestfulController.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/AbstractRestfulController.php
+
+		-
+			message: '#^PHPDoc tag @var with type int is not subtype of native type int\<0, max\>\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/CpmsCommon/Controller/Plugin/Download.php
+
+		-
+			message: '#^Cannot access offset ''default_version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Controller/Plugin/SendPayload.php
+
+		-
+			message: '#^Parameter \#1 \$code of method Laminas\\Http\\Response\:\:setStatusCode\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/Plugin/SendPayload.php
+
+		-
+			message: '#^Parameter \#1 \$matchAgainst of method Laminas\\Mvc\\Controller\\AbstractController\:\:acceptableViewModelSelector\(\) expects array\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/Plugin/SendPayload.php
+
+		-
+			message: '#^Parameter \#1 \$variables of method Laminas\\View\\Model\\ModelInterface\:\:setVariables\(\) expects array\<string, mixed\>\|ArrayAccess\<string, mixed\>, array\<mixed, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Controller/Plugin/SendPayload.php
+
+		-
+			message: '#^Class CpmsCommon\\InputFilter\\NotEmptyArrayInput extends @final class Laminas\\InputFilter\\ArrayInput\.$#'
+			identifier: class.extendsFinalByPhpDoc
+			count: 1
+			path: src/CpmsCommon/InputFilter/NotEmptyArrayInput.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/InputFilter/NotEmptyArrayInput.php
+
+		-
+			message: '#^Trait CpmsCommon\\Log\\LogDataAwareTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/CpmsCommon/Log/LogDataAwareTrait.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, array\{\$this\(CpmsCommon\\Queue\\Adapter\\Synchronous\\SynchronousQueueAdapter\), ''enqueue''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Queue/Adapter/Synchronous/SynchronousQueueAdapter.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Queue/Adapter/Synchronous/SynchronousQueueAdapter.php
+
+		-
+			message: '#^Cannot access offset ''class'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Queue/DefaultQueueFactory.php
+
+		-
+			message: '#^Cannot access offset mixed on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Queue/DefaultQueueFactory.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Psr\\Container\\ContainerInterface\:\:get\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Queue/DefaultQueueFactory.php
+
+		-
+			message: '#^Cannot access offset ''default_version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Service/ApiContentTypeFactory.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/ApiContentTypeFactory.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/BaseAuthenticationService.php
+
+		-
+			message: '#^Parameter \#1 \$depth of method CpmsCommon\\Service\\Config\\ServiceOptions\:\:setDepth\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/Config/ServiceOptions.php
+
+		-
+			message: '#^Parameter \#1 \$requiredFields of method CpmsCommon\\Service\\Config\\ServiceOptions\:\:setRequiredFields\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/Config/ServiceOptions.php
+
+		-
+			message: '#^Method CpmsCommon\\Service\\ErrorCodeService\:\:getMessage\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Parameter \#1 \$format of method CpmsCommon\\Service\\ErrorCodeService\:\:printMessage\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Parameter \#4 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Parameter \#5 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Possibly invalid array key type float\|int\|string\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: array.invalidKey
+			count: 67
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 10
+			path: src/CpmsCommon/Service/ErrorCodeService.php
+
+		-
+			message: '#^Cannot access offset ''messages'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Service/ErrorCodeServiceFactory.php
+
+		-
+			message: '#^Cannot access offset ''provider'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/CpmsCommon/Service/ErrorCodeServiceFactory.php
+
+		-
+			message: '#^Binary operation "\+\=" between mixed and non\-empty\-string results in an error\.$#'
+			identifier: assignOp.invalid
+			count: 1
+			path: src/CpmsCommon/Utility/TokenGenerator.php
+
+		-
+			message: '#^Binary operation "\.\=" between mixed and '''' results in an error\.$#'
+			identifier: assignOp.invalid
+			count: 1
+			path: src/CpmsCommon/Utility/TokenGenerator.php
+
+		-
+			message: '#^Method CpmsCommon\\Utility\\TokenGenerator\:\:summarizeValue\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/CpmsCommon/Utility/TokenGenerator.php
+
+		-
+			message: '#^Parameter \#2 \$datetime of static method DateTime\:\:createFromFormat\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/Validator/DateDifference.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function file_exists expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/View/Helper/Revision.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function file_get_contents expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/View/Helper/Revision.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/View/Helper/Revision.php
+
+		-
+			message: '#^Part \$config\[''application_env''\] \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: src/CpmsCommon/View/Helper/Revision.php
+
+		-
+			message: '#^Parameter \#1 \$variables of class Laminas\\View\\Model\\JsonModel constructor expects array\<string, mixed\>\|ArrayAccess\<string, mixed\>\|Traversable\<string, mixed\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/CpmsCommon/View/JsonExceptionStrategy.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Bootstrap.php
+
+		-
+			message: '#^Cannot access offset ''modules'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Bootstrap.php
+
+		-
+			message: '#^Parameter \#1 \$configuration of static method Laminas\\Mvc\\Application\:\:init\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Bootstrap.php
+
+		-
+			message: '#^Parameter \#1 \$applicationConfig of method Laminas\\Test\\PHPUnit\\Controller\\AbstractControllerTestCase\:\:setApplicationConfig\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/AbstractHttpControllerTestCase.php
+
+		-
+			message: '#^Parameter \#1 \$applicationConfig of method Laminas\\Test\\PHPUnit\\Controller\\AbstractControllerTestCase\:\:setApplicationConfig\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/Plugin/DownloadTest.php
+
+		-
+			message: '#^Cannot call method getVariables\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: test/CpmsCommonTest/Controller/Plugin/SendPayloadTest.php
+
+		-
+			message: '#^Parameter \#1 \$applicationConfig of method Laminas\\Test\\PHPUnit\\Controller\\AbstractControllerTestCase\:\:setApplicationConfig\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/Plugin/SendPayloadTest.php
+
+		-
+			message: '#^Parameter \#2 \$array of method PHPUnit\\Framework\\Assert\:\:assertArrayNotHasKey\(\) expects array\|ArrayAccess, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/Plugin/SendPayloadTest.php
+
+		-
+			message: '#^Parameter \#1 \$applicationConfig of method Laminas\\Test\\PHPUnit\\Controller\\AbstractControllerTestCase\:\:setApplicationConfig\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/SampleControllerTest.php
+
+		-
+			message: '#^Parameter \#1 \$options of static method Laminas\\Router\\Http\\TreeRouteStack\<Laminas\\Router\\Http\\HttpRouteInterface\>\:\:factory\(\) expects iterable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/SampleControllerTest.php
+
+		-
+			message: '#^Parameter \#1 \$router of method Laminas\\Mvc\\MvcEvent\:\:setRouter\(\) expects Laminas\\Router\\RouteStackInterface, Laminas\\Router\\RouteInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Controller/SampleControllerTest.php
+
+		-
+			message: '#^Parameter \#1 \$accessToken of method CpmsCommon\\Log\\LogData\:\:setAccessToken\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$classMethod of method CpmsCommon\\Log\\LogData\:\:setClassMethod\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$correlationId of method CpmsCommon\\Log\\LogData\:\:setCorrelationId\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$data of method CpmsCommon\\Log\\LogData\:\:setData\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$entryType of method CpmsCommon\\Log\\LogData\:\:setEntryType\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$exceptionCode of method CpmsCommon\\Log\\LogData\:\:setExceptionCode\(\) expects int\|null, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$exceptionMessage of method CpmsCommon\\Log\\LogData\:\:setExceptionMessage\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$exceptionType of method CpmsCommon\\Log\\LogData\:\:setExceptionType\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$openAmToken of method CpmsCommon\\Log\\LogData\:\:setOpenAmToken\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$stackTrace of method CpmsCommon\\Log\\LogData\:\:setStackTrace\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#1 \$userId of method CpmsCommon\\Log\\LogData\:\:setUserId\(\) expects string, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Log/LogDataTest.php
+
+		-
+			message: '#^Parameter \#3 \$context of method DvsaLogger\\Logger\\MotLogger\:\:log\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Mock/LoggerAwareTraitMock.php
+
+		-
+			message: '#^Method CpmsCommonTest\\Mock\\RedirectionDataTraitMock\:\:handleRedirectionData\(\) should return Laminas\\Http\\Response\|Laminas\\View\\Model\\ViewModel but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: test/CpmsCommonTest/Mock/RedirectionDataTraitMock.php
+
+		-
+			message: '#^Parameter \#1 \$url of static method CpmsCommon\\Utility\\Util\:\:appendQueryString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Mock/RedirectionDataTraitMock.php
+
+		-
+			message: '#^Method CpmsCommonTest\\Module\:\:getConfig\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: test/CpmsCommonTest/Module.php
+
+		-
+			message: '#^Parameter \#1 \$displayExceptions of method Laminas\\Mvc\\View\\Http\\ExceptionStrategy\:\:setDisplayExceptions\(\) expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Module.php
+
+		-
+			message: '#^PHPDoc tag @var with type CpmsCommon\\Queue\\JobInterface is not subtype of native type PHPUnit\\Framework\\MockObject\\MockObject\.$#'
+			identifier: varTag.nativeType
+			count: 3
+			path: test/CpmsCommonTest/Queue/Adapter/Synchronous/SynchronousQueueAdapterTest.php
+
+		-
+			message: '#^Method CpmsCommonTest\\SampleController\:\:handleRedirectionData\(\) should return Laminas\\Http\\Response\|Laminas\\View\\Model\\ViewModel but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: test/CpmsCommonTest/SampleController.php
+
+		-
+			message: '#^Parameter \#1 \$url of static method CpmsCommon\\Utility\\Util\:\:appendQueryString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/SampleController.php
+
+		-
+			message: '#^Cannot access offset ''default_version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/ApiContentTypeTest.php
+
+		-
+			message: '#^Cannot access offset ''file'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''loggers'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''mot\-cpms\-common'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''path'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''writers'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: test/CpmsCommonTest/Service/LoggerServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''file'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''loggers'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''mot\-cpms\-common'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''path'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''writers'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$array of method PHPUnit\\Framework\\Assert\:\:assertArrayHasKey\(\) expects array\|ArrayAccess, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/Service/SampleServiceTest.php
+
+		-
+			message: '#^Binary operation "\." between ''get'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: test/CpmsCommonTest/Service/ServiceOptionTest.php
+
+		-
+			message: '#^Cannot access offset ''default_version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: test/CpmsCommonTest/Service/ValidationServiceTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 5
+			path: test/CpmsCommonTest/View/JsonExceptionStrategyTest.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function file_exists expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/View/RevisionTest.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function file_put_contents expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/View/RevisionTest.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function unlink expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/CpmsCommonTest/View/RevisionTest.php

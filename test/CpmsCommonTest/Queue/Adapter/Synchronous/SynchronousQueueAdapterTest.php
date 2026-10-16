@@ -15,6 +15,7 @@ class SynchronousQueueAdapterTest extends \PHPUnit\Framework\TestCase
 {
     private SynchronousQueueAdapter $adapter;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->adapter = new SynchronousQueueAdapter();

@@ -98,6 +98,7 @@ class DateDifference extends AbstractValidator
      *
      * @return bool
      */
+    #[\Override]
     public function isValid($value, $context = array())
     {
         $this->setValue($value);

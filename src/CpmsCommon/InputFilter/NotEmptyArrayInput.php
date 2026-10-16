@@ -11,6 +11,7 @@ use Laminas\InputFilter\ArrayInput;
  */
 class NotEmptyArrayInput extends ArrayInput
 {
+    #[\Override]
     public function isValid($context = null)
     {
         // if we actually have an empty array, but have said this can't be empty, it should not pass validation. In

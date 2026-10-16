@@ -38,6 +38,7 @@ class JsonExceptionStrategy extends ExceptionStrategy
      *
      * @return null
      */
+    #[\Override]
     public function prepareExceptionViewModel(MvcEvent $event): null
     {
         $omittedErrors = array(
@@ -109,7 +110,6 @@ class JsonExceptionStrategy extends ExceptionStrategy
         /** @var ?\Exception $exception */
         $exception = $event->getParam('exception');
         if ($exception) {
-            /** @phpstan-ignore if.alwaysTrue */
             if ($app = $event->getApplication()) {
                 $serviceLocator = $app->getServiceManager();
                 /** @var ErrorCodeService $errorService */

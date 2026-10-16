@@ -29,7 +29,6 @@ class Download extends AbstractPlugin
     public function __invoke($file, $maskedFile = null)
     {
         if (file_exists($file)) {
-            /** @var Stream $response */
             $response = new Stream();
             $headers = new Headers();
             $maskedFilename = $maskedFile ?: $this->getMaskFilename($file);

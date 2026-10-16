@@ -2,8 +2,12 @@
 <psalm
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
-        xsi:schemaLocation="https://getpsalm.org/schema/config vendor-bin/psalm/vendor/vimeo/psalm/config.xsd"
-        xmlns:xi="http://www.w3.org/2001/XInclude"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        findUnusedVariables="true"
+        findUnusedParams="true"
+        errorLevel="5"
+        errorBaseline="psalm-baseline.xml"
+        autoloader="vendor/autoload.php"
         resolveFromConfigFile="true"
 >
     <projectFiles>
@@ -11,6 +15,21 @@
         <directory name="test" />
         <ignoreFiles>
             <directory name="vendor" />
+            <!-- Ignore the local Laminas Console shim used only for testing; -->
+            <file name="src/Laminas/Console/Console.php" />
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <directory name="test" />
+            </errorLevel>
+        </UnusedClass>
+        <PossiblyUnusedMethod>
+            <errorLevel type="info">
+                <directory name="src" />
+            </errorLevel>
+        </PossiblyUnusedMethod>
+    </issueHandlers>
 </psalm>

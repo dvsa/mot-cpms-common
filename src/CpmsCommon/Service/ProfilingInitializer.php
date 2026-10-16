@@ -47,6 +47,7 @@ class ProfilingInitializer implements InitializerInterface
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
+    #[\Override]
     public function __invoke(ContainerInterface $container, $instance)
     {
         if (!$instance instanceof EventManagerAwareInterface) {

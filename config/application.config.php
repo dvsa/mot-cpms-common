@@ -2,6 +2,7 @@
 
 return array(
     'modules' => array(
+        'DvsaLogger',
         'Laminas\InputFilter',
         'Laminas\Filter',
         'Laminas\Router',

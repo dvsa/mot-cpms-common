@@ -20,6 +20,7 @@ class SampleController extends AbstractRestfulController
      *
      * @return mixed
      */
+    #[\Override]
     public function get($id)
     {
         return $this->sendPayload(array('id' => $id));
@@ -31,6 +32,7 @@ class SampleController extends AbstractRestfulController
      *
      * @return array|mixed
      */
+    #[\Override]
     public function update($id, $data)
     {
         return $this->getSuccessMessage();
@@ -47,6 +49,7 @@ class SampleController extends AbstractRestfulController
         return $view;
     }
 
+    #[\Override]
     public function getList()
     {
         $data = array(

@@ -17,6 +17,7 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
 
     protected ServiceManager $serviceManager;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
@@ -42,7 +43,9 @@ class SampleServiceTest extends \PHPUnit\Framework\TestCase
 
         /** @var array $config */
         $config = $this->serviceManager->get('config');
-        $logLocation = $config['logger']['location'];
+        $logLocation = dirname(
+            (string) $config['mot_logger']['loggers']['mot-cpms-common']['writers']['file']['path']
+        );
         Util::deleteDir($logLocation);
     }
 

@@ -67,12 +67,12 @@ abstract class AbstractRestfulController extends ZendRestfulController implement
      *
      * @return mixed|\Laminas\Http\PhpEnvironment\Response|Response
      */
+    #[\Override]
     public function dispatch(Request $request, Response $response = null)
     {
         $logger = $this->getLogger();
         try {
             $data = parent::dispatch($request, $response);
-            /** @var  HttpResponse $response */
             $response = $this->getResponse();
             /** @var HttpRequest $request */
             $logger->debug($request->toString());

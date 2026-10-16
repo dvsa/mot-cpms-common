@@ -21,6 +21,7 @@ class ApiAutoloader extends StandardAutoloader
      *
      * @return string
      */
+    #[\Override]
     protected function transformClassNameToFilename($class, $directory)
     {
         // $class may contain a namespace portion, in  which case we need

@@ -17,6 +17,7 @@ class JsonExceptionStrategyTest extends \PHPUnit\Framework\TestCase
 {
     private JsonExceptionStrategy $strategy;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->strategy = new JsonExceptionStrategy();

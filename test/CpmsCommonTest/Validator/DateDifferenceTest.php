@@ -12,6 +12,7 @@ class DateDifferenceTest extends \PHPUnit\Framework\TestCase
 {
     private DateDifference $validator;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->validator = new DateDifference();

@@ -21,6 +21,7 @@ class DownloadTest extends AbstractControllerTestCase
 
     protected Download $plugin;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->setApplicationConfig(

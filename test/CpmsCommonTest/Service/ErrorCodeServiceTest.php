@@ -17,6 +17,7 @@ class ErrorCodeServiceTest extends \PHPUnit\Framework\TestCase
 
     private ErrorCodeService $errorService;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();

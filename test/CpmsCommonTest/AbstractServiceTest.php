@@ -12,6 +12,7 @@ class AbstractServiceTest extends \PHPUnit\Framework\TestCase
 
     private AbstractService&MockObject $service;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->service = $this->getMockForAbstractClass(

@@ -18,6 +18,7 @@ class ControllerPluginTest extends TestCase
 
     private ErrorCodeService $errorService;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->serviceManager = Bootstrap::getInstance()->getServiceManager();
@@ -36,7 +37,6 @@ class ControllerPluginTest extends TestCase
         /** @var SendPayload $plugin */
         $plugin = $controllerPluginManager->get('sendPayload');
         $this->assertInstanceOf('CpmsCommon\Controller\Plugin\SendPayload', $plugin);
-        /** @var SampleController $controller */
         $controller = new SampleController();
         $event = new MvcEvent();
         $event->setRequest(new Request());

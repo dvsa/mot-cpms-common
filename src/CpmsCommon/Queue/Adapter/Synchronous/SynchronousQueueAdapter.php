@@ -36,11 +36,13 @@ class SynchronousQueueAdapter implements QueueInterface, LoggerAwareInterface
     /**
      * @param JobInterface $job
      */
+    #[\Override]
     public function enqueue(JobInterface $job): void
     {
         $this->process($job);
     }
 
+    #[\Override]
     public function enqueueAll(array $jobs): void
     {
         array_map([$this, 'enqueue'], $jobs);
